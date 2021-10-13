@@ -10,6 +10,7 @@ gem 'rails', '~> 6.1.4', '>= 6.1.4.1'
 gem 'pg', '~> 1.1'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
+gem 'rexml'
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
 gem 'stateful_enum'
@@ -52,6 +53,7 @@ group :test do
   gem 'capybara', '>= 3.26'
   gem 'fuubar'
   gem 'selenium-webdriver'
+  gem 'shoulda-matchers', '~> 5.0'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
 end

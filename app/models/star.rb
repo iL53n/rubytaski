@@ -1,4 +1,6 @@
 class Star < ApplicationRecord
+  validates :state, presence: true
+
   belongs_to :user
   belongs_to :task
 
