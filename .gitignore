@@ -36,3 +36,9 @@
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+
+# Keys
+/config/master.key
+
+# Database config
+/config/database.yml

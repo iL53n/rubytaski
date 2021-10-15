@@ -6,8 +6,33 @@
 import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
-import "channels"
+
+import Vue from 'vue'
+import App from '../app'
+
+import { Quasar } from 'quasar'
+import '@quasar/extras/fontawesome-v5/fontawesome-v5.css'
+import '../app/assets/styles/quasar.sass'
+import 'quasar/dist/quasar.ie.polyfills'
+import quasar_params from './quasar_params'
+import '@quasar/quasar-ui-qcalendar/dist/index.css'
+import QCalendar from '@quasar/quasar-ui-qcalendar'
+
+Vue.use(Quasar, quasar_params)
+Vue.use(QCalendar)
 
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+document.addEventListener('DOMContentLoaded', () => {
+    const app = new Vue({ render: h => h(App) }).$mount();
+    document.body.appendChild(app.$el)
+});
+
+// document.addEventListener('DOMContentLoaded', () => {
+//     new Vue({
+//         el: '#app',
+//         render: h => h(App)
+//     })
+// })
