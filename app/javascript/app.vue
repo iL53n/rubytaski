@@ -1,37 +1,31 @@
-<template>
-  <div style="max-width: 800px; width: 100%;">
-    <p>Hello my PetApp</p>
-<!--    <q-calendar-->
-<!--        v-model="selectedDate"-->
-<!--        view="week-scheduler"-->
-<!--        :resources="resources"-->
-<!--        locale="ru"-->
-<!--        style="height: 100%;"-->
-<!--    >-->
-<!--      <template #scheduler-resource-day="{ timestamp, /* index, */ resource }">-->
-<!--        <q-btn flat class="fit"><span class="ellipsis" style="font-size: 10px;">{{ resource.label }}:{{ timestamp.day }}</span></q-btn>-->
-<!--      </template>-->
-<!--    </q-calendar>-->
-  </div>
+<template lang="pug">
+  div(v-if="" class="q-pa-md")
+    q-layout(view="lhh lpR lff" container style="height: 95vh" class="shadow-5 rounded-borders")
+      q-layout(view="hHh lpR fFf")
+        header-component
+
+        q-page-container
+          schedule
+
+        footer-component
 </template>
 
 <script>
-export default {
-  data () {
-    return {
-      // selectedDate: '',
-      // resources: [
-      //   { label: 'John' },
-      //   { label: 'Mary' },
-      //   { label: 'Susan' },
-      //   { label: 'Olivia' },
-      //   { label: 'Board Room' },
-      //   { label: 'Room-1' },
-      //   { label: 'Room-2' }
-      // ]
+  import HeaderComponent from 'components/Header'
+  import FooterComponent from 'components/Footer'
+  import Schedule from 'components/Schedule'
+
+  export default {
+    data () {
+      return {
+      }
+    },
+    components: {
+      HeaderComponent,
+      FooterComponent,
+      Schedule
     }
   }
-}
 </script>
 
 <style scoped>

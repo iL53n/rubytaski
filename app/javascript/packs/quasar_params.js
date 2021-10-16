@@ -7,7 +7,12 @@ import {
     QDrawer,
     QPageContainer,
     QPage,
-    QBtn
+    QBtn,
+    QFooter,
+    QToolbar,
+    QToolbarTitle,
+    QAvatar,
+    QCard
 } from 'quasar'
 
 export default {
@@ -18,7 +23,12 @@ export default {
         QDrawer,
         QPageContainer,
         QPage,
-        QBtn
+        QBtn,
+        QFooter,
+        QToolbar,
+        QToolbarTitle,
+        QAvatar,
+        QCard
     },
     directives: {
     },
