@@ -11,6 +11,7 @@
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "5.4.3",
     "@vue/compiler-sfc": "^3.2.20",
+    "axios": "^0.23.0",
     "babel-loader": "^8.2.2",
     "babel-plugin-transform-imports": "^1.5.1",
     "pug": "^3.0.2",
