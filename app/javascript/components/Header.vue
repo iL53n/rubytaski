@@ -5,7 +5,8 @@
       q-avatar
         img(src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg")
       //q-toolbar-title(class="title") ChildSchedule
-      q-toolbar-title ChildSchedule
+      q-toolbar-title
+        strong ChildSchedule
       q-btn(flat round dense icon="whatshot")
 </template>
 

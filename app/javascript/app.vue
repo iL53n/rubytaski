@@ -1,13 +1,11 @@
 <template lang="pug">
   div(v-if="" class="q-pa-md")
     q-layout(view="lhh lpR lff" container style="height: 95vh" class="shadow-5 rounded-borders")
-      q-layout(view="hHh lpR fFf")
-        header-component
+      header-component
 
-        q-page-container
-          schedule
+      schedule
 
-        footer-component
+      footer-component
 </template>
 
 <script>

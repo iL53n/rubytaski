@@ -13,7 +13,8 @@ import {
     QToolbar,
     QToolbarTitle,
     QAvatar,
-    QCard
+    QCard,
+    QCardSection
 } from 'quasar'
 
 export default {
@@ -29,7 +30,8 @@ export default {
         QToolbar,
         QToolbarTitle,
         QAvatar,
-        QCard
+        QCard,
+        QCardSection
     },
     directives: {
     },

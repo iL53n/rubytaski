@@ -1,7 +1,15 @@
+titles = [ 'Застелить кровать',
+           'Сделать зарядку',
+           'Помочь маме',
+           'Убрать рабочий стол',
+           'Позаниматься англ.яз',
+           'Сделать ДЗ',
+           'Почиатать перед сном' ]
+
 unless Task.any?
-  5.times do |n|
+  titles.each do |title|
     Task.create!(
-      title: "Task_#{n}",
+      title: title,
       description: "description description description description description description description description ",
       user: User.first
     )
