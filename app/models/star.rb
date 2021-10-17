@@ -1,5 +1,6 @@
 class Star < ApplicationRecord
   validates :state, presence: true
+  validate :uniqueness_task_user_date
 
   belongs_to :user
   belongs_to :task
@@ -16,6 +17,12 @@ class Star < ApplicationRecord
       end
 
       transition planned: :done
+    end
+  end
+
+  def uniqueness_task_user_date
+    if Star.where(user_id: user_id, task_id: task_id, due_date: due_date).exists?
+      self.errors.add(:star, "already exists for the specified user, task and date")
     end
   end
 end
