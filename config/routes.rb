@@ -3,5 +3,6 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :tasks
+  resources :tasks, only: :index
+  resources :stars, only: :create
 end
