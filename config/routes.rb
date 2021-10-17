@@ -4,5 +4,5 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :tasks, only: :index
-  resources :stars, only: :create
+  resources :stars, only: %i[create update]
 end

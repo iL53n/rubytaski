@@ -31,20 +31,6 @@
                   div(v-for="star in resource.attributes.stars_dates" :key="star.id")
                     div(v-if="star.due_date == timestamp.date")
                       q-btn(
-                        v-if="star.state == 'planned'"
-                        push
-                        round
-                        padding="xs"
-                        class="fit"
-                        align="around"
-                        name="star"
-                        text-color="yellow"
-                        size="30px"
-                        icon="star_border"
-                        @click="doneStar()"
-                      )
-                      q-btn(
-                        v-else-if="star.state == 'done'"
                         push
                         round
                         padding="xs"
@@ -55,8 +41,37 @@
                         text-color="yellow"
                         size="30px"
                         icon="star"
-                        @click="undoneStar()"
+                        @click=""
                       )
+                    // ToDo: template for 3 states
+                    //div(v-if="star.due_date == timestamp.date")
+                    //  q-btn(
+                    //    v-if="star.state == 'planned'"
+                    //    push
+                    //    round
+                    //    padding="xs"
+                    //    class="fit"
+                    //    align="around"
+                    //    name="star"
+                    //    text-color="yellow"
+                    //    size="30px"
+                    //    icon="star_border"
+                    //    @click="doneStar(star)"
+                    //  )
+                    //  q-btn(
+                    //    v-else-if="star.state == 'done'"
+                    //    push
+                    //    round
+                    //    padding="xs"
+                    //    class="fit"
+                    //    align="around"
+                    //    name="star"
+                    //    color="light-blue-9"
+                    //    text-color="yellow"
+                    //    size="30px"
+                    //    icon="star"
+                    //    @click="undoneStar()"
+                    //  )
                     //div(v-else)
                     //  q-btn(
                     //    flat
@@ -73,7 +88,7 @@
 </template>
 
 <script>
-  import { getTasks, postStar } from '../api'
+  import { getTasks, postStar, updateStar } from '../api'
 
   export default {
     data () {
@@ -95,12 +110,16 @@
           this.getTasks()
         })
       },
-      doneStar() {
-        console.log('done_star')
-      },
-      undoneStar() {
-        console.log('undone_star')
-      },
+      // doneStar(star) {
+      //   star.state = 2
+      //   updateStar(star)
+      //   .then((response) => {
+      //     this.getTasks()
+      //   })
+      // },
+      // undoneStar() {
+      //   console.log('undone_star')
+      // },
       calendarNext () {
         this.$refs.calendar.next()
       },

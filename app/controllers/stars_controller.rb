@@ -1,6 +1,7 @@
 class StarsController < ApplicationController
   # before_action :authenticate_user!
   skip_before_action :verify_authenticity_token
+  # before_action :load_star, only: :update
   before_action :load_task, only: :create
 
   def create
@@ -15,15 +16,31 @@ class StarsController < ApplicationController
     end
   end
 
+  # def update
+  #   if @star.update(star_params)
+  #     render json: StarSerializer.new(@star).serialized_json, status: :created
+  #   else
+  #     render json: { errors: @star.errors }, status: :unprocessable_entity
+  #   end
+  # end
+
   private
+
+  def load_star
+    @star ||= Star.find(params[:id])
+  end
 
   def load_task
     @task = Task.find(params[:task_id])
   end
 
   def star_params
-    params.permit(:state,
-                  :user,
-                  :due_date)
+    params.require(:star).permit(:id,
+                                :state,
+                                :user,
+                                :task_id,
+                                :due_date,
+                                :done_date,
+                                star: [])
   end
 end

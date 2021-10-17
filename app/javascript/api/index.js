@@ -6,5 +6,9 @@ export function getTasks () {
 }
 
 export function postStar (params) {
-    return axios.post('/stars',params )
+    return axios.post('/stars', params )
+}
+
+export function updateStar (star) {
+    return axios.patch('/stars/' + star.id, star )
 }
