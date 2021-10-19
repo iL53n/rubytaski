@@ -12,3 +12,7 @@ export function postStar (params) {
 export function updateStar (star) {
     return axios.patch('/stars/' + star.id, star )
 }
+
+export function deleteStar (id) {
+    return axios.delete('/stars/' + id )
+}

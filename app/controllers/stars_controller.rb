@@ -1,7 +1,7 @@
 class StarsController < ApplicationController
   # before_action :authenticate_user!
   skip_before_action :verify_authenticity_token
-  # before_action :load_star, only: :update
+  before_action :load_star, only: %i[update destroy]
   before_action :load_task, only: :create
 
   def create
@@ -23,6 +23,10 @@ class StarsController < ApplicationController
   #     render json: { errors: @star.errors }, status: :unprocessable_entity
   #   end
   # end
+
+  def destroy
+    @star.destroy
+  end
 
   private
 

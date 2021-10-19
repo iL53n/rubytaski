@@ -27,9 +27,10 @@
                   q-btn(flat class="fit" size="xl")
                     div(class="ellipsis") {{ resource.attributes.title }}
               template(#scheduler-resource-day="{ timestamp, /* index, */ resource }")
-                q-btn(flat class="fit" @click="addStar(resource.id, timestamp.date)")
+                q-btn(flat class="fit" @click.stop="addStar(resource.id, timestamp.date)")
                   div(v-for="star in resource.attributes.stars_dates" :key="star.id")
-                    div(v-if="star.due_date == timestamp.date")
+                    div(v-show="star.due_date == timestamp.date")
+                      //star options: stars, verified, check_circle, task_alt
                       q-btn(
                         push
                         round
@@ -41,7 +42,7 @@
                         text-color="yellow"
                         size="30px"
                         icon="star"
-                        @click=""
+                        @click.stop="removeStar(star.id)"
                       )
                     // ToDo: template for 3 states
                     //div(v-if="star.due_date == timestamp.date")
@@ -88,7 +89,7 @@
 </template>
 
 <script>
-  import { getTasks, postStar, updateStar } from '../api'
+  import { getTasks, postStar, updateStar, deleteStar } from '../api'
 
   export default {
     data () {
@@ -120,6 +121,12 @@
       // undoneStar() {
       //   console.log('undone_star')
       // },
+      removeStar(id) {
+        deleteStar(id)
+          .then((response) => {
+            this.getTasks()
+          })
+      },
       calendarNext () {
         this.$refs.calendar.next()
       },
