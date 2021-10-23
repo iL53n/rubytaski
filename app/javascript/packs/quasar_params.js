@@ -3,6 +3,7 @@
 import iconSet from 'quasar/icon-set/material-icons'
 import '@quasar/extras/material-icons/material-icons.css'
 import {
+    Dialog,
     QLayout,
     QHeader,
     QDrawer,
@@ -37,5 +38,6 @@ export default {
     },
     iconSet: iconSet,
     plugins: {
+        Dialog
     }
 }

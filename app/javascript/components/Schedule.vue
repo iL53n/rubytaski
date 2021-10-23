@@ -26,6 +26,17 @@
                 div(class="col-12")
                   q-btn(flat class="fit" size="xl")
                     div(class="ellipsis") {{ resource.attributes.title }}
+                    q-btn(
+                      name="delete"
+                      flat
+                      round
+                      color="white"
+                      text-color="negative"
+                      size="15px"
+                      icon="clear"
+                      @click="removeTask(resource)"
+                      method="delete"
+                    )
               template(#scheduler-resource-day="{ timestamp, /* index, */ resource }")
                 q-btn(flat class="fit" @click.stop="addStar(resource.id, timestamp.date)")
                   div(v-for="star in resource.attributes.stars_dates" :key="star.id")
@@ -89,7 +100,7 @@
 </template>
 
 <script>
-  import { getTasks, postStar, updateStar, deleteStar } from '../api'
+  import { getTasks, deleteTask, postStar, updateStar, deleteStar } from '../api'
 
   export default {
     data () {
@@ -103,6 +114,31 @@
         getTasks()
           .then((response) => {
             this.resources = response.data.data
+        })
+      },
+      removeTask(task) {
+        this.$q.dialog({
+          title: "Удалить задание '" + task.attributes.title + "' ?",
+          //message: "Вы собираетесь безвозвратно удалить задание '" + task.attributes.title + "' !",
+          ok: {
+            outline: true,
+            color: 'negative',
+            label: 'Да'
+          },
+          cancel: {
+            flat: true,
+            color: 'black',
+            label: 'Нет'
+          }
+        }).onOk(() => {
+          deleteTask(task.id)
+            .then((response) => {
+              this.getTasks()
+            })
+        }).onCancel(() => {
+          // console.log('Cancel')
+        }).onDismiss(() => {
+          // console.log('I am triggered on both OK and Cancel')
         })
       },
       addStar(task_id, date) {
