@@ -4,5 +4,5 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :tasks, only: %i[index create destroy]
-  resources :stars , only: %i[create update destroy]
+  resources :stars, only: %i[create update destroy]
 end

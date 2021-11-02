@@ -15,7 +15,9 @@ import {
     QToolbarTitle,
     QAvatar,
     QCard,
-    QCardSection
+    QCardSection,
+    QInput,
+    QDialog
 } from 'quasar'
 
 export default {
@@ -32,7 +34,9 @@ export default {
         QToolbarTitle,
         QAvatar,
         QCard,
-        QCardSection
+        QCardSection,
+        QInput,
+        QDialog
     },
     directives: {
     },

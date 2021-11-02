@@ -5,6 +5,10 @@ export function getTasks () {
     return axios.get('/tasks');
 }
 
+export function  postTask(params) {
+    return axios.post('/tasks', params);
+}
+
 export function deleteTask (id) {
     return axios.delete('/tasks/' + id );
 }

@@ -1,8 +1,7 @@
 <template lang="pug">
   q-footer(elevated)
     q-toolbar
-      q-toolbar-title
-        | Footer
+        text-caption RubyTaski today to be successful tomorrow
 
 </template>
 

@@ -13,7 +13,7 @@
               view="week-scheduler"
               :resources="resources"
               resource-key="id"
-              :resource-width="500"
+              :resource-width="550"
               locale="ru"
               style="height: 100%;"
             )
@@ -97,16 +97,21 @@
                     //    icon="star_border"
                     //    @click=""
                     //  )
+      q-btn(fab color="primary" @click="newTask()" icon="add" name="new_task")
+      q-dialog(v-model="new_task_show" persistent)
+        new-task
 </template>
 
 <script>
   import { getTasks, deleteTask, postStar, updateStar, deleteStar } from '../api'
+  import NewTask from './NewTask'
 
   export default {
     data () {
       return {
         selectedDate: '',
         resources: this.getTasks(),
+        new_task_show: false
       }
     },
     methods: {
@@ -115,6 +120,9 @@
           .then((response) => {
             this.resources = response.data.data
         })
+      },
+      newTask() {
+        this.new_task_show = true
       },
       removeTask(task) {
         this.$q.dialog({
@@ -173,6 +181,8 @@
         this.$refs.calendar.prev()
       },
     },
-    components: {}
+    components: {
+      NewTask
+    }
   }
 </script>
