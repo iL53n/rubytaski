@@ -97,6 +97,8 @@
                     //    icon="star_border"
                     //    @click=""
                     //  )
+      // calendar-heatmap(:values='resources')
+      calendar-heatmap
       q-btn(fab color="primary" @click="newTask()" icon="add" name="new_task")
       q-dialog(v-model="new_task_show" persistent)
         new-task
@@ -105,6 +107,7 @@
 <script>
   import { getTasks, deleteTask, postStar, updateStar, deleteStar } from '../api'
   import NewTask from './NewTask'
+  import CalendarHeatmap from './CalendarHeatmap'
 
   export default {
     data () {
@@ -182,7 +185,8 @@
       },
     },
     components: {
-      NewTask
+      NewTask,
+      CalendarHeatmap
     }
   }
 </script>

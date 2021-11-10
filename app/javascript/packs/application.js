@@ -16,9 +16,12 @@ import 'quasar/dist/quasar.ie.polyfills'
 import quasar_params from './quasar_params'
 import '@quasar/quasar-ui-qcalendar/dist/index.css'
 import QCalendar from '@quasar/quasar-ui-qcalendar'
+import VueCalendarHeatmap from 'vue-calendar-heatmap'
+
 
 Vue.use(Quasar, quasar_params)
 Vue.use(QCalendar)
+Vue.use(VueCalendarHeatmap)
 
 Rails.start()
 ActiveStorage.start()

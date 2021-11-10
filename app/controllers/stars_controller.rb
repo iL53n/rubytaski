@@ -28,6 +28,10 @@ class StarsController < ApplicationController
     @star.destroy
   end
 
+  def statistics
+    render json: Statistics.new(Star.all).date_count
+  end
+
   private
 
   def load_star

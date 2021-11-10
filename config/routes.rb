@@ -5,4 +5,6 @@ Rails.application.routes.draw do
 
   resources :tasks, only: %i[index create destroy]
   resources :stars, only: %i[create update destroy]
+
+  get '/statistics', to: 'stars#statistics'
 end
