@@ -10,17 +10,22 @@ export function  postTask(params) {
 }
 
 export function deleteTask (id) {
-    return axios.delete('/tasks/' + id );
+    return axios.delete('/tasks/' + id);
 }
 
+// STAR
 export function postStar (params) {
-    return axios.post('/stars', params );
+    return axios.post('/stars', params);
 }
 
 export function updateStar (star) {
-    return axios.patch('/stars/' + star.id, star );
+    return axios.patch('/stars/' + star.id, star);
 }
 
 export function deleteStar (id) {
-    return axios.delete('/stars/' + id );
+    return axios.delete('/stars/' + id);
+}
+
+export function getStatistics () {
+    return axios.get('/statistics');
 }
