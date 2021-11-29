@@ -101,7 +101,7 @@
       calendar-heatmap
       q-btn(fab color="primary" @click="newTask()" icon="add" name="new_task")
       q-dialog(v-model="new_task_show" persistent)
-        new-task
+        new-task(@add-task="addTask")
 </template>
 
 <script>
@@ -126,6 +126,11 @@
       },
       newTask() {
         this.new_task_show = true
+      },
+      addTask(title) {
+        console.log(title),
+        this.getTasks(),
+        this.new_task_show = false
       },
       removeTask(task) {
         this.$q.dialog({

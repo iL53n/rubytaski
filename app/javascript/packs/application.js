@@ -11,7 +11,7 @@ import App from '../app'
 
 import { Quasar } from 'quasar'
 import '@quasar/extras/fontawesome-v5/fontawesome-v5.css'
-import '../app/assets/styles/quasar.sass'
+import '../app/assets/styles/quasar.styl'
 import 'quasar/dist/quasar.ie.polyfills'
 import quasar_params from './quasar_params'
 import '@quasar/quasar-ui-qcalendar/dist/index.css'

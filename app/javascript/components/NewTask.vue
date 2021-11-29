@@ -47,6 +47,7 @@
       addTask() {
         postTask(this.task)
           .then((response) => {
+            this.$emit('add-task', this.task.title)
           })
       }
     }
