@@ -35,8 +35,6 @@
 </template>
 
 <script>
-  import { postTask } from '../api'
-
   export default {
     data: function () {
       return {
@@ -45,10 +43,13 @@
     },
     methods: {
       addTask() {
-        postTask(this.task)
+        this.$backend.tasks.create(this.task)
           .then((response) => {
             this.$emit('add-task', this.task.title)
+            this.task.title = ''
           })
+          .catch(()   => this.error = true)
+          .finally(() => this.loading = false)
       }
     }
   }

@@ -10,8 +10,6 @@
 </template>
 
 <script>
-  import { getStatistics } from '../api'
-
   export default {
     // props: ['values'],
     data () {
@@ -27,10 +25,13 @@
     },
     methods: {
       getStatistics() {
-        getStatistics()
+        this.$backend.statistics.index()
           .then((response) => {
             this.data = response.data
-        })
+            this.getTasks()
+          })
+          .catch(()   => this.error = true)
+          .finally(() => this.loading = false)
       },
       getLastMonthsDay() {
         this.last_months_day = new Date(this.current_date.getFullYear(), this.current_date.getMonth() + 1, 0);

@@ -9,9 +9,9 @@
 </template>
 
 <script>
-  import HeaderComponent from 'components/Header'
-  import FooterComponent from 'components/Footer'
-  import Schedule from 'components/Schedule'
+  import HeaderComponent from 'app/components/Header'
+  import FooterComponent from 'app/components/Footer'
+  import Schedule from 'app/components/Schedule'
 
   export default {
     data () {

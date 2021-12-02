@@ -105,9 +105,8 @@
 </template>
 
 <script>
-  import { getTasks, deleteTask, postStar, updateStar, deleteStar } from '../api'
-  import NewTask from './NewTask'
-  import CalendarHeatmap from './CalendarHeatmap'
+  import NewTask from 'components/NewTask'
+  import CalendarHeatmap from 'components/CalendarHeatmap'
 
   export default {
     data () {
@@ -117,20 +116,28 @@
         new_task_show: false
       }
     },
+    created: function() {
+      this.getTasks
+    },
     methods: {
       getTasks() {
-        getTasks()
-          .then((response) => {
-            this.resources = response.data.data
-        })
+        this.$backend.tasks.index()
+          .then((response) => this.resources = response.data.data)
+          .catch(()        => this.error = true)
+          .finally(()      => this.loading = false)
       },
       newTask() {
         this.new_task_show = true
       },
       addTask(title) {
-        console.log(title),
-        this.getTasks(),
-        this.new_task_show = false
+        this.$backend.tasks.create()
+          .then((response) => {
+            this.getTasks(),
+            this.new_task_show = false
+          })
+          .catch(()   => this.error = true)
+          .finally(() => this.loading = false)
+
       },
       removeTask(task) {
         this.$q.dialog({
@@ -147,10 +154,12 @@
             label: 'Нет'
           }
         }).onOk(() => {
-          deleteTask(task.id)
-            .then((response) => {
-              this.getTasks()
-            })
+          this.$backend.tasks.destroy(task.id)
+          .then((response) => {
+            this.getTasks()
+          })
+          .catch(()   => this.error = true)
+          .finally(() => this.loading = false)
         }).onCancel(() => {
           // console.log('Cancel')
         }).onDismiss(() => {
@@ -158,10 +167,14 @@
         })
       },
       addStar(task_id, date) {
-        postStar({ state: 1, task_id: task_id, due_date: date })
-        .then((response) => {
-          this.getTasks()
-        })
+        let params = { state: 1, task_id: task_id, due_date: date }
+
+        this.$backend.stars.create(params)
+          .then((response) => {
+            this.getTasks()
+          })
+          .catch(()   => this.error = true)
+          .finally(() => this.loading = false)
       },
       // doneStar(star) {
       //   star.state = 2
@@ -174,10 +187,12 @@
       //   console.log('undone_star')
       // },
       removeStar(id) {
-        deleteStar(id)
+        this.$backend.stars.destroy(id)
           .then((response) => {
             this.getTasks()
           })
+          .catch(()   => this.error = true)
+          .finally(() => this.loading = false)
       },
       calendarNext () {
         this.$refs.calendar.next()
