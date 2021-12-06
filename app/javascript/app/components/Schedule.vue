@@ -44,13 +44,14 @@
                       //star options: stars, verified, check_circle, task_alt
                       q-btn(
                         push
+                        glossy
                         round
                         padding="xs"
                         class="fit"
                         align="around"
                         name="star"
-                        color="light-blue-9"
-                        text-color="yellow"
+                        color="amber-5"
+                        text-color="yellow-2"
                         size="30px"
                         icon="star"
                         @click.stop="removeStar(star.id)"
