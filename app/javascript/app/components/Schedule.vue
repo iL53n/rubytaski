@@ -1,8 +1,8 @@
 <template lang="pug">
   div
     q-page-container(align="middle")
-      //q-toolbar(class="bg-green-3")
-      //  q-toolbar-title(align="middle") #моянеделя
+      //- q-toolbar(class="bg-green-3")
+        //- q-toolbar-title(align="middle") #моянеделя
       div(class="q-pa-md row justify-around")
         q-card
           q-card-section
@@ -14,7 +14,7 @@
               :resources="resources"
               resource-key="id"
               :resource-width="550"
-              locale="ru"
+              locale="en"
               style="height: 100%;"
             )
               template(#scheduler-resources-header)

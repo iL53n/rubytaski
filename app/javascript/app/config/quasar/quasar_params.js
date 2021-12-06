@@ -26,7 +26,8 @@ import {
   QItem,
   QItemSection,
   QIcon,
-  QList
+  QList,
+  QChip
 } from 'quasar'
 
 export default {
@@ -51,7 +52,8 @@ export default {
     QItem,
     QItemSection,
     QIcon,
-    QList
+    QList,
+    QChip
   },
   directives: {
   },

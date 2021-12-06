@@ -1,11 +1,10 @@
 <template lang="pug">
-  div(v-if="" class="q-pa-md")
-    q-layout(view="lHr lpr fFf")
-      header-component
-      left-menu
-      right-menu
+  q-layout(view="lHr lpR fFf")
+    header-component
+    left-menu
+    right-menu
 
-      schedule
+    schedule
 </template>
 
 <script>
@@ -13,7 +12,7 @@
   import LeftMenu        from 'components/LeftMenu'
   import RightMenu       from 'components/RightMenu'
   import Schedule        from 'components/Schedule'
-
+  
   export default {
     data () {
       return {
