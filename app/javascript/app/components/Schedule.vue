@@ -16,6 +16,7 @@
               :resource-width="550"
               locale="en"
               style="height: 100%;"
+              :weekdays=[1, 2, 3, 4, 5, 6, 0]
             )
               template(#scheduler-resources-header)
                 div(class="full-height row justify-center items-center")
