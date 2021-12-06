@@ -2,6 +2,7 @@
 // import '@quasar/extras/fontawesome-v5/fontawesome-v5.css'
 import iconSet from 'quasar/icon-set/material-icons'
 import '@quasar/extras/material-icons/material-icons.css'
+// import '@quasar/extras/roboto-font/roboto-font.css'
 import '../../assets/styles/quasar.styl'
 import 'quasar/dist/quasar.ie.polyfills'
 import {
@@ -19,7 +20,13 @@ import {
   QCard,
   QCardSection,
   QInput,
-  QDialog
+  QDialog,
+  QSeparator,
+  QScrollArea,
+  QItem,
+  QItemSection,
+  QIcon,
+  QList
 } from 'quasar'
 
 export default {
@@ -38,12 +45,18 @@ export default {
     QCard,
     QCardSection,
     QInput,
-    QDialog
+    QDialog,
+    QSeparator,
+    QScrollArea,
+    QItem,
+    QItemSection,
+    QIcon,
+    QList
   },
   directives: {
   },
   iconSet: iconSet,
   plugins: {
     Dialog
-  }
+  },
 }

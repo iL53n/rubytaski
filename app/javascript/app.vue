@@ -1,17 +1,18 @@
 <template lang="pug">
   div(v-if="" class="q-pa-md")
-    q-layout(view="lhh lpR lff" container style="height: 95vh" class="shadow-5 rounded-borders")
+    q-layout(view="lHr lpr fFf")
       header-component
+      left-menu
+      right-menu
 
       schedule
-
-      footer-component
 </template>
 
 <script>
-  import HeaderComponent from 'app/components/Header'
-  import FooterComponent from 'app/components/Footer'
-  import Schedule from 'app/components/Schedule'
+  import HeaderComponent from 'components/Header'
+  import LeftMenu        from 'components/LeftMenu'
+  import RightMenu       from 'components/RightMenu'
+  import Schedule        from 'components/Schedule'
 
   export default {
     data () {
@@ -20,7 +21,8 @@
     },
     components: {
       HeaderComponent,
-      FooterComponent,
+      LeftMenu,
+      RightMenu,
       Schedule
     }
   }
@@ -30,5 +32,8 @@
 p {
   font-size: 2em;
   text-align: center;
+}
+div {
+  background: rgb(248, 247, 253)
 }
 </style>
