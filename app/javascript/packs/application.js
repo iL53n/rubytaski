@@ -17,7 +17,6 @@ import VueCalendarHeatmap from 'vue-calendar-heatmap'
 
 import { backend } from "../app/backend"
 
-
 Vue.use(Quasar, quasar_params)
 Vue.use(QCalendar)
 Vue.use(VueCalendarHeatmap)
