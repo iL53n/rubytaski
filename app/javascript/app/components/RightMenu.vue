@@ -1,5 +1,5 @@
 <template lang="pug">
-  q-drawer(show-if-above side="right" :width="220" :breakpoint="500")
+  q-drawer(show-if-above side="right" :width="300" :breakpoint="500")
     q-scroll-area(class="fit")
       q-list()
         q-item(style="background: rgb(248, 247, 253)" class="text-primary")
