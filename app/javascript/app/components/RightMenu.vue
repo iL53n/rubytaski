@@ -2,9 +2,9 @@
   q-drawer(show-if-above side="right" :width="260" :breakpoint="500")
     q-scroll-area(class="fit")
       q-list()
-        q-item(style="background: rgb(248, 247, 253)" class="text-primary")
-          q-icon(size="md" name="date_range")
-          q-toolbar-title Calendar Heatmap
+        q-item(style="background: rgb(248, 247, 253)" align="center")
+          //- q-icon(size="md" name="date_range")
+          q-toolbar-title(class="text-blue-grey-10") Calendar Heatmap
         heatmap
 </template>
 

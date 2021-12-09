@@ -3,9 +3,32 @@
     //- q-toolbar(class="bg-green-3")
       //- q-toolbar-title(align="middle") #моянеделя
     div(class="row justify-around")
-      q-card(class="col-2 q-ma-lg")
+      q-card(class="col-2 q-ma-lg" style="background: linear-gradient(90deg, #847bf3 0%, #b47bf3 100%);")
         q-card-section
-          div(class="text-h2") CARD
+          div(class="row no-wrap")
+            div(class="col" align="left")
+              div(class="text-h1 text-white") 273
+              div(class="text-subtitle1 text-grey-1") ALL STARS
+              br
+              div(class="text-h2 text-white") 122
+              div(class="text-subtitle2 text-grey-1") THIS YEAR
+              br
+              div(class="text-h3 text-white") 36
+              div(class="text-subtitle2 text-grey-1") THIS MONTH
+              br
+              div(class="text-h4 text-white") 12
+              div(class="text-subtitle2 text-grey-1") THIS WEEK
+              br
+              div(class="text-h5 text-white") 5
+              div(class="text-subtitle2 text-grey-1") TODAY
+            div(class="col-auto" align="bottom")
+              q-btn(color="grey-1" round flat icon="more_vert")
+                q-menu(cover auto-close)
+                  q-list
+                    q-item(clickable class="text-primary")
+                      q-item-section Show All Statistic
+                  //- q-item(clickable)
+                  //-   q-item-section Send Feedback
       q-card(class="col-grow q-ma-lg")
         q-card-section
           // weekdays=[0,1,2,3,4,5,6,7]

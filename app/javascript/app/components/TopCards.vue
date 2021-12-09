@@ -4,7 +4,7 @@
       q-card-section
         div(class="row")
           div(class="col text-grey" align="left")
-            q-icon(name="event" color="deep-purple-4" size="sm")
+            q-icon(name="event" color="primary" size="sm")
           div(class="col text-subtitle1 text-grey" align="right") Today
         q-separator
         br
@@ -22,7 +22,7 @@
       q-card-section
         div(class="row")
           div(class="col text-grey" align="left")
-            q-icon(name="calendar_view_week" color="deep-purple-4" size="sm")
+            q-icon(name="calendar_view_week" color="primary" size="sm")
           div(class="col text-subtitle1 text-grey" align="right") Week
         q-separator
         br
@@ -34,7 +34,7 @@
       q-card-section
         div(class="row")
           div(class="col text-grey" align="left")
-            q-icon(name="track_changes" color="deep-purple-4" size="sm")
+            q-icon(name="track_changes" color="primary" size="sm")
           div(class="col text-subtitle1 text-grey" align="right") Goal
         q-separator
         br

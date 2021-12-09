@@ -32,7 +32,9 @@ import {
   QRating,
   QKnob,
   QLinearProgress,
-  QBadge
+  QBadge,
+  QImg,
+  QMenu
 } from 'quasar'
 
 export default {
@@ -63,7 +65,9 @@ export default {
     QRating,
     QKnob,
     QLinearProgress,
-    QBadge
+    QBadge,
+    QImg,
+    QMenu
   },
   directives: {
   },
