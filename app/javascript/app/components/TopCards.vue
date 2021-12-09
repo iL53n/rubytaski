@@ -1,56 +1,67 @@
 <template lang="pug">
-  div
-    q-page-container(align="middle")
-      div(class="q-pa-md row justify-around q-gutter-sm")
-        q-card(class="col")
-          q-card-section
-            div(class="text-h5 text-grey" align="right") Today
-            q-separator
-            br
-            q-rating(
-              readonly
-              v-model="progressToday"
-              size="5em"
-              color="orange-3"
-              icon="star_border"
-              icon-selected="star"
-            )
-            div(class="text-h2 text-blue-grey-14") 3/5
-        q-card(class="col")
-          q-card-section
-            div(class="text-h5 text-grey" align="right") Week
-            q-separator
-            br
-            q-linear-progress(size="70px" value=0.76 color="green-4")
-              div(class="absolute-full flex flex-center")
-                q-badge(color="white" text-color="green" label="76%")
-            div(class="text-h2 text-blue-grey-14") 52/86
-        q-card(class="col")
-          q-card-section
-            div(class="text-h5 text-grey" align="right") Goal
-            q-separator
-            br
-            q-knob(
-              readonly
-              v-model="progressGoal"
-              show-value
-              size="130px"
-              :thickness="0.22"
-              color="red-4"
-              track-color="grey-3"
-              class="text-blue-grey-14"
-            ) {{progressGoal}} %
+  div(class="row justify-around")
+    q-card(class="col q-ma-lg")
+      q-card-section
+        div(class="row")
+          div(class="col text-grey" align="left")
+            q-icon(name="event" color="deep-purple-4" size="sm")
+          div(class="col text-subtitle1 text-grey" align="right") Today
+        q-separator
+        br
+        q-rating(
+          readonly
+          v-model="progressToday"
+          :max="6"
+          size="4em"
+          color="orange-3"
+          icon="star_border"
+          icon-selected="star"
+        )
+        div(class="text-h3 text-blue-grey-14") 5/6
+    q-card(class="col q-ma-lg")
+      q-card-section
+        div(class="row")
+          div(class="col text-grey" align="left")
+            q-icon(name="calendar_view_week" color="deep-purple-4" size="sm")
+          div(class="col text-subtitle1 text-grey" align="right") Week
+        q-separator
+        br
+        q-linear-progress(size="55px" value=0.76 color="green-4")
+          div(class="absolute-full flex flex-center")
+            q-badge(color="white" text-color="green" label="76%")
+        div(class="text-h3 text-blue-grey-14") 52/86
+    q-card(class="col q-ma-lg")
+      q-card-section
+        div(class="row")
+          div(class="col text-grey" align="left")
+            q-icon(name="track_changes" color="deep-purple-4" size="sm")
+          div(class="col text-subtitle1 text-grey" align="right") Goal
+        q-separator
+        br
+        q-knob(
+          readonly
+          v-model="progressGoal"
+          show-value
+          size="100px"
+          :thickness="0.22"
+          color="red-4"
+          track-color="grey-3"
+          class="text-blue-grey-14"
+        )
+          div(class="text-h3") {{progressGoal}}
+          div(class="text-h6 text-grey") %
 </template>
 
 <script>
   export default {
     data () {
       return {
-        progressToday: 3,
+        progressToday: 5,
         progressGoal: 62
       }
     }
   }
 </script>
+
 <style scoped></style>
 

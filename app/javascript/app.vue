@@ -4,10 +4,9 @@
     left-menu
     right-menu
 
-    top-cards
-
-    schedule
-      heatmap
+    q-page-container(align="middle")
+      top-cards
+      schedule
 </template>
 
 <script>
@@ -15,7 +14,6 @@
   import LeftMenu        from 'components/LeftMenu'
   import RightMenu       from 'components/RightMenu'
   import Schedule        from 'components/Schedule'
-  import Heatmap         from 'components/CalendarHeatmap'
   import TopCards        from 'components/TopCards'
   
   export default {
@@ -28,7 +26,6 @@
       LeftMenu,
       RightMenu,
       Schedule,
-      Heatmap,
       TopCards
     }
   }

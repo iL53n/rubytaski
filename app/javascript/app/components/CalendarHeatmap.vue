@@ -1,14 +1,13 @@
 <template lang="pug">
   div(class="q-pa-md row justify-around")
-    q-card(class="my-card")
-      q-card-section
-        //- https://www.color-hex.com/color/6544d3
-        calendar-heatmap(
-          :values="data"
-          tooltip-unit="stars"
-          :end-date="last_months_day"
-          :range-color="['#f7f6f9','#e0d9f6','#b2a1e9','#8369db','#5036a8']"
-          )
+    //- https://www.color-hex.com/color/6544d3
+    calendar-heatmap(
+      :values="data"
+      :vertical="true"
+      tooltip-unit="stars"
+      :end-date="last_months_day"
+      :range-color="['#f7f6f9','#e0d9f6','#b2a1e9','#8369db','#5036a8']"
+      )
 </template>
 
 <script>
@@ -42,11 +41,4 @@
   }
 </script>
 
-<style scoped>
-  .my-card {
-    width: 80%;
-    max-width: 1135px;
-    /* height: 10%; */
-    /* max-height: 100px */
-  }
-</style>
+<style scoped></style>
