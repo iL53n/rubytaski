@@ -4,6 +4,8 @@
     left-menu
     right-menu
 
+    top-cards
+
     schedule
       heatmap
 </template>
@@ -14,6 +16,7 @@
   import RightMenu       from 'components/RightMenu'
   import Schedule        from 'components/Schedule'
   import Heatmap         from 'components/CalendarHeatmap'
+  import TopCards        from 'components/TopCards'
   
   export default {
     data () {
@@ -25,7 +28,8 @@
       LeftMenu,
       RightMenu,
       Schedule,
-      Heatmap
+      Heatmap,
+      TopCards
     }
   }
 </script>
