@@ -17,7 +17,7 @@
           q-item-section
             q-toolbar-title rubytaski
         div(class="text-primary")
-          q-item          
+          q-item        
           q-item(to="/" v-ripple)
             q-item-section(avatar)
               q-icon(name="library_books")
@@ -34,10 +34,16 @@
             q-item-section(avatar)
               q-icon(name="done_all")
             q-item-section Done all
+          q-item
+          q-separator          
           q-item(to="/" v-ripple)
             q-item-section(avatar)
-              q-icon(name="favorite_border")
-            q-item-section Favorite
+              q-icon(name="contact_support")
+            q-item-section Support
+          q-item(to="/" v-ripple)
+            q-item-section(avatar)
+              q-icon(name="info")
+            q-item-section About  
 </template>
 
 <script>

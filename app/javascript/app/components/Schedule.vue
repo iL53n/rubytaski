@@ -20,9 +20,10 @@
             )
               template(#scheduler-resources-header)
                 div(class="full-height row justify-center items-center")
-                  q-btn(flat color="white" text-color="grey" icon="keyboard_arrow_left" @click="calendarPrev")
-                  q-btn(flat color="white" text-color="grey" icon="more_horiz" @click="calendarToday")
-                  q-btn(flat color="white" text-color="grey" icon="keyboard_arrow_right" @click="calendarNext")
+                  q-btn-group(outline)
+                    q-btn(flat color="white" size="sm" text-color="grey" icon="keyboard_arrow_left" @click="calendarPrev")
+                    q-btn(flat color="white" size="sm" text-color="grey" icon="more_horiz" @click="calendarToday")
+                    q-btn(flat color="white" size="sm" text-color="grey" icon="keyboard_arrow_right" @click="calendarNext")
               template(#scheduler-resource="{ resource /*, index */ }")
                 div(class="col-12")
                   q-btn(flat class="fit" size="xl")
@@ -100,15 +101,14 @@
                     //    @click=""
                     //  )
       // calendar-heatmap(:values='resources')
-      calendar-heatmap
-      q-btn(fab color="primary" @click="newTask()" icon="add" name="new_task")
+      q-btn(unelevated rounded color="deep-purple-1" text-color="primary" @click="newTask()" icon="add" name="new_task" label="Add Task")
       q-dialog(v-model="new_task_show" persistent)
         new-task(@add-task="addTask")
+      slot
 </template>
 
 <script>
   import NewTask from 'components/NewTask'
-  import CalendarHeatmap from 'components/CalendarHeatmap'
 
   export default {
     data () {
@@ -207,8 +207,7 @@
       },
     },
     components: {
-      NewTask,
-      CalendarHeatmap
+      NewTask
     }
   }
 </script>

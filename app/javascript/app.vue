@@ -5,6 +5,7 @@
     right-menu
 
     schedule
+      heatmap
 </template>
 
 <script>
@@ -12,6 +13,7 @@
   import LeftMenu        from 'components/LeftMenu'
   import RightMenu       from 'components/RightMenu'
   import Schedule        from 'components/Schedule'
+  import Heatmap         from 'components/CalendarHeatmap'
   
   export default {
     data () {
@@ -22,7 +24,8 @@
       HeaderComponent,
       LeftMenu,
       RightMenu,
-      Schedule
+      Schedule,
+      Heatmap
     }
   }
 </script>

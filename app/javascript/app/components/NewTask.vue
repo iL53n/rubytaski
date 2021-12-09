@@ -4,32 +4,35 @@
       q-form(enctype="multipart/form-data")
         q-card-section(class="q-gutter-y-md column")
           q-item-section
-            q-input(
-              filled
-              ref="title"
-              label="Задание *"
-              placeholder="Наименование задания"
-              v-model="task.title"
-              type="text"
-            )
-            q-input(
-              filled
-              ref="title"
-              label="Описание"
-              placeholder="Описание задания"
-              v-model="task.description"
-              type="textarea"
-            )
+          q-input(
+            filled
+            ref="title"
+            label="Title*"
+            placeholder="Tasks title"
+            v-model="task.title"
+            type="text"
+          )
+          q-input(
+            filled
+            ref="title"
+            label="Description"
+            placeholder="Tasks description"
+            v-model="task.description"
+            type="textarea"
+          )
+          q-card-actions(align="right" class="q-gutter-sm")
             q-btn(
-              color="primary"
-              label="Сохранить"
-              @click="addTask"
+              unelevated 
+              color="deep-purple-1"
+              text-color="primary"
+              label="Cancel"
               v-close-popup
             )
             q-btn(
-              flat
+              unelevated
               color="primary"
-              label="Закрыть"
+              label="Save"
+              @click="addTask"
               v-close-popup
             )
 </template>

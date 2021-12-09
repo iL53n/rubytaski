@@ -7,7 +7,7 @@
           :values="data"
           tooltip-unit="stars"
           :end-date="last_months_day"
-          :range-color="['#f7f5fc','#e0d9f6','#b2a1e9','#8369db','#5036a8']"
+          :range-color="['#f7f6f9','#e0d9f6','#b2a1e9','#8369db','#5036a8']"
           )
 </template>
 
