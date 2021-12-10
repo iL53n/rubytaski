@@ -34,7 +34,8 @@ import {
   QLinearProgress,
   QBadge,
   QImg,
-  QMenu
+  QMenu,
+  QSlider
 } from 'quasar'
 
 export default {
@@ -67,7 +68,8 @@ export default {
     QLinearProgress,
     QBadge,
     QImg,
-    QMenu
+    QMenu,
+    QSlider
   },
   directives: {
   },
