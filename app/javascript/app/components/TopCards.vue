@@ -8,14 +8,25 @@
           div(class="col text-subtitle1 text-grey" align="right") Today
         q-separator
         br
-        q-rating(
-          readonly
+        br
+        //- q-rating(
+        //-   readonly
+        //-   v-model="progressToday"
+        //-   :max="6"
+        //-   size="4em"
+        //-   color="orange-3"
+        //-   icon="star_border"
+        //-   icon-selected="star"
+        //- )
+        q-slider(
           v-model="progressToday"
+          :min="0"
           :max="6"
-          size="4em"
-          color="orange-3"
-          icon="star_border"
-          icon-selected="star"
+          readonly
+          label
+          :label-value="progressToday + ' left to complete'"
+          label-always
+          color="orange-4"
         )
         div(class="text-h3 text-blue-grey-14") 5/6
     q-card(class="col q-ma-lg")
