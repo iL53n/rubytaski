@@ -6,7 +6,7 @@
     @mouseover="miniState = false"
     @mouseout="miniState = true"
     mini-to-overlay
-    :width="220"
+    :width="200"
     :breakpoint="500"
     )
     q-scroll-area(class="fit")
@@ -20,29 +20,29 @@
           q-item        
           q-item(to="/" v-ripple)
             q-item-section(avatar)
-              q-icon(name="library_books")
-            q-item-section Dashboard
+              q-icon(name="dashboard")
+            q-item-section
+              div(class="text-subtitle1") Dashboard
           q-item(to="/" v-ripple)
             q-item-section(avatar)
-              q-icon(name="book")
-            q-item-section Book
+              q-icon(name="library_add_check")
+            q-item-section
+              div(class="text-subtitle1") Tasks
           q-item(to="/" v-ripple)
             q-item-section(avatar)
-              q-icon(name="chrome_reader_mode")
-            q-item-section Reader mode
-          q-item(to="/" v-ripple)
-            q-item-section(avatar)
-              q-icon(name="done_all")
-            q-item-section Done all
+              q-icon(name="flag_circle")
+            q-item-section
+              div(class="text-subtitle1") Goals
+          q-item
           q-item
           q-separator          
           q-item(to="/" v-ripple)
             q-item-section(avatar)
-              q-icon(name="contact_support")
-            q-item-section Support
+              q-icon(name="chat_bubble_outline")
+            q-item-section Feedback
           q-item(to="/" v-ripple)
             q-item-section(avatar)
-              q-icon(name="info")
+              q-icon(name="info_outline")
             q-item-section About  
 </template>
 
