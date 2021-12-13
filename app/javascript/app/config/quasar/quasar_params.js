@@ -35,7 +35,8 @@ import {
   QBadge,
   QImg,
   QMenu,
-  QSlider
+  QSlider,
+  Notify
 } from 'quasar'
 
 export default {
@@ -75,6 +76,7 @@ export default {
   },
   iconSet: iconSet,
   plugins: {
-    Dialog
+    Dialog,
+    Notify
   },
 }

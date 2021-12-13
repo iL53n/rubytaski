@@ -141,7 +141,8 @@
       return {
         selectedDate: '',
         resources: this.getTasks(),
-        new_task_show: false
+        new_task_show: false,
+        error: Boolean
       }
     },
     created: function() {
@@ -169,24 +170,37 @@
       },
       removeTask(task) {
         this.$q.dialog({
-          title: "Удалить задание '" + task.attributes.title + "' ?",
-          //message: "Вы собираетесь безвозвратно удалить задание '" + task.attributes.title + "' !",
+          title: "Delete the task '" + task.attributes.title + "' ?",
+          message: "You are about to permanently delete the task '" + task.attributes.title + "' with all earned stars! Are you sure?",
           ok: {
             outline: true,
             color: 'negative',
-            label: 'Да'
+            label: 'Yes'
           },
           cancel: {
             flat: true,
             color: 'black',
-            label: 'Нет'
+            label: 'No'
           }
         }).onOk(() => {
           this.$backend.tasks.destroy(task.id)
           .then((response) => {
             this.getTasks()
+            this.$q.notify({
+              message: "The task deleted!",
+              color: 'negative',
+              position: 'top'
+            })
           })
-          .catch(()   => this.error = true)
+          .catch((error) => {
+            this.error = true
+            console.log(error)
+            this.$q.notify({
+              message: "The task didn't delete!",
+              color: 'negative',
+              position: 'top'
+            })
+          })
           .finally(() => this.loading = false)
         }).onCancel(() => {
           // console.log('Cancel')

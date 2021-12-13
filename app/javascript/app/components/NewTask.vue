@@ -41,18 +41,34 @@
   export default {
     data: function () {
       return {
-        task: {}
+        task: {},
+        error: Boolean
       }
     },
     methods: {
       addTask() {
         this.$backend.tasks.create(this.task)
           .then((response) => {
-            this.$emit('add-task', this.task.title)
-            this.task.title = ''
+            this.$q.notify({
+              message: "Created new task!",
+              color: 'positive',
+              position: 'top'
+            })
           })
-          .catch(()   => this.error = true)
-          .finally(() => this.loading = false)
+          .catch((error) => {
+            this.error = true
+            console.log(error)
+            this.$q.notify({
+              message: "New task not created!",
+              color: 'negative',
+              position: 'top'
+            })
+          })
+          .finally(() => {
+            this.task.title = ''
+            this.loading = false
+            this.$emit('add-task', this.task.title)
+          })
       }
     }
   }
