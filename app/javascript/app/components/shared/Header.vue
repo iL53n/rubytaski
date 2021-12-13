@@ -29,7 +29,7 @@
               q-item(align="between")
                 q-item-section
                   div(class="row justify-center")
-                    q-btn(color="primary" v-close-popup icon-right="logout" label="Sign Out")
+                    q-btn(color="primary" no-caps v-close-popup icon-right="logout" label="Sign Out")
 </template>
 
 <script></script>

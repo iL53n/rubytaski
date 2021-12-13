@@ -127,7 +127,7 @@
                   //    @click=""
                   //  )
     // calendar-heatmap(:values='resources')
-    q-btn(unelevated rounded color="deep-purple-1" text-color="primary" @click="newTask()" icon="add" name="new_task" label="Add Task")
+    q-btn(unelevated rounded no-caps color="deep-purple-1" text-color="primary" @click="newTask()" icon="add" name="new_task" label="Add Task")
     q-dialog(v-model="new_task_show" persistent)
       new-task(@add-task="addTask")
     slot

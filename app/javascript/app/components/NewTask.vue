@@ -26,6 +26,7 @@
               color="deep-purple-1"
               text-color="primary"
               label="Cancel"
+              no-caps
               v-close-popup
             )
             q-btn(
@@ -33,6 +34,7 @@
               color="primary"
               label="Save"
               @click="addTask"
+              no-caps
               v-close-popup
             )
 </template>
