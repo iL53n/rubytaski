@@ -37,7 +37,7 @@
           div(class="col text-subtitle1 text-grey" align="right") Week
         q-separator
         br
-        q-linear-progress(size="55px" value=0.76 color="green-4")
+        q-linear-progress(size="60px" value=0.76 color="green-4")
           div(class="absolute-full flex flex-center")
             q-badge(color="white" text-color="green" label="76%")
         div(class="text-h3 text-blue-grey-14") 52/86
@@ -53,7 +53,7 @@
           readonly
           v-model="progressGoal"
           show-value
-          size="100px"
+          size="105px"
           :thickness="0.22"
           color="red-4"
           track-color="grey-3"
