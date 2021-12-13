@@ -4,7 +4,7 @@
       q-list()
         q-item(style="background: rgb(248, 247, 253)" align="center")
           //- q-icon(size="md" name="date_range")
-          q-toolbar-title(class="text-blue-grey-10") Calendar Heatmap
+          q-toolbar-title(class="text-blue-grey-10") Heatmap
         heatmap
 </template>
 

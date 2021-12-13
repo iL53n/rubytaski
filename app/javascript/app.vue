@@ -10,11 +10,12 @@
 </template>
 
 <script>
-  import HeaderComponent from 'components/Header'
-  import LeftMenu        from 'components/LeftMenu'
-  import RightMenu       from 'components/RightMenu'
-  import Schedule        from 'components/Schedule'
+  import HeaderComponent from 'components/shared/Header'
+  import LeftMenu        from 'components/shared/LeftMenu'
+  import RightMenu       from 'components/shared/RightMenu'
   import TopCards        from 'components/TopCards'
+  // import GeneralStat     from 'components/GeneralStat'
+  import Schedule        from 'components/Schedule'
   
   export default {
     data () {
@@ -25,8 +26,9 @@
       HeaderComponent,
       LeftMenu,
       RightMenu,
-      Schedule,
-      TopCards
+      TopCards,
+      // GeneralStat,
+      Schedule
     }
   }
 </script>

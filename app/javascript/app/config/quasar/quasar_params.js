@@ -36,7 +36,8 @@ import {
   QImg,
   QMenu,
   QSlider,
-  Notify
+  Notify,
+  QSpace
 } from 'quasar'
 
 export default {
@@ -70,7 +71,8 @@ export default {
     QBadge,
     QImg,
     QMenu,
-    QSlider
+    QSlider,
+    QSpace
   },
   directives: {
   },
