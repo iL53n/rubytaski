@@ -4,8 +4,8 @@ class Statistics
   end
 
   def date_count
-    @data.group_by { |object| object.due_date }.transform_values {|values| values.count}.map do |key, value|
-      {date: key, count: value}
+    @data.group_by(&:due_date).transform_values(&:count).map do |key, value|
+      { date: key, count: value }
     end
   end
 end
