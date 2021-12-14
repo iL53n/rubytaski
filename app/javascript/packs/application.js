@@ -14,8 +14,8 @@ import quasar_params from '../app/config/quasar/quasar_params'
 import '@quasar/quasar-ui-qcalendar/dist/index.css'
 import QCalendar from '@quasar/quasar-ui-qcalendar'
 import VueCalendarHeatmap from 'vue-calendar-heatmap'
-
 import { backend } from "../app/backend"
+import router from '../app/router'
 
 Vue.use(Quasar, quasar_params)
 Vue.use(QCalendar)
@@ -27,6 +27,9 @@ Rails.start()
 ActiveStorage.start()
 
 document.addEventListener('DOMContentLoaded', () => {
-  const app = new Vue({ render: h => h(App) }).$mount();
+  const app = new Vue({ 
+    render: h => h(App),
+    router
+  }).$mount();
   document.body.appendChild(app.$el)
 });
