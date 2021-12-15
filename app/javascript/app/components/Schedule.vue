@@ -52,7 +52,7 @@
                   q-btn(flat color="white" size="sm" text-color="grey" icon="keyboard_arrow_right" @click="calendarNext")
             template(#scheduler-resource="{ resource /*, index */ }")
               div(class="col-12")
-                q-btn(flat class="fit" size="lg")
+                q-btn(@click="showTask(resource.id)" flat class="fit" size="lg")
                   div(class="ellipsis") {{ resource.attributes.title }}
                   q-btn(
                     name="delete"
@@ -128,9 +128,7 @@
                   //  )
     // calendar-heatmap(:values='resources')
     q-btn(unelevated rounded no-caps color="deep-purple-1" text-color="primary" @click="newTask()" icon="add" name="new_task" label="Add Task")
-    q-dialog(v-model="new_task_show" persistent)
-      new-task(@add-task="addTask")
-    slot
+    router-view
 </template>
 
 <script>
@@ -141,7 +139,6 @@
       return {
         selectedDate: '',
         resources: this.getTasks(),
-        new_task_show: false,
         error: Boolean
       }
     },
@@ -156,7 +153,7 @@
           .finally(()      => this.loading = false)
       },
       newTask() {
-        this.new_task_show = true
+        this.$router.push({ name: 'dashboardNewTask' })
       },
       addTask(title) {
         this.$backend.tasks.create()
@@ -166,7 +163,9 @@
           })
           .catch(()   => this.error = true)
           .finally(() => this.loading = false)
-
+      },
+      showTask(task_id) {
+        this.$router.push({ name: 'dashboardShowTask', params: { id: task_id } })
       },
       removeTask(task) {
         this.$q.dialog({

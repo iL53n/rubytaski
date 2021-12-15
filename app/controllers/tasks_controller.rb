@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   # before_action :authenticate_user!
-  before_action :load_task, only: :destroy
+  before_action :load_task, only: %i[show destroy]
 
   layout false
 
@@ -19,6 +19,10 @@ class TasksController < ApplicationController
     else
       render json: { errors: @task.errors }, status: :unprocessable_entity
     end
+  end
+
+  def show
+    render json: TaskSerializer.new(@task).serialized_json, status: :ok
   end
 
   def destroy

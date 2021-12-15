@@ -37,7 +37,9 @@ import {
   QMenu,
   QSlider,
   Notify,
-  QSpace
+  QSpace,
+  ClosePopup,
+  QBar
 } from 'quasar'
 
 export default {
@@ -72,9 +74,11 @@ export default {
     QImg,
     QMenu,
     QSlider,
-    QSpace
+    QSpace,
+    QBar
   },
   directives: {
+    ClosePopup
   },
   iconSet: iconSet,
   plugins: {

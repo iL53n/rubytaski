@@ -1,42 +1,56 @@
 <template lang="pug">
-  div
-    q-card(style="width: 500px")
-      q-form(enctype="multipart/form-data")
-        q-card-section(class="q-gutter-y-md column")
-          q-item-section
-          q-input(
-            filled
-            ref="title"
-            label="Title*"
-            placeholder="Tasks title"
-            v-model="task.title"
-            type="text"
-          )
-          q-input(
-            filled
-            ref="title"
-            label="Description"
-            placeholder="Tasks description"
-            v-model="task.description"
-            type="textarea"
-          )
-          q-card-actions(align="right" class="q-gutter-sm")
-            q-btn(
-              unelevated 
-              color="deep-purple-1"
-              text-color="primary"
-              label="Cancel"
-              no-caps
-              v-close-popup
+  div(class="q-pa-md")
+    q-dialog(
+      :value="true"
+      @hide="afterShow"
+      :maximized="maximizedToggle"
+      transition-show="slide-up"
+      transition-hide="slide-down"
+    )
+      q-card(style="width: 500px")
+        q-form(enctype="multipart/form-data")
+          q-card-section(class="row items-center q-pb-none text-blue-grey-14")
+            .text-h5 Add Task
+            q-space
+            q-btn(icon="close" flat round dense v-close-popup)
+          br
+          q-separator
+          q-card-section(class="q-gutter-y-md column")
+            q-input(
+              filled
+              ref="title"
+              label="Title*"
+              placeholder="Task title"
+              v-model="task.title"
+              type="text"
             )
-            q-btn(
-              unelevated
-              color="primary"
-              label="Save"
-              @click="addTask"
-              no-caps
-              v-close-popup
+            q-input(
+              filled
+              ref="title"
+              label="Description"
+              placeholder="Task description"
+              v-model="task.description"
+              type="textarea"
             )
+          q-separator
+          q-card-section(class="q-gutter-y-md column")
+            q-card-actions(align="right" class="q-gutter-sm")
+              q-btn(
+                unelevated 
+                color="deep-purple-1"
+                text-color="primary"
+                label="Cancel"
+                no-caps
+                v-close-popup
+              )
+              q-btn(
+                unelevated
+                color="primary"
+                label="Save"
+                @click="addTask"
+                no-caps
+                v-close-popup
+              )
 </template>
 
 <script>
@@ -71,6 +85,9 @@
             this.loading = false
             this.$emit('add-task', this.task.title)
           })
+      },
+      afterShow() {
+        this.$router.go(-1)
       }
     }
   }
