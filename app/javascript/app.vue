@@ -5,17 +5,13 @@
     right-menu
 
     q-page-container(align="middle")
-      top-cards
-      schedule
+      router-view
 </template>
 
 <script>
   import HeaderComponent from 'components/shared/Header'
   import LeftMenu        from 'components/shared/LeftMenu'
   import RightMenu       from 'components/shared/RightMenu'
-  import TopCards        from 'components/TopCards'
-  // import GeneralStat     from 'components/GeneralStat'
-  import Schedule        from 'components/Schedule'
   
   export default {
     data () {
@@ -25,10 +21,7 @@
     components: {
       HeaderComponent,
       LeftMenu,
-      RightMenu,
-      TopCards,
-      // GeneralStat,
-      Schedule
+      RightMenu
     }
   }
 </script>

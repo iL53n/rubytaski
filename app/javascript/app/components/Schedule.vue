@@ -134,7 +134,7 @@
 </template>
 
 <script>
-  import NewTask from 'components/NewTask'
+  import NewTask from 'components/tasks/New'
 
   export default {
     data () {

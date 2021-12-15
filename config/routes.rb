@@ -3,8 +3,11 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :tasks, only: %i[index create destroy]
+  resources :tasks, only: %i[index create show update destroy]
+  # resources :goals, only: %i[index create show update destroy]
   resources :stars, only: %i[create update destroy]
 
   get '/statistics', to: 'stars#statistics'
+
+  get '/*path', to: 'application#index', format: false
 end
