@@ -39,7 +39,8 @@ import {
   Notify,
   QSpace,
   ClosePopup,
-  QBar
+  QBar,
+  QSpinnerDots
 } from 'quasar'
 
 export default {
@@ -75,7 +76,8 @@ export default {
     QMenu,
     QSlider,
     QSpace,
-    QBar
+    QBar,
+    QSpinnerDots
   },
   directives: {
     ClosePopup
