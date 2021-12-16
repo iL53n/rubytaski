@@ -40,7 +40,9 @@ import {
   QSpace,
   ClosePopup,
   QBar,
-  QSpinnerDots
+  QSpinnerDots,
+  QTable,
+  QTd
 } from 'quasar'
 
 export default {
@@ -77,7 +79,9 @@ export default {
     QSlider,
     QSpace,
     QBar,
-    QSpinnerDots
+    QSpinnerDots,
+    QTable,
+    QTd
   },
   directives: {
     ClosePopup

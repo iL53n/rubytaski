@@ -15,21 +15,20 @@ export default new VueRouter ({
   hashbang: false,
   routes: [
     { path: '/',          redirect: '/dashboard' },
-    { path: '/tasks',     component: Tasks,
+    { path: '/tasks_list',     component: Tasks,
       children: [
         { path: 'new/', component: NewTask, name: 'newTask' },
         { path: ':id/', component: Task, name: 'showTask' }
       ]
     },
-    { path: '/goals',     component: Goals,
+    { path: '/goals_list',     component: Goals,
       children: [
         { path: ':id/', component: Goal, name: 'showGoal' }
       ]
     },
     { path: '/dashboard', component: Dashboard,
     children: [
-      { path: ':id/', component: Task, name: 'dashboardShowTask' },
-      { path: 'new/', component: NewTask, name: 'dashboardNewTask' } //del
+      { path: ':id/', component: Task, name: 'dashboardShowTask' }
     ]
   }
   ]

@@ -18,17 +18,17 @@
             q-toolbar-title rubytaski
         div(class="text-primary")
           q-item        
-          q-item(to="/dashboard" v-ripple)
+          q-item(to="/dashboard")
             q-item-section(avatar)
               q-icon(name="dashboard")
             q-item-section
               div(class="text-subtitle1") Dashboard
-          q-item(to="/tasks" v-ripple)
+          q-item(to="/tasks_list")
             q-item-section(avatar)
               q-icon(name="library_add_check")
             q-item-section
               div(class="text-subtitle1") Tasks
-          q-item(to="/goals" v-ripple)
+          q-item(to="/goals_list")
             q-item-section(avatar)
               q-icon(name="flag_circle")
             q-item-section
@@ -36,11 +36,11 @@
           q-item
           q-item
           q-separator          
-          q-item(to="/" v-ripple)
+          q-item(to="/")
             q-item-section(avatar)
               q-icon(name="chat_bubble_outline")
             q-item-section Feedback
-          q-item(to="/" v-ripple)
+          q-item(to="/")
             q-item-section(avatar)
               q-icon(name="info_outline")
             q-item-section About

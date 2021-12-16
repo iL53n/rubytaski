@@ -60,17 +60,6 @@
                 div(class="col-12")
                   q-btn(@click="showTask(resource.id)" flat class="fit" size="lg")
                     div(class="ellipsis") {{ resource.attributes.title }}
-                    q-btn(
-                      name="delete"
-                      flat
-                      round
-                      color="white"
-                      text-color="negative"
-                      size="10px"
-                      icon="clear"
-                      @click="removeTask(resource)"
-                      method="delete"
-                    )
               template(#scheduler-resource-day="{ timestamp, /* index, */ resource }")
                 q-btn(flat class="fit" @click.stop="addStar(resource.id, timestamp.date)")
                   div(v-for="star in resource.attributes.stars_dates" :key="star.id")
@@ -133,24 +122,20 @@
                     //    @click=""
                     //  )
       // calendar-heatmap(:values='resources')
-      q-btn(unelevated rounded no-caps color="deep-purple-1" text-color="primary" @click="newTask()" icon="add" name="new_task" label="Add Task")
-      router-view
 </template>
 
 <script>
-  import NewTask from 'components/tasks/New'
-
   export default {
     data () {
       return {
         selectedDate: '',
-        resources: this.getTasks(),
+        resources: [],
         error: false,
         loading: true
       }
     },
     created: function() {
-      this.getTasks
+      this.getTasks()
     },
     methods: {
       getTasks() {
@@ -159,60 +144,8 @@
           .catch(()        => this.error = true)
           .finally(()      => this.loading = false)
       },
-      newTask() {
-        this.$router.push({ name: 'dashboardNewTask' })
-      },
-      addTask(title) {
-        this.$backend.tasks.create()
-          .then((response) => {
-            this.getTasks(),
-            this.new_task_show = false
-          })
-          .catch(()   => this.error = true)
-          .finally(() => this.loading = false)
-      },
       showTask(task_id) {
         this.$router.push({ name: 'dashboardShowTask', params: { id: task_id } })
-      },
-      removeTask(task) {
-        this.$q.dialog({
-          title: "Delete the task '" + task.attributes.title + "' ?",
-          message: "You are about to permanently delete the task '" + task.attributes.title + "' with all earned stars! Are you sure?",
-          ok: {
-            outline: true,
-            color: 'negative',
-            label: 'Yes'
-          },
-          cancel: {
-            flat: true,
-            color: 'black',
-            label: 'No'
-          }
-        }).onOk(() => {
-          this.$backend.tasks.destroy(task.id)
-          .then((response) => {
-            this.getTasks()
-            this.$q.notify({
-              message: "The task deleted!",
-              color: 'negative',
-              position: 'top'
-            })
-          })
-          .catch((error) => {
-            this.error = true
-            console.log(error)
-            this.$q.notify({
-              message: "The task didn't delete!",
-              color: 'negative',
-              position: 'top'
-            })
-          })
-          .finally(() => this.loading = false)
-        }).onCancel(() => {
-          // console.log('Cancel')
-        }).onDismiss(() => {
-          // console.log('I am triggered on both OK and Cancel')
-        })
       },
       addStar(task_id, date) {
         let params = { state: 1, task_id: task_id, due_date: date }
@@ -252,8 +185,6 @@
         this.$refs.calendar.prev()
       },
     },
-    components: {
-      NewTask
-    }
+    components: {}
   }
 </script>
