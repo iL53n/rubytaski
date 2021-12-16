@@ -2,6 +2,8 @@
 
 * **Ruby version:** 3.0.2
 * **Rails version:** 6.1.4
+* **Vue version:** 2.6.14
+* **Quasar framework version:** 1.16
 
 ### Start project (local)
 1. Install foreman `gem  install foreman`
