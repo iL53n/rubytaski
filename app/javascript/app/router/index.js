@@ -8,6 +8,7 @@ import Task       from 'components/tasks/Show.vue'
 import NewTask    from 'components/tasks/New.vue'
 import Goals      from 'components/goals/Index.vue'
 import Goal       from 'components/goals/Show.vue'
+import NewGoal    from 'components/goals/New.vue'
 import Dashboard  from 'components/Dashboard.vue'
 
 export default new VueRouter ({
@@ -23,6 +24,7 @@ export default new VueRouter ({
     },
     { path: '/goals_list',     component: Goals,
       children: [
+        { path: 'new/', component: NewGoal, name: 'newGoal' },
         { path: ':id/', component: Goal, name: 'showGoal' }
       ]
     },

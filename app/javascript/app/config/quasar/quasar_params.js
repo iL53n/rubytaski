@@ -42,7 +42,12 @@ import {
   QBar,
   QSpinnerDots,
   QTable,
-  QTd
+  QTd,
+  QDate,
+  QForm,
+  QCardActions,
+  QPopupProxy,
+  date
 } from 'quasar'
 
 export default {
@@ -81,12 +86,19 @@ export default {
     QBar,
     QSpinnerDots,
     QTable,
-    QTd
+    QTd,
+    QDate,
+    QForm,
+    QCardActions,
+    QPopupProxy
   },
   directives: {
     ClosePopup
   },
   iconSet: iconSet,
+  utils: {
+    date
+  },
   plugins: {
     Dialog,
     Notify

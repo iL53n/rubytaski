@@ -3,7 +3,6 @@
     q-dialog(
       :value="true"
       @hide="afterShow"
-      :maximized="maximizedToggle"
       transition-show="slide-up"
       transition-hide="slide-down"
     )
@@ -58,7 +57,7 @@
     data: function () {
       return {
         task: {},
-        error: Boolean
+        error: false
       }
     },
     methods: {
