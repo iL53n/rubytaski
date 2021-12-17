@@ -6,19 +6,19 @@ class Star < ApplicationRecord
   belongs_to :task
 
   # https://github.com/amatsuda/stateful_enum
-  enum state: { created: 0, planned: 1, done: 2 } do
-    event :plan do
-      transition created: :planned
-    end
+  # enum state: { created: 0, planned: 1, done: 2 } do
+  #   event :plan do
+  #     transition created: :planned
+  #   end
 
-    event :complete do
-      before do
-        self.done_date = Time.zone.now
-      end
+  #   event :complete do
+  #     before do
+  #       self.done_date = Time.zone.now
+  #     end
 
-      transition planned: :done
-    end
-  end
+  #     transition planned: :done
+  #   end
+  # end
 
   def uniqueness_task_user_date
     if Star.where(user_id: user_id, task_id: task_id, due_date: due_date).exists?

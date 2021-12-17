@@ -79,49 +79,6 @@
                         icon="star"
                         @click.stop="removeStar(star.id)"
                       )
-                    // ToDo: template for 3 states
-                    //div(v-if="star.due_date == timestamp.date")
-                    //  q-btn(
-                    //    v-if="star.state == 'planned'"
-                    //    push
-                    //    round
-                    //    padding="xs"
-                    //    class="fit"
-                    //    align="around"
-                    //    name="star"
-                    //    text-color="yellow"
-                    //    size="30px"
-                    //    icon="star_border"
-                    //    @click="doneStar(star)"
-                    //  )
-                    //  q-btn(
-                    //    v-else-if="star.state == 'done'"
-                    //    push
-                    //    round
-                    //    padding="xs"
-                    //    class="fit"
-                    //    align="around"
-                    //    name="star"
-                    //    color="light-blue-9"
-                    //    text-color="yellow"
-                    //    size="30px"
-                    //    icon="star"
-                    //    @click="undoneStar()"
-                    //  )
-                    //div(v-else)
-                    //  q-btn(
-                    //    flat
-                    //    round
-                    //    padding="xs"
-                    //    align="around"
-                    //    class="fit"
-                    //    name="star"
-                    //    text-color="grey"
-                    //    size="15px"
-                    //    icon="star_border"
-                    //    @click=""
-                    //  )
-      // calendar-heatmap(:values='resources')
 </template>
 
 <script>
@@ -157,16 +114,6 @@
           .catch(()   => this.error = true)
           .finally(() => this.loading = false)
       },
-      // doneStar(star) {
-      //   star.state = 2
-      //   updateStar(star)
-      //   .then((response) => {
-      //     this.getTasks()
-      //   })
-      // },
-      // undoneStar() {
-      //   console.log('undone_star')
-      // },
       removeStar(id) {
         this.$backend.stars.destroy(id)
           .then((response) => {
