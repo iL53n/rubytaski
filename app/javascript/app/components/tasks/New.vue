@@ -82,7 +82,7 @@
           .finally(() => {
             this.task.title = ''
             this.loading = false
-            this.$emit('add-task', this.task.title)
+            this.$emit('add-task')
           })
       },
       afterShow() {

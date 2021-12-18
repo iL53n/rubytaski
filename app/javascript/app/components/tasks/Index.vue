@@ -47,7 +47,7 @@
                   @click="removeTask(props.row)"
                   method="delete"
                 )
-      router-view
+      router-view(@add-task="getTasks()")
 </template>
 
 <script>

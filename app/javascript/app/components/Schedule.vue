@@ -110,6 +110,7 @@
         this.$backend.stars.create(params)
           .then((response) => {
             this.getTasks()
+            this.$emit('add-star')
           })
           .catch(()   => this.error = true)
           .finally(() => this.loading = false)

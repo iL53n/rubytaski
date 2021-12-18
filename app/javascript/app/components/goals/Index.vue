@@ -47,7 +47,7 @@
                   @click="removeGoal(props.row)"
                   method="delete"
                   )
-      router-view
+      router-view(@add-goal="getGoals()")
 </template>
 
 <script>
