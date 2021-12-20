@@ -29,6 +29,9 @@ class StarsController < ApplicationController
     @star.destroy
   end
 
+  # Stats
+  # ToDo: move to a separate service
+
   def heatmap_stat
     render json: Statistics.new(stars: Star.all).date_count
   end
@@ -38,7 +41,7 @@ class StarsController < ApplicationController
   end
 
   def current_stat
-    render json: Statistics.new(stars: Star.all, 
+    render json: Statistics.new(stars: Star.all,
                                 tasks: Task.all).current_stat
   end
 
