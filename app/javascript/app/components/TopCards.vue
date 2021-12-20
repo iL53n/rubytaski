@@ -28,10 +28,10 @@
           div(class="col text-subtitle1 text-grey" align="right") Week
         q-separator
         br
-        q-linear-progress(size="60px" :value="weekProgress" color="green-4")
+        q-linear-progress(size="60px" :value="weekProgress / 100" color="green-4")
           div(class="absolute-full flex flex-center")
             q-badge(color="white" text-color="green")
-              | {{  Math.round(weekProgress * 100) }}%
+              | {{  weekProgress }}%
         div(class="text-h3 text-blue-grey-14") {{stat.done_week}}/{{stat.all_week}}
     q-card(class="col q-ma-lg")
       q-card-section
@@ -51,7 +51,7 @@
           track-color="grey-3"
           class="text-blue-grey-14"
         )
-          div(class="text-h3") {{goalProgress}}
+          div(class="text-h3") {{  goalProgress }}
           div(class="text-h6 text-grey") %
 </template>
 
@@ -64,13 +64,14 @@
     },
     computed: {
       weekProgress() {
-        return this.stat.done_week / this.stat.all_week
+        // return this.stat.done_week / this.stat.all_week
+        return Math.round(this.stat.done_week / this.stat.all_week * 100)
       },
       leftToCompleteDay() {
         return this.stat.all_today - this.stat.done_today
       },
       goalProgress() {
-        return 72
+        return Math.round(this.stat.done_goal / this.stat.all_goal * 100)
       }
     },
     created () {
@@ -81,6 +82,7 @@
         this.$backend.statistics.current()
           .then((response) => {
             this.stat = response.data
+            console.log(this.stat)
           })
           .catch(()   => this.error = true)
           .finally(() => this.loading = false)
