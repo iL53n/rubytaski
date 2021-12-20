@@ -29,7 +29,8 @@ const backend = {
     destroy: (id)     => adapter.delete(`stars/${id}`)
   },
   statistics: {
-    index:   ()       => adapter.get('statistics'),
+    heatmap: ()       => adapter.get('heatmap_stat'),
+    stars:   ()       => adapter.get('stars_stat'),
   }
 }
 

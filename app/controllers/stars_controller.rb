@@ -29,8 +29,12 @@ class StarsController < ApplicationController
     @star.destroy
   end
 
-  def statistics
+  def heatmap_stat
     render json: Statistics.new(Star.all).date_count
+  end
+
+  def stars_stat
+    render json: Statistics.new(Star.all).stars_stat
   end
 
   private

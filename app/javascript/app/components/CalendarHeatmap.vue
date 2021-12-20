@@ -26,7 +26,7 @@
     },
     methods: {
       getStatistics() {
-        this.$backend.statistics.index()
+        this.$backend.statistics.heatmap()
           .then((response) => {
             this.data = response.data
             this.getTasks()

@@ -13,20 +13,20 @@
           q-card-section
             div(class="row no-wrap")
               div(class="col" align="left")
-                div(class="text-h1 text-white") 273
-                div(class="text-subtitle1 text-grey-1") ALL STARS
+                .text-h1.text-white {{ stars_stat.all }}
+                .text-subtitle1.text-grey-1 ALL STARS
                 br
-                div(class="text-h2 text-white") 122
-                div(class="text-subtitle2 text-grey-1") THIS YEAR
+                .text-h2.text-white {{ stars_stat.current_year }}
+                .text-subtitle2.text-grey-1 THIS YEAR
                 br
-                div(class="text-h3 text-white") 36
-                div(class="text-subtitle2 text-grey-1") THIS MONTH
+                .text-h2.text-white {{ stars_stat.current_month }}
+                .text-subtitle2.text-grey-1 THIS MONTH
                 br
-                div(class="text-h4 text-white") 12
-                div(class="text-subtitle2 text-grey-1") THIS WEEK
+                .text-h4.text-white {{ stars_stat.current_week }}
+                .text-subtitle2.text-grey-1 THIS WEEK
                 br
-                div(class="text-h5 text-white") 5
-                div(class="text-subtitle2 text-grey-1") TODAY
+                .text-h5.text-white {{ stars_stat.today }}
+                .text-subtitle2.text-grey-1 TODAY
               div(class="col-auto" align="bottom")
                 q-btn(color="grey-1" round flat icon="more_vert")
                   q-menu(cover auto-close)
@@ -88,11 +88,13 @@
         selectedDate: '',
         resources: [],
         error: false,
-        loading: true
+        loading: true,
+        stars_stat: {}
       }
     },
     created: function() {
-      this.getTasks()
+      this.getTasks(),
+      this.getStatistics()
     },
     methods: {
       getTasks() {
@@ -110,6 +112,7 @@
         this.$backend.stars.create(params)
           .then((response) => {
             this.getTasks()
+            this.getStatistics()
             this.$emit('add-star')
           })
           .catch(()   => this.error = true)
@@ -119,6 +122,15 @@
         this.$backend.stars.destroy(id)
           .then((response) => {
             this.getTasks()
+            this.getStatistics()
+          })
+          .catch(()   => this.error = true)
+          .finally(() => this.loading = false)
+      },
+      getStatistics() {
+        this.$backend.statistics.stars()
+          .then((response) => {
+            this.stars_stat = response.data
           })
           .catch(()   => this.error = true)
           .finally(() => this.loading = false)
