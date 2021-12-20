@@ -30,11 +30,16 @@ class StarsController < ApplicationController
   end
 
   def heatmap_stat
-    render json: Statistics.new(Star.all).date_count
+    render json: Statistics.new(stars: Star.all).date_count
   end
 
   def stars_stat
-    render json: Statistics.new(Star.all).stars_stat
+    render json: Statistics.new(stars: Star.all).stars_stat
+  end
+
+  def current_stat
+    render json: Statistics.new(stars: Star.all, 
+                                tasks: Task.all).current_stat
   end
 
   private

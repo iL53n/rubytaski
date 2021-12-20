@@ -9,26 +9,17 @@
         q-separator
         br
         br
-        //- q-rating(
-        //-   readonly
-        //-   v-model="progressToday"
-        //-   :max="6"
-        //-   size="4em"
-        //-   color="orange-3"
-        //-   icon="star_border"
-        //-   icon-selected="star"
-        //- )
         q-slider(
-          v-model="progressToday"
+          v-model="stat.done_today"
           :min="0"
-          :max="6"
+          :max="stat.all_today"
           readonly
           label
-          :label-value="progressToday + ' left to complete'"
+          :label-value="leftToCompleteDay + ' left to complete'"
           label-always
           color="orange-4"
         )
-        div(class="text-h3 text-blue-grey-14") 5/6
+        div(class="text-h3 text-blue-grey-14") {{stat.done_today}}/{{stat.all_today}}
     q-card(class="col q-ma-lg")
       q-card-section
         div(class="row")
@@ -37,10 +28,11 @@
           div(class="col text-subtitle1 text-grey" align="right") Week
         q-separator
         br
-        q-linear-progress(size="60px" value=0.76 color="green-4")
+        q-linear-progress(size="60px" :value="weekProgress" color="green-4")
           div(class="absolute-full flex flex-center")
-            q-badge(color="white" text-color="green" label="76%")
-        div(class="text-h3 text-blue-grey-14") 52/86
+            q-badge(color="white" text-color="green")
+              | {{  Math.round(weekProgress * 100) }}%
+        div(class="text-h3 text-blue-grey-14") {{stat.done_week}}/{{stat.all_week}}
     q-card(class="col q-ma-lg")
       q-card-section
         div(class="row")
@@ -51,7 +43,7 @@
         br
         q-knob(
           readonly
-          v-model="progressGoal"
+          v-model="goalProgress"
           show-value
           size="105px"
           :thickness="0.22"
@@ -59,7 +51,7 @@
           track-color="grey-3"
           class="text-blue-grey-14"
         )
-          div(class="text-h3") {{progressGoal}}
+          div(class="text-h3") {{goalProgress}}
           div(class="text-h6 text-grey") %
 </template>
 
@@ -67,9 +59,32 @@
   export default {
     data () {
       return {
-        progressToday: 5,
-        progressGoal: 62
+        stat: {},
       }
+    },
+    computed: {
+      weekProgress() {
+        return this.stat.done_week / this.stat.all_week
+      },
+      leftToCompleteDay() {
+        return this.stat.all_today - this.stat.done_today
+      },
+      goalProgress() {
+        return 72
+      }
+    },
+    created () {
+      this.getStatistics()
+    },
+    methods: {
+      getStatistics() {
+        this.$backend.statistics.current()
+          .then((response) => {
+            this.stat = response.data
+          })
+          .catch(()   => this.error = true)
+          .finally(() => this.loading = false)
+      },
     }
   }
 </script>

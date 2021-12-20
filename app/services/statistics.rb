@@ -1,6 +1,7 @@
 class Statistics
-  def initialize(stars)
-    @stars = stars
+  def initialize(params = {})
+    @stars = params[:stars]
+    @tasks = params[:tasks]
   end
 
   def date_count
@@ -16,6 +17,15 @@ class Statistics
       current_month: stars_count_between_dates('month'),
       current_week:  stars_count_between_dates('week'),
       today:         stars_count_between_dates('day')
+    }
+  end
+
+  def current_stat
+    {
+      all_today: @tasks.count,
+      done_today: stars_count_between_dates('day'),
+      all_week: @tasks.count * 7,
+      done_week: stars_count_between_dates('week')
     }
   end
 

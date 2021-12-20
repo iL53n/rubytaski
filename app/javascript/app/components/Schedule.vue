@@ -13,19 +13,19 @@
           q-card-section
             div(class="row no-wrap")
               div(class="col" align="left")
-                .text-h1.text-white {{ stars_stat.all }}
+                .text-h1.text-white {{ stat.all }}
                 .text-subtitle1.text-grey-1 ALL STARS
                 br
-                .text-h2.text-white {{ stars_stat.current_year }}
+                .text-h2.text-white {{ stat.current_year }}
                 .text-subtitle2.text-grey-1 THIS YEAR
                 br
-                .text-h2.text-white {{ stars_stat.current_month }}
+                .text-h2.text-white {{ stat.current_month }}
                 .text-subtitle2.text-grey-1 THIS MONTH
                 br
-                .text-h4.text-white {{ stars_stat.current_week }}
+                .text-h4.text-white {{ stat.current_week }}
                 .text-subtitle2.text-grey-1 THIS WEEK
                 br
-                .text-h5.text-white {{ stars_stat.today }}
+                .text-h5.text-white {{ stat.today }}
                 .text-subtitle2.text-grey-1 TODAY
               div(class="col-auto" align="bottom")
                 q-btn(color="grey-1" round flat icon="more_vert")
@@ -89,10 +89,10 @@
         resources: [],
         error: false,
         loading: true,
-        stars_stat: {}
+        stat: {}
       }
     },
-    created: function() {
+    created() {
       this.getTasks(),
       this.getStatistics()
     },
@@ -130,7 +130,7 @@
       getStatistics() {
         this.$backend.statistics.stars()
           .then((response) => {
-            this.stars_stat = response.data
+            this.stat = response.data
           })
           .catch(()   => this.error = true)
           .finally(() => this.loading = false)

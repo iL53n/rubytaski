@@ -31,6 +31,7 @@ const backend = {
   statistics: {
     heatmap: ()       => adapter.get('heatmap_stat'),
     stars:   ()       => adapter.get('stars_stat'),
+    current: ()       => adapter.get('current_stat')
   }
 }
 
