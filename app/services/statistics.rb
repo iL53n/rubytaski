@@ -22,13 +22,18 @@ class Statistics
   end
 
   def current_stat
+    if @goal
+      all_goal = @goal.number_of_stars
+      done_goal = @stars.where('due_date BETWEEN ? AND ?', @goal.start_date, @goal.due_date).count
+    end
+
     {
       all_today: @tasks.count,
       done_today: stars_count_between_dates('day'),
       all_week: @tasks.count * 7,
       done_week: stars_count_between_dates('week'),
-      all_goal: @goal.number_of_stars,
-      done_goal: @stars.where('due_date BETWEEN ? AND ?', @goal.start_date, @goal.due_date).count
+      all_goal: all_goal,
+      done_goal: done_goal
     }
   end
 
