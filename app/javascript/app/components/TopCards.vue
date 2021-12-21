@@ -64,7 +64,6 @@
     },
     computed: {
       weekProgress() {
-        // return this.stat.done_week / this.stat.all_week
         return Math.round(this.stat.done_week / this.stat.all_week * 100)
       },
       leftToCompleteDay() {

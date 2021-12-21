@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :stars, only: %i[create destroy]
 
   # Stat_data
+  # TODO: add scope 'stat'
   get '/heatmap_stat', to: 'stars#heatmap_stat'
   get '/stars_stat',   to: 'stars#stars_stat'
   get '/current_stat', to: 'stars#current_stat'

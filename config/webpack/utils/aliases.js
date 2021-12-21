@@ -7,7 +7,8 @@ module.exports = {
   resolve: {
     alias: {
       'images': resolve_relative('assets/images'),
-      'components': resolve_relative('components')
+      'components': resolve_relative('components'),
+      'mixins': resolve_relative('mixins')
     }
   }
 }

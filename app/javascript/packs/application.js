@@ -16,6 +16,7 @@ import QCalendar from '@quasar/quasar-ui-qcalendar'
 import VueCalendarHeatmap from 'vue-calendar-heatmap'
 import { backend } from "../app/backend"
 import router from '../app/router'
+import '../app/mixins'
 
 Vue.use(Quasar, quasar_params)
 Vue.use(QCalendar)

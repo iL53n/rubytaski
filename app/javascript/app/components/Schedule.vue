@@ -82,13 +82,13 @@
 </template>
 
 <script>
+  import loadingMixin from 'mixins'
+
   export default {
     data () {
       return {
         selectedDate: '',
         resources: [],
-        error: false,
-        loading: true,
         stat: {}
       }
     },
@@ -145,6 +145,7 @@
         this.$refs.calendar.prev()
       },
     },
+    mixins: [loadingMixin],
     components: {}
   }
 </script>
