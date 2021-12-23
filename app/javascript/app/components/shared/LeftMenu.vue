@@ -33,6 +33,11 @@
               q-icon(name="flag_circle")
             q-item-section
               div(class="text-subtitle1") Goals
+          q-item(to="/statistics")
+            q-item-section(avatar)
+              q-icon(name="insert_chart")
+            q-item-section
+              div(class="text-subtitle1") Statistics
           q-item
           q-item
           q-separator          

@@ -10,6 +10,7 @@ import Goals      from 'components/goals/Index.vue'
 import Goal       from 'components/goals/Show.vue'
 import NewGoal    from 'components/goals/New.vue'
 import Dashboard  from 'components/Dashboard.vue'
+import Statistics from 'components/Statistics.vue'
 
 export default new VueRouter ({
   mode: 'history',
@@ -32,6 +33,7 @@ export default new VueRouter ({
     children: [
       { path: ':id/', component: Task, name: 'dashboardShowTask' }
     ]
-  }
+    },
+    { path: '/statistics', component: Statistics }
   ]
 })

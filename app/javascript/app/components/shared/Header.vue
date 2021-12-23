@@ -12,14 +12,14 @@
                 q-item-section 
                   .text-h5 Bogdan Gribko
                   .text-subtitle1 9 years
-              q-item(to="/" v-ripple)
+              q-item(to="/statistics" v-ripple)
                 q-item-section(avatar)
                   q-icon(class="text-primary bg-deep-purple-1 profile-icon" name="insert_chart_outlined")
                 q-item-section(class="text-blue-grey-8")
                   .text-subtitle1 Statistics
                   .text-caption Full information about your activity
               q-separator(spaced inset)
-              q-item(to="/" v-ripple)
+              q-item(to="/profile" v-ripple)
                 q-item-section(avatar)
                   q-icon(class="text-primary bg-deep-purple-1 profile-icon" name="settings")
                 q-item-section(class="text-blue-grey-8")
