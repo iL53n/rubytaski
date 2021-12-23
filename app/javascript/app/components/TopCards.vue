@@ -8,18 +8,22 @@
           div(class="col text-subtitle1 text-grey" align="right") Today
         q-separator
         br
-        br
-        q-slider(
-          v-model="stat.done_today"
-          :min="0"
-          :max="stat.all_today"
-          readonly
-          label
-          :label-value="leftToCompleteDay + ' left to complete'"
-          label-always
-          color="orange-4"
-        )
-        div(class="text-h3 text-blue-grey-14") {{stat.done_today}}/{{stat.all_today}}
+        div(v-if="leftToCompleteDay")
+          br
+          q-slider(
+            v-model="stat.done_today"
+            :min="0"
+            :max="stat.all_today"
+            readonly
+            label
+            :label-value="leftToCompleteDay + ' left to complete'"
+            label-always
+            color="orange-4"
+          )
+          div(class="text-h3 text-blue-grey-14") {{stat.done_today}}/{{stat.all_today}}
+        div(v-else)
+          br
+          q-chip(size="xl" outline color="blue-grey-4" icon="warning_amber") No information
     q-card(class="col q-ma-lg")
       q-card-section
         div(class="row")
@@ -28,11 +32,15 @@
           div(class="col text-subtitle1 text-grey" align="right") Week
         q-separator
         br
-        q-linear-progress(size="60px" :value="weekProgress / 100" color="green-4")
-          div(class="absolute-full flex flex-center")
-            q-badge(color="white" text-color="green")
-              | {{  weekProgress }}%
-        div(class="text-h3 text-blue-grey-14") {{stat.done_week}}/{{stat.all_week}}
+        div(v-if="weekProgress")
+          q-linear-progress(size="60px" :value="weekProgress / 100" color="green-4")
+            div(class="absolute-full flex flex-center")
+              q-badge(color="white" text-color="green")
+                | {{  weekProgress }}%
+          div(class="text-h3 text-blue-grey-14") {{stat.done_week}}/{{stat.all_week}}
+        div(v-else)
+          br
+          q-chip(size="xl" outline color="blue-grey-4" icon="warning_amber") No information
     q-card(class="col q-ma-lg")
       q-card-section
         div(class="row")
@@ -42,6 +50,7 @@
         q-separator
         br
         q-knob(
+          v-if="goalProgress"
           readonly
           v-model="goalProgress"
           show-value
@@ -53,6 +62,9 @@
         )
           div(class="text-h3") {{  goalProgress }}
           div(class="text-h6 text-grey") %
+        div(v-else)
+          br
+          q-chip(size="xl" outline color="blue-grey-4" icon="warning_amber") No information
 </template>
 
 <script>
