@@ -17,10 +17,12 @@ import VueCalendarHeatmap from 'vue-calendar-heatmap'
 import { backend } from "../app/backend"
 import router from '../app/router'
 import '../app/mixins'
+import VueApexCharts from 'vue-apexcharts'
 
 Vue.use(Quasar, quasar_params)
 Vue.use(QCalendar)
 Vue.use(VueCalendarHeatmap)
+Vue.component('apexchart', VueApexCharts)
 
 Vue.prototype.$backend = backend
 
