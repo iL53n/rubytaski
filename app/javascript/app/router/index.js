@@ -3,27 +3,27 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
-import Tasks      from 'components/tasks/Index.vue'
-import Task       from 'components/tasks/Show.vue'
-import NewTask    from 'components/tasks/New.vue'
-import Goals      from 'components/goals/Index.vue'
-import Goal       from 'components/goals/Show.vue'
-import NewGoal    from 'components/goals/New.vue'
-import Dashboard  from 'components/Dashboard.vue'
-import Statistics from 'components/Statistics.vue'
+const Tasks      = () => import(/* webpackChunkName: "tasks" */ 'components/tasks/Index')
+const Task       = () => import(/* webpackChunkName: "task" */ 'components/tasks/Show')
+const NewTask    = () => import(/* webpackChunkName: "task" */ 'components/tasks/New')
+const Goals      = () => import(/* webpackChunkName: "goals" */ 'components/goals/Index')
+const Goal       = () => import(/* webpackChunkName: "goal" */ 'components/goals/Show')
+const NewGoal    = () => import(/* webpackChunkName: "new-goal" */ 'components/goals/New')
+const Dashboard  = () => import(/* webpackChunkName: "dashboard" */ 'components/Dashboard')
+const Statistics = () => import(/* webpackChunkName: "statistics" */ 'components/Statistics')
 
 export default new VueRouter ({
   mode: 'history',
   hashbang: false,
   routes: [
-    { path: '/',          redirect: '/dashboard' },
-    { path: '/tasks_list',     component: Tasks,
+    { path: '/', redirect: '/dashboard' },
+    { path: '/tasks_list', component: Tasks,
       children: [
         { path: 'new/', component: NewTask, name: 'newTask' },
         { path: ':id/', component: Task, name: 'showTask' }
       ]
     },
-    { path: '/goals_list',     component: Goals,
+    { path: '/goals_list', component: Goals,
       children: [
         { path: 'new/', component: NewGoal, name: 'newGoal' },
         { path: ':id/', component: Goal, name: 'showGoal' }
