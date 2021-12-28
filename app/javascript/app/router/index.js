@@ -4,11 +4,11 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 const Tasks      = () => import(/* webpackChunkName: "tasks" */ 'components/tasks/Index')
-const Task       = () => import(/* webpackChunkName: "task" */ 'components/tasks/Show')
-const NewTask    = () => import(/* webpackChunkName: "task" */ 'components/tasks/New')
+const Task       = () => import(/* webpackChunkName: "tasks" */ 'components/tasks/Show')
+const NewTask    = () => import(/* webpackChunkName: "tasks" */ 'components/tasks/New')
 const Goals      = () => import(/* webpackChunkName: "goals" */ 'components/goals/Index')
-const Goal       = () => import(/* webpackChunkName: "goal" */ 'components/goals/Show')
-const NewGoal    = () => import(/* webpackChunkName: "new-goal" */ 'components/goals/New')
+const Goal       = () => import(/* webpackChunkName: "goals" */ 'components/goals/Show')
+const NewGoal    = () => import(/* webpackChunkName: "goals" */ 'components/goals/New')
 const Dashboard  = () => import(/* webpackChunkName: "dashboard" */ 'components/Dashboard')
 const Statistics = () => import(/* webpackChunkName: "statistics" */ 'components/Statistics')
 
