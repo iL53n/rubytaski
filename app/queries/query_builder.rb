@@ -33,7 +33,7 @@ class QueryBuilder
   def perform_filter
     @search = params[:search]
     return if @search.blank?
-    
+
     if @performed_scope.klass.respond_to?(:search)
       @performed_scope = @performed_scope.merge(@performed_scope.klass.search(@search))
     end

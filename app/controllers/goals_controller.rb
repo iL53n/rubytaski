@@ -5,8 +5,9 @@ class GoalsController < ApplicationController
   layout false
 
   def index
-    @goals = Goal.all
-    render json: GoalSerializer.new(@goals).serialized_json
+    scope = Goal.all
+    @goals = ::QueryBuilder.new(params, scope)
+    # render json: GoalSerializer.new(@goals).serialized_json
   end
 
   def create
@@ -14,9 +15,9 @@ class GoalsController < ApplicationController
     @goal.user = User.first
 
     if @goal.save!
-      render json: GoalSerializer.new(@goal).serialized_json, status: :created
+      # render json: GoalSerializer.new(@goal).serialized_json, status: :created
     else
-      render json: { errors: @goal.errors }, status: :unprocessable_entity
+      # render json: { errors: @goal.errors }, status: :unprocessable_entity
     end
   end
 

@@ -11,9 +11,9 @@ class StarsController < ApplicationController
     @star.task = @task
 
     if @star.save!
-      render json: StarSerializer.new(@star).serialized_json, status: :created
+      # render json: StarSerializer.new(@star).serialized_json, status: :created
     else
-      render json: { errors: @star.errors }, status: :unprocessable_entity
+      # render json: { errors: @star.errors }, status: :unprocessable_entitys
     end
   end
 

@@ -9,13 +9,19 @@
             q-btn(unelevated rounded no-caps color="deep-purple-1" text-color="primary" @click="newTask()" icon="add" name="new_task" label="Add Task")
         q-card-section
           q-table(
-            :data="data",
-            :columns="columns",
+            :data="taskList.table.data",
+            :columns="taskList.table.columns",
+            :pagination.sync="taskList.table.pagination"
+            :rows-per-page-options="[10, 25, 100]"
+            :filter="taskList.filter"
+            binary-state-sort
             row-key="id",
-            separator="cell"
-            class="no-shadow")
-            template(v-slot:body-cell-btns="props")
-              q-td
+            separator="cell",
+            class="no-shadow",
+            @request="onRequest")
+            template(v-slot:body-cell-actions="props")
+              q-td(key="actions")
+                actions-cell(:actions="props.row.actions", :id="props.row.id" @changes="getTasks()")
                 q-btn(
                   name="edit"
                   flat
@@ -52,28 +58,38 @@
 
 <script>
   import NewTask from 'components/tasks/New'
+  import LoadingMixin from 'mixins'
 
   export default {
     data () {
       return {
-        columns: [
-          { name: 'id',          required: true,  label: 'ID',          align: 'left', field: row => row.id, format: val => `${val}`, sortable: true },
-          { name: 'title',       required: true,  label: 'TITLE',       align: 'left', field: row => row.title, format: val => `${val}`, sortable: true },
-          { name: 'description', required: false, label: 'DESCRIPTION', align: 'left', field: row => row.description, format: val => `${val}`, sortable: false },
-          { name: 'btns',                         label: 'ACTION',      align: 'left' }
-        ],
-        data: [],
-        error: false,
-        loading: true
+        taskList: {
+          table: {
+            columns: [],
+            data: [],
+            filter: '',
+            pagination: {}
+          },
+          filter: ''
+        }
       } 
     },
-    created: function() {
+    created() {
       this.getTasks()
     },
     methods: {
-      getTasks() {
-        this.$backend.tasks.index()
-          .then((response) => this.data = response.data.data.map(i => i.attributes))
+      onRequest(props) {
+        let { page, rowsPerPage, sortBy, descending } = props.pagination
+        let filter = props.filter
+
+        this.getTasks(page, rowsPerPage, sortBy, descending, filter)
+      },
+      refresh() {
+        this.$refs.table.requestServerInteraction()
+      },
+      getTasks(page, rowsPerPage, sort, desc, filter, scopes) {
+        this.$backend.tasks.index({ page, rowsPerPage, sort, desc, filter, scopes })
+          .then((response) => this.taskList = response.data)
           .catch(()        => this.error = true)
           .finally(()      => this.loading = false)
       },
@@ -123,7 +139,10 @@
     },
     components: {
       NewTask
-    }
+    },
+    mixins: [
+      LoadingMixin
+    ]
   }
 </script>
 

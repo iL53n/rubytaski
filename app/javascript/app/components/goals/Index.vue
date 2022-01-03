@@ -9,13 +9,19 @@
             q-btn(unelevated rounded no-caps color="deep-purple-1" text-color="primary" @click="newGoal()" icon="add" name="new_goal" label="Add Goal")
         q-card-section
           q-table(
-            :data="data",
-            :columns="columns",
+            :data="goalList.table.data",
+            :columns="goalList.table.columns",
+            :pagination.sync="goalList.table.pagination"
+            :rows-per-page-options="[10, 25, 100]"
+            :filter="goalList.filter"
+            binary-state-sort
             row-key="id",
-            separator="cell"
-            class="no-shadow")
-            template(v-slot:body-cell-btns="props")
-              q-td
+            separator="cell",
+            class="no-shadow",
+            @request="onRequest")
+            template(v-slot:body-cell-actions="props")
+              q-td(key="actions")
+                actions-cell(:actions="props.row.actions", :id="props.row.id" @changes="getGoals()")
                 q-btn(
                   name="edit"
                   flat
@@ -52,31 +58,38 @@
 
 <script>
   import NewGoal from 'components/goals/New'
+  import LoadingMixin from 'mixins'
 
   export default {
     data () {
       return {
-        columns: [
-          { name: 'id',              required: true, label: 'ID',              align: 'left', field: row => row.id, format: val => `${val}`, sortable: true },
-          { name: 'start_date',      required: true, label: 'START DATE',      align: 'left', field: row => row.start_date, format: val => `${val}`, sortable: true },
-          { name: 'due_date',        required: true, label: 'DUE DATE',        align: 'left', field: row => row.due_date, format: val => `${val}`, sortable: true },
-          { name: 'number_of_stars', required: true, label: 'NUMBER OF STARS', align: 'left', field: row => row.number_of_stars, format: val => `${val}`, sortable: true },
-          { name: 'prize',           required: true, label: 'PRIZE',           align: 'left', field: row => row.prize, format: val => `${val}`, sortable: false },
-          { name: 'state',           required: true, label: 'STATE',           align: 'left', field: row => row.state, format: val => `${val}`, sortable: true },
-          { name: 'btns',                            label: 'ACTION',          align: 'left' }
-        ],
-        data: [],
-        error: false,
-        loading: true
+        goalList: {
+          table: {
+            columns: [],
+            data: [],
+            filter: '',
+            pagination: {}
+          },
+          filter: ''
+        }
       } 
     },
     created: function() {
       this.getGoals()
     },
     methods: {
-      getGoals() {
-        this.$backend.goals.index()
-          .then((response) => this.data = response.data.data.map(i => i.attributes))
+      onRequest(props) {
+        let { page, rowsPerPage, sortBy, descending } = props.pagination
+        let filter = props.filter
+
+        this.getGoals(page, rowsPerPage, sortBy, descending, filter)
+      },
+      refresh() {
+        this.$refs.table.requestServerInteraction()
+      },
+      getGoals(page, rowsPerPage, sort, desc, filter, scopes) {
+        this.$backend.goals.index({ page, rowsPerPage, sort, desc, filter, scopes })
+          .then((response) => this.goalList = response.data)
           .catch(()        => this.error = true)
           .finally(()      => this.loading = false)
       },
@@ -126,7 +139,10 @@
     },
     components: {
       NewGoal
-    }
+    },
+    mixins: [
+      LoadingMixin
+    ]
   }
 </script>
 

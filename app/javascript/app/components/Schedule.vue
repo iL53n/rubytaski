@@ -42,7 +42,7 @@
               ref="calendar"
               v-model="selectedDate"
               view="week-scheduler"
-              :resources="resources"
+              :resources="resources.schedule.data"
               resource-key="id"
               :resource-width="550"
               :resource-height="0"
@@ -59,10 +59,10 @@
               template(#scheduler-resource="{ resource /*, index */ }")
                 div(class="col-12")
                   q-btn(@click="showTask(resource.id)" flat class="fit" size="lg")
-                    div(class="ellipsis") {{ resource.attributes.title }}
+                    div(class="ellipsis") {{ resource.title }}
               template(#scheduler-resource-day="{ timestamp, /* index, */ resource }")
                 q-btn(flat class="fit" @click.stop="addStar(resource.id, timestamp.date)")
-                  div(v-for="star in resource.attributes.stars_dates" :key="star.id")
+                  div(v-for="star in resource.stars_dates" :key="star.id")
                     div(v-show="star.due_date == timestamp.date")
                       //star options: stars, verified, check_circle, task_alt
                       q-btn(
@@ -88,7 +88,11 @@
     data () {
       return {
         selectedDate: '',
-        resources: [],
+        resources: {
+          schedule: {
+            data: []
+          }
+        },
         stat: {}
       }
     },
@@ -99,7 +103,7 @@
     methods: {
       getTasks() {
         this.$backend.tasks.index()
-          .then((response) => this.resources = response.data.data)
+          .then((response) => this.resources = response.data)
           .catch(()        => this.error = true)
           .finally(()      => this.loading = false)
       },

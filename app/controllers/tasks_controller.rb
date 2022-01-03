@@ -5,8 +5,9 @@ class TasksController < ApplicationController
   layout false
 
   def index
-    @tasks = Task.includes(:stars)
-    render json: TaskSerializer.new(@tasks).serialized_json
+    scope = Task.preload(:stars)
+    @tasks = ::QueryBuilder.new(params, scope)
+    # render json: TaskSerializer.new(@tasks).serialized_json
     # render json: TaskSerializer.new(@tasks, include: [:stars]).serializable_hash
   end
 
@@ -15,9 +16,9 @@ class TasksController < ApplicationController
     @task.user = User.first
 
     if @task.save!
-      render json: TaskSerializer.new(@task).serialized_json, status: :created
+      # render json: TaskSerializer.new(@task).serialized_json, status: :created
     else
-      render json: { errors: @task.errors }, status: :unprocessable_entity
+      # render json: { errors: @task.errors }, status: :unprocessable_entity
     end
   end
 

@@ -12,13 +12,13 @@ const adapter = axios.create({
 
 const backend = {
   tasks: {
-    index:   ()       => adapter.get('tasks'),
+    index:   (params) => adapter.get('tasks', { params: params }),
     create:  (params) => adapter.post('tasks', params),
     show:    (id)     => adapter.get(`tasks/${id}`),
     destroy: (id)     => adapter.delete(`tasks/${id}`)
   },
   goals: {
-    index:   ()       => adapter.get('goals'),
+    index:   (params) => adapter.get('goals', { params: params }),
     create:  (params) => adapter.post('goals', params),
     show:    (id)     => adapter.get(`goals/${id}`),
     destroy: (id)     => adapter.delete(`goals/${id}`)
