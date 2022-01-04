@@ -19,9 +19,12 @@ class TaskPresenter < BasePresenter
   end
 
   def actions
+    # TODO: can implement separation actions by roles
+    # TODO: move frontend elements (color, icon) to components
     [
-      { name: :edit, label: 'Edit' },
-      { name: :destroy, label: 'Delete' }
+      { name: :edit,    label: 'Edit',    color: 'green-5',  icon: 'edit' },
+      { name: :archive, label: 'Archive', color: 'orange-5', icon: 'archive' },
+      { name: :destroy, label: 'Delete',  color: 'red-5',    icon: 'delete' }
     ]
   end
 end

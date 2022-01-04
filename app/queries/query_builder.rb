@@ -19,7 +19,7 @@ class QueryBuilder
 
   def perform_scope
     @scopes = @params[:scopes]
-    return unless @scope.present?
+    return unless @scopes.present?
 
     @scopes = @scopes.split(',')
     @scopes.each.with_index(1) do |scope, index|
@@ -44,18 +44,18 @@ class QueryBuilder
     return if @sort.blank?
 
     sort_params = {}
-    split_params = @params[:sort].split(',')
+    split_params = @sort.split(',')
     split_params.each do |sort|
       sort = sort.split('|')
-      next unless @scope.klass.column_names.include(sort.first) && %w[asc desc].include?(sort.last)
+      next unless @performed_scope.klass.column_names.include?(sort.first) && %w[asc desc].include?(sort.last)
 
       sort_params[sort.first] = sort.last
     end
 
     sort_params = {}
-    sort_params[@sort] = @params[:desc] == 'true' ? 'desc' : 'asc'
+    sort_params[@sort] = @params[:desc] == 'true' ? :desc : :asc
 
-    @scope = @scope.reorder(sort_params)
+    @performed_scope = @performed_scope.reorder(sort_params)
   end
 
   def perform_pagination
