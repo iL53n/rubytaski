@@ -13,19 +13,19 @@
           q-card-section
             div(class="row no-wrap")
               div(class="col" align="left")
-                .text-h1.text-white {{ stat.all }}
+                .text-h1.text-white {{ starsStatistics.all }}
                 .text-subtitle1.text-grey-1 ALL STARS
                 br
-                .text-h2.text-white {{ stat.current_year }}
+                .text-h2.text-white {{ starsStatistics.current_year }}
                 .text-subtitle2.text-grey-1 THIS YEAR
                 br
-                .text-h2.text-white {{ stat.current_month }}
+                .text-h2.text-white {{ starsStatistics.current_month }}
                 .text-subtitle2.text-grey-1 THIS MONTH
                 br
-                .text-h4.text-white {{ stat.current_week }}
+                .text-h4.text-white {{ starsStatistics.current_week }}
                 .text-subtitle2.text-grey-1 THIS WEEK
                 br
-                .text-h5.text-white {{ stat.today }}
+                .text-h5.text-white {{ starsStatistics.current_day }}
                 .text-subtitle2.text-grey-1 TODAY
               div(class="col-auto" align="bottom")
                 q-btn(color="grey-1" round flat icon="more_vert")
@@ -96,6 +96,16 @@
         stat: {}
       }
     },
+    computed: {
+      starsStatistics: {
+        get () {
+          return this.$store.state.statistics.stars
+        },
+        set (values) {
+          this.$store.commit('updateStarsStatistics', values)
+        }
+      }
+    },
     created() {
       this.getTasks(),
       this.getStatistics()
@@ -134,7 +144,8 @@
       getStatistics() {
         this.$backend.statistics.stars()
           .then((response) => {
-            this.stat = response.data
+            // this.stat = response.data
+            this.starsStatistics = response.data
           })
           .catch(()   => this.error = true)
           .finally(() => this.loading = false)
