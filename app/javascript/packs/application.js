@@ -9,19 +9,20 @@ import * as ActiveStorage from "@rails/activestorage"
 import Vue from 'vue'
 import App from '../app'
 
-import { Quasar } from 'quasar'
+import { Quasar }    from 'quasar'
 import quasar_params from '../app/config/quasar/quasar_params'
-import '@quasar/quasar-ui-qcalendar/dist/index.css'
-import QCalendar from '@quasar/quasar-ui-qcalendar'
-import VueCalendarHeatmap from 'vue-calendar-heatmap'
-import { backend } from "../app/backend"
-import router from '../app/router'
-import '../app/mixins'
+import                    '@quasar/quasar-ui-qcalendar/dist/index.css'
+import QCalendar     from '@quasar/quasar-ui-qcalendar'
+import Heatmap       from 'vue-calendar-heatmap'
+import { backend }   from "../app/backend"
+import router        from '../app/router'
+import                    '../app/mixins'
 import VueApexCharts from 'vue-apexcharts'
+import store         from '../app/store'
 
 Vue.use(Quasar, quasar_params)
 Vue.use(QCalendar)
-Vue.use(VueCalendarHeatmap)
+Vue.use(Heatmap)
 Vue.component('apexchart', VueApexCharts)
 
 Vue.prototype.$backend = backend
@@ -32,7 +33,8 @@ ActiveStorage.start()
 document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({ 
     render: h => h(App),
-    router
+    router,
+    store
   }).$mount();
   document.body.appendChild(app.$el)
 });
