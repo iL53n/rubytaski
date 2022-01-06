@@ -20,9 +20,20 @@
         current_date: new Date()
       }
     },
+    computed: {
+      starsStats() {
+        return this.$store.state.statistics.stars.all
+      },
+    },
     created() {
       this.getStatistics(),
+      // TODO: computer better?
       this.getLastMonthsDay()
+    },
+    watch: {
+      starsStats() {
+        this.getStatistics()
+      }
     },
     methods: {
       getStatistics() {

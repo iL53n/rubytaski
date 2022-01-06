@@ -75,6 +75,9 @@
       }
     },
     computed: {
+      starsStats() {
+        return this.$store.state.statistics.stars.all
+      },
       weekProgress() {
         return Math.round(this.stat.done_week / this.stat.all_week * 100)
       },
@@ -87,6 +90,11 @@
     },
     created () {
       this.getStatistics()
+    },
+    watch: {
+      starsStats() {
+        this.getStatistics()
+      }
     },
     methods: {
       getStatistics() {

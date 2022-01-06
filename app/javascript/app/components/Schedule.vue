@@ -13,19 +13,19 @@
           q-card-section
             div(class="row no-wrap")
               div(class="col" align="left")
-                .text-h1.text-white {{ starsStatistics.all }}
+                .text-h1.text-white {{ stats.all }}
                 .text-subtitle1.text-grey-1 ALL STARS
                 br
-                .text-h2.text-white {{ starsStatistics.current_year }}
+                .text-h2.text-white {{ stats.current_year }}
                 .text-subtitle2.text-grey-1 THIS YEAR
                 br
-                .text-h2.text-white {{ starsStatistics.current_month }}
+                .text-h2.text-white {{ stats.current_month }}
                 .text-subtitle2.text-grey-1 THIS MONTH
                 br
-                .text-h4.text-white {{ starsStatistics.current_week }}
+                .text-h4.text-white {{ stats.current_week }}
                 .text-subtitle2.text-grey-1 THIS WEEK
                 br
-                .text-h5.text-white {{ starsStatistics.current_day }}
+                .text-h5.text-white {{ stats.current_day }}
                 .text-subtitle2.text-grey-1 TODAY
               div(class="col-auto" align="bottom")
                 q-btn(color="grey-1" round flat icon="more_vert")
@@ -92,12 +92,11 @@
           schedule: {
             data: []
           }
-        },
-        stat: {}
+        }
       }
     },
     computed: {
-      starsStatistics: {
+      stats: {
         get () {
           return this.$store.state.statistics.stars
         },
@@ -127,7 +126,7 @@
           .then((response) => {
             this.getTasks()
             this.getStatistics()
-            this.$emit('add-star')
+            // this.$emit('add-star')
           })
           .catch(()   => this.error = true)
           .finally(() => this.loading = false)
@@ -144,8 +143,7 @@
       getStatistics() {
         this.$backend.statistics.stars()
           .then((response) => {
-            // this.stat = response.data
-            this.starsStatistics = response.data
+            this.stats = response.data
           })
           .catch(()   => this.error = true)
           .finally(() => this.loading = false)

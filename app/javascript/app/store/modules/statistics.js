@@ -6,7 +6,15 @@ export default {
       current_month: 0,
       current_week: 0,
       current_day: 0
-    }
+    },
+    current: {
+      all_today: 0,
+      done_today: 0,
+      all_week: 0,
+      done_week: 0,
+      all_goal: 0,
+      done_goal: 0
+    },
   },
   mutations: {
     updateStarsStatistics(state, values) {

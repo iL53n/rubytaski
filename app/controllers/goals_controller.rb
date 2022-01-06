@@ -22,7 +22,7 @@ class GoalsController < ApplicationController
   end
 
   def show
-    render json: GoalSerializer.new(@goal).serialized_json, status: :ok
+    # render json: GoalSerializer.new(@goal).serialized_json, status: :ok
   end
 
   def update; end
