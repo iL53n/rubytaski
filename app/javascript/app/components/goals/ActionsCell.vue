@@ -41,7 +41,7 @@
             label: 'No'
           }
         }).onOk(() => {
-          this.$backend.tasks.destroy(this.id)
+          this.$backend.goals.destroy(this.id)
           .then((response) => {
             this.$q.notify({
               message: "The goal deleted!",
