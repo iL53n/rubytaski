@@ -45,7 +45,7 @@
                         glossy
                         round
                         padding="xs"
-                        class="fit"
+                        class="fit emergence"
                         align="around"
                         name="star"
                         color="amber-5"
@@ -140,3 +140,29 @@
     }
   }
 </script>
+
+<style scoped>
+.emergence { 
+    animation: emergence-with-rotate 0.8s;
+    animation-iteration-count: 1;
+}
+
+@keyframes emergence-with-rotate {
+  0% {
+    transform: rotate(0deg) scale(0.5);
+  }
+  60% {
+    transform: 
+    rotate(360deg) scale(1);
+  }
+  80% {
+    transform: scale(1.2);
+  }
+  90% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+</style>
