@@ -1,4 +1,4 @@
-# class TaskSerializer
+class TaskSerializer
 #   include FastJsonapi::ObjectSerializer
 
 #   attributes :id, :title, :description
@@ -20,4 +20,4 @@
 #   # attribute :stars do |object|
 #   #   object.stars.map { |s| s }
 #   # end
-# end
+end
