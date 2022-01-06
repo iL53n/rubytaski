@@ -8,7 +8,7 @@
           div(class="col text-subtitle1 text-grey" align="right") Today
         q-separator
         br
-        div(v-if="leftToCompleteDay")
+        div(v-if="leftToCompleteDay >= 0")
           br
           q-slider(
             v-model="stat.done_today"
@@ -32,7 +32,7 @@
           div(class="col text-subtitle1 text-grey" align="right") Week
         q-separator
         br
-        div(v-if="weekProgress")
+        div(v-if="weekProgress >= 0")
           q-linear-progress(size="60px" :value="weekProgress / 100" color="green-4")
             div(class="absolute-full flex flex-center")
               q-badge(color="white" text-color="green")
@@ -50,7 +50,7 @@
         q-separator
         br
         q-knob(
-          v-if="goalProgress"
+          v-if="goalProgress >= 0"
           readonly
           v-model="goalProgress"
           show-value

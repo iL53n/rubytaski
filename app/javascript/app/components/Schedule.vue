@@ -9,32 +9,7 @@
       .text-h3.text-red ERROR!
     div(v-else)
       div(class="row justify-around")
-        q-card(class="col-2 q-ma-lg" style="background: linear-gradient(90deg, #847bf3 0%, #b47bf3 100%);")
-          q-card-section
-            div(class="row no-wrap")
-              div(class="col" align="left")
-                .text-h1.text-white {{ stats.all }}
-                .text-subtitle1.text-grey-1 ALL STARS
-                br
-                .text-h2.text-white {{ stats.current_year }}
-                .text-subtitle2.text-grey-1 THIS YEAR
-                br
-                .text-h2.text-white {{ stats.current_month }}
-                .text-subtitle2.text-grey-1 THIS MONTH
-                br
-                .text-h4.text-white {{ stats.current_week }}
-                .text-subtitle2.text-grey-1 THIS WEEK
-                br
-                .text-h5.text-white {{ stats.current_day }}
-                .text-subtitle2.text-grey-1 TODAY
-              div(class="col-auto" align="bottom")
-                q-btn(color="grey-1" round flat icon="more_vert")
-                  q-menu(cover auto-close)
-                    q-list
-                      q-item(clickable to="/statistics" class="text-primary")
-                        q-item-section Show All Statistic
-                    //- q-item(clickable)
-                    //-   q-item-section Send Feedback
+        general-stat
         q-card(class="col-grow q-ma-lg")
           q-card-section
             // weekdays=[0,1,2,3,4,5,6,7]
@@ -82,6 +57,7 @@
 </template>
 
 <script>
+  import generalStat from 'components/GeneralStat'
   import loadingMixin from 'mixins'
 
   export default {
@@ -159,6 +135,8 @@
       },
     },
     mixins: [loadingMixin],
-    components: {}
+    components: {
+      generalStat
+    }
   }
 </script>

@@ -26,7 +26,7 @@
                 actions-cell(
                   :actions="props.row.actions",
                   :id="props.row.id"
-                  @changes="getGoals()")
+                  @changed="getGoals()")
       router-view(@add-goal="getGoals()")
 </template>
 
