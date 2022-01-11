@@ -3,8 +3,6 @@
     div(v-if="loading")
       q-page-container(align="middle")
         q-spinner-dots(color="primary" size="lg")
-    //- q-toolbar(class="bg-green-3")
-      //- q-toolbar-title(align="middle") #моянеделя
     div(v-else-if="error")
       .text-h3.text-red ERROR!
     div(v-else)
@@ -12,7 +10,6 @@
         general-stat
         q-card(class="col-grow q-ma-lg")
           q-card-section
-            // weekdays=[0,1,2,3,4,5,6,7]
             q-calendar(
               ref="calendar"
               v-model="selectedDate"
@@ -33,7 +30,7 @@
                     q-btn(flat color="white" size="sm" text-color="grey" icon="keyboard_arrow_right" @click="calendarNext")
               template(#scheduler-resource="{ resource /*, index */ }")
                 div(class="col-12")
-                  q-btn(@click="showTask(resource.id)" flat class="fit" size="lg")
+                  q-btn(@click="showTask(resource.id)" flat size="lg" align="left" style="width: 500px")
                     div(class="ellipsis") {{ resource.title }}
               template(#scheduler-resource-day="{ timestamp, /* index, */ resource }")
                 q-btn(flat class="fit" @click.stop="addStar(resource.id, timestamp.date)")
@@ -82,10 +79,13 @@
       }
     },
     created() {
-      this.getTasks(),
-      this.getStatistics()
+      this.refresh()
     },
     methods: {
+      refresh() {
+        this.getTasks(),
+        this.getStatistics()
+      },
       getTasks() {
         this.$backend.tasks.index()
           .then((response) => this.resources = response.data)
@@ -100,8 +100,7 @@
 
         this.$backend.stars.create(params)
           .then((response) => {
-            this.getTasks()
-            this.getStatistics()
+            this.refresh()
             // this.$emit('add-star')
           })
           .catch(()   => this.error = true)
@@ -110,8 +109,7 @@
       removeStar(id) {
         this.$backend.stars.destroy(id)
           .then((response) => {
-            this.getTasks()
-            this.getStatistics()
+            this.refresh()
           })
           .catch(()   => this.error = true)
           .finally(() => this.loading = false)
@@ -137,6 +135,13 @@
     mixins: [loadingMixin],
     components: {
       generalStat
+    },
+    subscriptions: {
+      StarsChannel: {
+        received(data) {
+          this.refresh()
+        }
+      }
     }
   }
 </script>

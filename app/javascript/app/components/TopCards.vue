@@ -101,7 +101,6 @@
         this.$backend.statistics.current()
           .then((response) => {
             this.stat = response.data
-            console.log(this.stat)
           })
           .catch(()   => this.error = true)
           .finally(() => this.loading = false)

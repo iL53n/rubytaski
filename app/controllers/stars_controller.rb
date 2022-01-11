@@ -2,6 +2,7 @@ class StarsController < ApplicationController
   # before_action :authenticate_user!
   before_action :load_star, only: %i[update destroy]
   before_action :load_task, only: :create
+  after_action  :broadcast, only: %i[create destroy]
 
   layout false
 
@@ -13,7 +14,7 @@ class StarsController < ApplicationController
     if @star.save!
       # render json: StarSerializer.new(@star).serialized_json, status: :created
     else
-      # render json: { errors: @star.errors }, status: :unprocessable_entitys
+      # render json: { errors: @star.errors }, status: :unprocessable_entity
     end
   end
 
@@ -63,5 +64,11 @@ class StarsController < ApplicationController
                                 :due_date,
                                 :done_date,
                                 star: [])
+  end
+
+  def broadcast
+    return if @star.errors.any?
+
+    ActionCable.server.broadcast('stars', { star: @star })
   end
 end

@@ -25,4 +25,11 @@ class Star < ApplicationRecord
       self.errors.add(:star, "already exists for the specified user, task and date")
     end
   end
+
+  # after_save :broadcast
+  # after_destroy :broadcast
+
+  # def broadcast
+  #   ActionCable.server.broadcast('stars', { star: self })
+  # end
 end
