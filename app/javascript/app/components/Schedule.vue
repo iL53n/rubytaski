@@ -18,7 +18,7 @@
               resource-key="id"
               :resource-width="550"
               :resource-height="0"
-              locale="en"
+              :locale="locale"
               style="height: 100%;"
               :weekdays=[1, 2, 3, 4, 5, 6, 0]
             )
@@ -61,6 +61,7 @@
     data () {
       return {
         selectedDate: '',
+        locale: this.$i18n.locale,
         resources: {
           schedule: {
             data: []

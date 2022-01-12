@@ -5,7 +5,7 @@
         div(class="row")
           div(class="col text-grey" align="left")
             q-icon(name="event" color="primary" size="sm")
-          div(class="col text-subtitle1 text-grey" align="right") Today
+          div(class="col text-subtitle1 text-grey" align="right") {{ $t('stat.today') }}
         q-separator
         br
         div(v-if="leftToCompleteDay >= 0")
@@ -29,7 +29,7 @@
         div(class="row")
           div(class="col text-grey" align="left")
             q-icon(name="calendar_view_week" color="primary" size="sm")
-          div(class="col text-subtitle1 text-grey" align="right") Week
+          div(class="col text-subtitle1 text-grey" align="right") {{ $t('stat.week') }}
         q-separator
         br
         div(v-if="weekProgress >= 0")
@@ -46,7 +46,7 @@
         div(class="row")
           div(class="col text-grey" align="left")
             q-icon(name="track_changes" color="primary" size="sm")
-          div(class="col text-subtitle1 text-grey" align="right") Goal
+          div(class="col text-subtitle1 text-grey" align="right") {{ $t('stat.goal') }}
         q-separator
         br
         q-knob(
@@ -72,6 +72,7 @@
     data () {
       return {
         stat: {},
+        msg: this.$t('message.tasks')
       }
     },
     computed: {

@@ -9,6 +9,8 @@
 </template>
 
 <script>
+  import languages from 'quasar/lang/index.json'
+
   import HeaderComponent from 'components/shared/Header'
   import LeftMenu        from 'components/shared/LeftMenu'
   import RightMenu       from 'components/shared/RightMenu'
@@ -16,6 +18,21 @@
   export default {
     data () {
       return {
+      }
+    },
+    created () {
+      this.$backend.locale()
+        .then((response) => {
+          this.setLocale(response.data.locale)
+        })
+    },
+    methods: {
+      setLocale(locale) {
+        this.$i18n.locale = locale
+
+        let qLang = languages.find(qLang => qLang.isoName === locale)
+        import(`quasar/lang/${qLang !== undefined ? qLang.isoName : 'en-us'}`)
+          .then(locale => this.$q.lang.set(locale.default))
       }
     },
     components: {
