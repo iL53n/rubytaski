@@ -23,7 +23,7 @@ gem 'webpacker', '~> 5.0'
 gem 'jbuilder', '~> 2.7'
 # gem 'fast_jsonapi', '~> 1.5'
 # Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 4.0'
+gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
