@@ -12,6 +12,6 @@ Rails.application.routes.draw do
   get '/heatmap_stat', to: 'stars#heatmap_stat'
   get '/stars_stat',   to: 'stars#stars_stat'
   get '/current_stat', to: 'stars#current_stat'
-
+  
   get '/*path', to: 'application#index', format: false
 end
