@@ -17,6 +17,7 @@ import Heatmap       from 'vue-calendar-heatmap'
 import { backend }   from "../app/backend"
 import router        from '../app/router'
 import                    '../app/mixins'
+import                    '../app/sockets'
 import VueApexCharts from 'vue-apexcharts'
 import store         from '../app/store'
 
