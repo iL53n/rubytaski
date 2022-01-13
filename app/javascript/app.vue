@@ -1,5 +1,5 @@
 <template lang="pug">
-  q-layout(view="lHr lpR fFf")
+  q-layout(v-if="user" view="lHr lpR fFf")
     header-component
     left-menu
     right-menu
@@ -17,6 +17,16 @@
   export default {
     data () {
       return {
+      }
+    },
+    computed: {
+      user: {
+        get() {
+          // return this.$store.state.currentUser
+        },
+        set(value) {
+          // this.$store.commit('updateCurrentUser', value)
+        }
       }
     },
     created () {
