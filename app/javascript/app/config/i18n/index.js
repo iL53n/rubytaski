@@ -11,7 +11,8 @@ const messages = { ru, en }
 const i18n = new VueI18n({
   locale: 'en-US',
   fallbackLocale: 'en-US',
-  messages: messages
+  messages: messages,
+  silentTranslationWarn: true
 })
 
 export default i18n

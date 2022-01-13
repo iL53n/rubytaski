@@ -118,7 +118,7 @@
           .finally(() => {
             this.goal.title = ''
             this.loading = false
-            this.$emit('add-goal')
+            this.$emit('changed')
           })
       },
       getCurrentDate() {
