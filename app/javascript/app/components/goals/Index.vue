@@ -27,7 +27,7 @@
                   :actions="props.row.actions",
                   :id="props.row.id"
                   @changed="getGoals()")
-      router-view(@add-goal="getGoals()")
+      router-view(@refresh="getGoals()")
 </template>
 
 <script>

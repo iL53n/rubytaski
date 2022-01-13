@@ -10,6 +10,7 @@ const EditTask   = () => import(/* webpackChunkName: "tasks" */ 'components/task
 const Goals      = () => import(/* webpackChunkName: "goals" */ 'components/goals/Index')
 const Goal       = () => import(/* webpackChunkName: "goals" */ 'components/goals/Show')
 const NewGoal    = () => import(/* webpackChunkName: "goals" */ 'components/goals/New')
+const EditGoal   = () => import(/* webpackChunkName: "goals" */ 'components/goals/Edit')
 const Dashboard  = () => import(/* webpackChunkName: "dashboard" */ 'components/Dashboard')
 const Statistics = () => import(/* webpackChunkName: "statistics" */ 'components/Statistics')
 
@@ -28,6 +29,7 @@ export default new VueRouter ({
     { path: '/goals_list', component: Goals,
       children: [
         { path: 'new/', component: NewGoal, name: 'newGoal' },
+        { path: ':id/edit/', component: EditGoal, name: 'editGoal' },
         { path: ':id/', component: Goal, name: 'showGoal' }
       ]
     },

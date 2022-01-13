@@ -1,13 +1,13 @@
 class GoalsController < ApplicationController
   # before_action :authenticate_user!
-  before_action :load_goal, only: %i[show destroy]
+  before_action :load_goal, only: %i[show update destroy]
 
   layout false
 
   def index
     scope = Goal.all
     @goals = ::QueryBuilder.new(params, scope)
-    # render json: GoalSerializer.new(@goals).serialized_json
+    render status: :ok
   end
 
   def create
@@ -15,20 +15,36 @@ class GoalsController < ApplicationController
     @goal.user = User.first
 
     if @goal.save!
-      # render json: GoalSerializer.new(@goal).serialized_json, status: :created
+      render status: :created,
+        json: { notice: 'Goal was successfully created.' }
     else
-      # render json: { errors: @goal.errors }, status: :unprocessable_entity
+      render status: :unprocessable_entity,
+        json: { error: @goal.errors.full_messages.to_sentence }
     end
   end
 
   def show
-    # render json: GoalSerializer.new(@goal).serialized_json, status: :ok
+    render status: :ok
   end
 
-  def update; end
+  def update
+    if @goal.update(goal_params)
+      render status: :ok,
+        json: { notice: 'Successfully updated goal.' }
+    else
+      render status: :unprocessable_entity,
+        json: { error: @goal.errors.full_messages.to_sentence }
+    end
+  end
 
   def destroy
-    @goal.destroy
+    if @goal.destroy
+      render status: :ok,
+        json: { notice: 'Successfully deleted goal.' }
+    else
+      render status: :unprocessable_entity,
+        json: { error: @goal.errors.full_messages.to_sentence }
+    end
   end
 
   private

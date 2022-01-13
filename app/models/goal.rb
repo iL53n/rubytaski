@@ -4,7 +4,7 @@ class Goal < ApplicationRecord
             :due_date,
             :number_of_stars,
             :prize, presence: true
-  validate :can_be_only_one_active_goal
+  validate :can_be_only_one_active_goal, on: :create
   belongs_to :user
 
   enum state: { created: 0, done: 1, archived: 5 } do
