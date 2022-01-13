@@ -21,10 +21,10 @@
         if (typeof this[action] === 'function') this[action]()
       },
       edit() {
-        this.$router.push({ name: 'editTask' })
+        this.$router.push({ name: 'editTask', params: { id: this.id } })
       },
       archive() {
-        this.$router.push({ name: 'archiveTask' })
+        this.$router.push({ name: 'archiveTask', params: { id: this.id } })
       },
       destroy() {
         this.$q.dialog({

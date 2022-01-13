@@ -9,7 +9,7 @@
       q-card(style="width: 500px")
         q-form(enctype="multipart/form-data")
           q-card-section(class="row items-center q-pb-none text-blue-grey-14")
-            .text-h5 Add Task
+            .text-h5 Edit Task
             q-space
             q-btn(icon="close" flat round dense v-close-popup)
           br
@@ -45,27 +45,44 @@
               q-btn(
                 unelevated
                 color="primary"
-                label="Save"
-                @click="addTask"
+                label="Update"
+                @click="updateTask"
                 no-caps
                 v-close-popup
               )
 </template>
 
 <script>
+  import LoadingMixin from 'mixins'
+  
   export default {
     data: function () {
       return {
-        task: {},
-        error: false
+        task: {}
       }
     },
+    created() {
+      this.getTask()
+    },
     methods: {
-      addTask() {
-        this.$backend.tasks.create(this.task)
+      getTask() {
+        this.$backend.tasks.show(this.$route.params.id)
+          .then((response) => {
+            this.task = response.data.task
+          })
+          .catch((error) => {
+            console.log(error);
+            this.error = true
+          })
+          .finally(() => {
+            this.loading = false  
+          })
+      },
+      updateTask() {
+        this.$backend.tasks.update(this.task)
           .then((response) => {
             this.$q.notify({
-              message: "Created new task!",
+              message: "Updated the task!",
               color: 'positive',
               position: 'top'
             })
@@ -74,13 +91,12 @@
             this.error = true
             console.log(error)
             this.$q.notify({
-              message: "New task didn't create!",
+              message: "The task didn't update!",
               color: 'negative',
               position: 'top'
             })
           })
           .finally(() => {
-            this.task.title = ''
             this.loading = false
             this.$emit('refresh')
           })
@@ -88,7 +104,10 @@
       afterShow() {
         this.$router.go(-1)
       }
-    }
+    },
+    mixins: [
+      LoadingMixin
+    ]
   }
 </script>
 

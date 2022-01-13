@@ -28,7 +28,7 @@
                   :title="props.row.title",
                   :id="props.row.id"
                   @changed="getTasks()")
-      router-view(@add-task="getTasks()")
+      router-view(@refresh="getTasks()")
 </template>
 
 <script>
