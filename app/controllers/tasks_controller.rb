@@ -7,8 +7,7 @@ class TasksController < ApplicationController
   def index
     scope = Task.preload(:stars)
     @tasks = ::QueryBuilder.new(params, scope)
-    # render json: TaskSerializer.new(@tasks).serialized_json
-    # render json: TaskSerializer.new(@tasks, include: [:stars]).serializable_hash
+    render status: :ok
   end
 
   def create
@@ -16,32 +15,46 @@ class TasksController < ApplicationController
     @task.user = User.first
 
     if @task.save!
-      # render json: TaskSerializer.new(@task).serialized_json, status: :created
+      render status: :created,
+        json: { notice: 'Task was successfully created.' }
     else
-      # render json: { errors: @task.errors }, status: :unprocessable_entity
+      render status: :unprocessable_entity,
+        json: { error: @task.errors.full_messages.to_sentence }
     end
   end
 
   def show
-    # render json: TaskSerializer.new(@task).serialized_json, status: :ok
+    render status: :ok
   end
 
   def update
     if @task.update(task_params)
-      # render json: TaskSerializer.new(@task).serialized_json, status: :created
+      render status: :ok,
+        json: { notice: 'Successfully updated task.' }
     else
-      # render json: { errors: @task.errors }, status: :unprocessable_entity
+      render status: :unprocessable_entity,
+        json: { error: @task.errors.full_messages.to_sentence }
     end
   end
 
   def destroy
-    @task.destroy
+    if @task.destroy
+      render status: :ok,
+        json: { notice: 'Successfully deleted task.' }
+    else
+      render status: :unprocessable_entity,
+        json: { error: @task.errors.full_messages.to_sentence }
+    end
   end
 
   private
 
   def load_task
     @task ||= Task.find(params[:id])
+    unless @task
+      render status: :not_found,
+        json: { error: t('task.not_found') }
+    end
   end
 
   def task_params
