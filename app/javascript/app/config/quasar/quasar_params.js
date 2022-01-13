@@ -12,6 +12,7 @@ import {
   Notify,
   QAvatar,
   QBadge,
+  QBanner,
   QBar,
   QBtn,
   QBtnGroup,
@@ -55,6 +56,7 @@ export default {
   components: {
     QAvatar,
     QBadge,
+    QBanner,
     QBar,
     QBtn,
     QBtnGroup,

@@ -25,7 +25,8 @@ const en = {
     title: 'Tasks'
   },
   goals: {
-    title: 'Goals'
+    title: 'Goals',
+    warning_one_goal: 'Warning! You can have only one active goal!'
   },
   stat: {
     title: 'Statistics',

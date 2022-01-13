@@ -1,6 +1,6 @@
 <template lang="pug">
     div(class="q-pa-md")
-      div(align="left")
+      banner
       q-card(class="col-2 q-ma-lg")
         q-card-section(class="row")
           div(class="col text-h3 text-blue-grey-14" align="left") {{ $t('goals.title') }}
@@ -33,6 +33,7 @@
 <script>
   import NewGoal from 'components/goals/New'
   import ActionsCell from 'components/goals/ActionsCell'
+  import Banner from 'components/goals/Banner'
   import LoadingMixin from 'mixins'
 
   export default {
@@ -76,7 +77,8 @@
     },
     components: {
       NewGoal,
-      ActionsCell
+      ActionsCell,
+      Banner
     },
     mixins: [
       LoadingMixin
