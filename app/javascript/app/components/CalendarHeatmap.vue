@@ -1,10 +1,10 @@
 <template lang="pug">
   div(class="q-pa-md row justify-around")
-    //- https://www.color-hex.com/color/6544d3
     calendar-heatmap(
       :values="data"
       :vertical="true"
-      tooltip-unit="stars"
+      :tooltip-unit="$t('heatmap.unit')"
+      :locale="$t('heatmap.locale')"
       :end-date="last_months_day"
       :range-color="['#eceef0','#9ceaaa','#3ec563','#2ca24d','#1b6e36']"
       )

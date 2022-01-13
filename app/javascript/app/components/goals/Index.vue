@@ -3,7 +3,7 @@
       div(align="left")
       q-card(class="col-2 q-ma-lg")
         q-card-section(class="row")
-          div(class="col text-h2" align="left") Goals
+          div(class="col text-h3 text-blue-grey-14" align="left") {{ $t('goals.title') }}
           div(class="col text-subtitle1 text-grey" align="right")
             br
             q-btn(unelevated rounded no-caps color="deep-purple-1" text-color="primary" @click="newGoal()" icon="add" name="new_goal" label="Add Goal")

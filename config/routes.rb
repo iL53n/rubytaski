@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   resources :goals, only: %i[index create show update destroy]
   resources :stars, only: %i[create destroy]
 
+  # TODO: add set locale in user profile
+  get :locale, to: 'application#locale'
+
   # Stat_data
   # TODO: add scope 'stat'
   get '/heatmap_stat', to: 'stars#heatmap_stat'

@@ -32,7 +32,8 @@ const backend = {
     heatmap: ()       => adapter.get('heatmap_stat'),
     stars:   ()       => adapter.get('stars_stat'),
     current: ()       => adapter.get('current_stat')
-  }
+  },
+  locale: () => adapter.get('locale')
 }
 
 export {

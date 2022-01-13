@@ -10,6 +10,7 @@ environment.plugins.prepend('VueLoaderPlugin', new VueLoaderPlugin())
 environment.loaders.append('js', babelLoaderQuasar)
 environment.loaders.append('stylus', stylus)
 environment.loaders.prepend('vue', vue)
+// environment.config.merge(vue)
 environment.loaders.prepend('pug', pug)
 environment.config.merge(aliases)
 

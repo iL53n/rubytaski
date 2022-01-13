@@ -14,12 +14,15 @@ import quasar_params from '../app/config/quasar/quasar_params'
 import                    '@quasar/quasar-ui-qcalendar/dist/index.css'
 import QCalendar     from '@quasar/quasar-ui-qcalendar'
 import Heatmap       from 'vue-calendar-heatmap'
+import VueApexCharts from 'vue-apexcharts'
+
 import { backend }   from "../app/backend"
 import router        from '../app/router'
-import                    '../app/mixins'
-import                    '../app/sockets'
-import VueApexCharts from 'vue-apexcharts'
 import store         from '../app/store'
+import i18n          from '../app/config/i18n'
+
+import '../app/mixins'
+import '../app/sockets'
 
 Vue.use(Quasar, quasar_params)
 Vue.use(QCalendar)
@@ -35,7 +38,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({ 
     render: h => h(App),
     router,
-    store
+    store,
+    i18n
   }).$mount();
   document.body.appendChild(app.$el)
 });
