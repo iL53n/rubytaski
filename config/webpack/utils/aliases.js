@@ -8,7 +8,8 @@ module.exports = {
     alias: {
       'images': resolve_relative('assets/images'),
       'components': resolve_relative('components'),
-      'mixins': resolve_relative('mixins')
+      'mixins': resolve_relative('mixins'),
+      'config': resolve_relative('config')
     }
   }
 }

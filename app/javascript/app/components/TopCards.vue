@@ -16,7 +16,7 @@
             :max="stat.all_today"
             readonly
             label
-            :label-value="leftToCompleteDay + ' left to complete'"
+            :label-value="leftToCompleteDay + $t('stat.left_to_complete')"
             label-always
             color="orange-4"
           )

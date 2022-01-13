@@ -22,33 +22,33 @@
             q-item-section(avatar)
               q-icon(name="dashboard")
             q-item-section
-              div(class="text-subtitle1") Dashboard
+              div(class="text-subtitle1") {{ $t('menu.left.dashboard') }}
           q-item(to="/tasks_list")
             q-item-section(avatar)
               q-icon(name="library_add_check")
             q-item-section
-              div(class="text-subtitle1") Tasks
+              div(class="text-subtitle1") {{ $t('menu.left.tasks') }}
           q-item(to="/goals_list")
             q-item-section(avatar)
               q-icon(name="flag_circle")
             q-item-section
-              div(class="text-subtitle1") Goals
+              div(class="text-subtitle1") {{ $t('menu.left.goals') }}
           q-item(to="/statistics")
             q-item-section(avatar)
               q-icon(name="insert_chart")
             q-item-section
-              div(class="text-subtitle1") Statistics
+              div(class="text-subtitle1") {{ $t('menu.left.statistics') }}
           q-item
           q-item
           q-separator          
           q-item(to="/")
             q-item-section(avatar)
               q-icon(name="chat_bubble_outline")
-            q-item-section Feedback
+            q-item-section {{ $t('menu.left.feedback') }}
           q-item(to="/")
             q-item-section(avatar)
               q-icon(name="info_outline")
-            q-item-section About
+            q-item-section {{ $t('menu.left.about') }}
 </template>
 
 <script>

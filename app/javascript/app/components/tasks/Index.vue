@@ -3,7 +3,7 @@
       div(align="left")
       q-card(class="col-2 q-ma-lg")
         q-card-section(class="row")
-          div(class="col text-h2" align="left") Tasks
+          div(class="col text-h3 text-blue-grey-14" align="left") {{ $t('tasks.title') }}
           div(class="col text-subtitle1 text-grey" align="right")
             br
             q-btn(unelevated rounded no-caps color="deep-purple-1" text-color="primary" @click="newTask()" icon="add" name="new_task" label="Add Task")

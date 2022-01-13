@@ -9,8 +9,8 @@ Vue.use(VueI18n)
 const messages = { ru, en }
 
 const i18n = new VueI18n({
-  locale: 'en',
-  fallbackLocale: 'en',
+  locale: 'en-US',
+  fallbackLocale: 'en-US',
   messages: messages
 })
 

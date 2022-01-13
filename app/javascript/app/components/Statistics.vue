@@ -1,5 +1,5 @@
 <template lang="pug">
-    .text-h1 Statistics
+    div(class="col text-h3 text-blue-grey-14") {{ $t('stat.title') }}
 
 </template>
 

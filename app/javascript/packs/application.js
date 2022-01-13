@@ -19,7 +19,7 @@ import VueApexCharts from 'vue-apexcharts'
 import { backend }   from "../app/backend"
 import router        from '../app/router'
 import store         from '../app/store'
-import i18n          from '../app/i18n'
+import i18n          from '../app/config/i18n'
 
 import '../app/mixins'
 import '../app/sockets'
