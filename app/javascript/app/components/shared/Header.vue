@@ -5,14 +5,13 @@
         q-chip(size="20px" square color="primary" text-color="white")
           q-avatar
             img(src="https://cdn.quasar.dev/img/boy-avatar.png")
-          | {{ user.email }}
+          | {{ user.nick_name }}
           q-menu(anchor="bottom end" self="top end")
             q-list(style="min-width: 250px")
               q-item(class="text-white" style="background: linear-gradient(90deg, #847bf3 0%, #b47bf3 100%);")
                 q-item-section
-                  div(v-if="user.first_name && user.last_name" class="text-h5 ") {{ user.first_name }} {{ user.last_name }}
                   .text-subtitle3 {{ user.email }}
-                  div(v-if="user.age" class="text-subtitle1 ") {{ $t('menu.top.profile.age', { msg: user.age }) }}
+                  div(v-if="user.date_of_birth" class="text-subtitle1 ") {{ $t('menu.top.profile.age', { msg: age }) }}
               q-item(to="/statistics" v-ripple)
                 q-item-section(avatar)
                   q-icon(class="text-primary bg-deep-purple-1 profile-icon" name="insert_chart_outlined")
@@ -57,6 +56,11 @@
         set(value) {
           this.$store.commit('updateCurrentUser', value)
         }
+      },
+      age() {
+        var today = new Date(); 
+        var birth_date = new Date(this.user.date_of_birth)
+        return Math.floor((today - birth_date) / (365*24*60*60*1000))
       }
     },
     created () {

@@ -1,5 +1,8 @@
 json.user do
   json.extract! @user,
     :id,
-    :email
+    :email,
+    :nick_name,
+    :date_of_birth,
+    :parent
 end
