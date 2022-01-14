@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   root to: 'application#index'
 
   devise_for :users
+  resources :users do
+    get :me, on: :collection
+  end
 
   resources :tasks, only: %i[index create show update destroy]
   resources :goals, only: %i[index create show update destroy]

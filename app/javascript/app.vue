@@ -22,20 +22,28 @@
     computed: {
       user: {
         get() {
-          // return this.$store.state.currentUser
+          return this.$store.state.currentUser
         },
         set(value) {
-          // this.$store.commit('updateCurrentUser', value)
+          this.$store.commit('updateCurrentUser', value)
         }
       }
     },
     created () {
+      this.setCurrentUser()
       this.$backend.locale()
         .then((response) => {
           this.setLocale(response.data.locale)
         })
     },
     methods: {
+      setCurrentUser() {
+        this.$backend.users.current()
+          .then((response) => {
+            this.user = response.data.user
+            // this.setLocale(response.data.user.locale)
+        })
+      },
       setLocale(locale) {
         this.$i18n.locale = locale
 

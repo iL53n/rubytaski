@@ -7,8 +7,14 @@ Vue.use(Vuex)
 import statistics from './modules/statistics'
 
 export default new Vuex.Store({
-  state:     {},
-  mutations: {},
+  state:     {
+    currentUser: null
+  },
+  mutations: {
+    updateCurrentUser(state, value) {
+      state.currentUser = value
+    }
+  },
   actions:   {},
   modules:   {
     statistics

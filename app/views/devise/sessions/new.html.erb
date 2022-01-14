@@ -11,15 +11,19 @@
           <div class="container">
             <div class="row">
               <div class="col-lg-10 col-xl-9 mx-auto">
-                <h3 class="display-4">Sign in</h3>
-                <p class="text-muted mb-4">Enter your email address and password to access application.</p>
+                <% if notice || alert %>
+                  <p class="notice alert-info"><%= notice %></p>
+                  <p class="alert alert-warning"><%= alert %></p>
+                <% end %>
+                <h1 class="display-3"><%= t("devise.sessions.sign_in") %></h1>
+                <%# <p class="text-muted mb-4"><%= t("devise.sessions.sign_in_description") %></p>
                 
                 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
                   <div>
                     <div class="form-group mb-3">
                       
                       <%= f.email_field :email,
-                                        placeholder: "Enter email",
+                                        placeholder: t("devise.sessions.email_placeholder"),
                                         required: "",
                                         autofocus: true,
                                         autocomplete: "email",
@@ -28,7 +32,7 @@
                     <div class="form-group mb-3">
                       <%= f.password_field :password,
                                             type: "password",
-                                            placeholder: "Enter password",
+                                            placeholder: t("devise.sessions.password_placeholder"),
                                             required: "",
                                             autocomplete: "current-password",
                                             class: "form-control border-0 shadow-sm px-4 text-primary" %>
@@ -36,11 +40,11 @@
                     <div class="custom-control custom-checkbox mb-3">
                       <% if devise_mapping.rememberable? %>
                           <%= f.check_box :remember_me, class: "custom-control-input" %>
-                          <%= f.label :remember_me, class: "custom-control-label" %>
+                          <%= f.label t("devise.sessions.remember_me"), class: "custom-control-label text-dark" %>
                       <% end %>
                     </div>
                     <div class="actions">
-                      <%= f.submit "Sign In", class: "btn btn-rubytaski btn-block mb-2 shadow-sm"%>
+                      <%= f.submit t("devise.sessions.sign_in_enter"), class: "btn btn-rubytaski btn-block mb-2 shadow-sm"%>
                     </div>
                   </div>
                 <% end %>

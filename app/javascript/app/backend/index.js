@@ -35,6 +35,9 @@ const backend = {
     stars:   ()       => adapter.get('stars_stat'),
     current: ()       => adapter.get('current_stat')
   },
+  users: {
+    current: ()       => adapter.get('users/me')
+  },
   locale: () => adapter.get('locale')
 }
 
