@@ -15,23 +15,37 @@ class StarsController < ApplicationController
     @star.user = current_user
     @star.task = @task
 
-    if @star.save!
-      # render json: StarSerializer.new(@star).serialized_json, status: :created
+    if @star.save
+      render status: :created,
+        json: { notice: 'Star was successfully created.' }
     else
-      # render json: { errors: @star.errors }, status: :unprocessable_entity
+      # render status: :unprocessable_entity,
+      render json: { error: @star.errors.full_messages.to_sentence }
     end
+  end
+
+  def show
+    render status: :ok
   end
 
   # def update
   #   if @star.update(star_params)
-  #     render json: StarSerializer.new(@star).serialized_json, status: :created
+  #     render status: :ok,
+  #       json: { notice: 'Successfully updated star.' }
   #   else
-  #     render json: { errors: @star.errors }, status: :unprocessable_entity
+  #     render status: :unprocessable_entity,
+  #       json: { error: @star.errors.full_messages.to_sentence }
   #   end
   # end
 
   def destroy
-    @star.destroy
+    if @star.destroy
+      render status: :ok,
+        json: { notice: 'Successfully deleted star.' }
+    else
+      render status: :unprocessable_entity,
+        json: { error: @star.errors.full_messages.to_sentence }
+    end
   end
 
   # Stats

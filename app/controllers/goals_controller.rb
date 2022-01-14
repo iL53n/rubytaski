@@ -14,7 +14,7 @@ class GoalsController < ApplicationController
     @goal = Goal.new(goal_params)
     @goal.user = current_user
 
-    if @goal.save!
+    if @goal.save
       render status: :created,
         json: { notice: 'Goal was successfully created.' }
     else

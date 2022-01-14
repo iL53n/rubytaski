@@ -14,7 +14,7 @@ class TasksController < ApplicationController
     @task = Task.new(task_params)
     @task.user = current_user
 
-    if @task.save!
+    if @task.save
       render status: :created,
         json: { notice: 'Task was successfully created.' }
     else
