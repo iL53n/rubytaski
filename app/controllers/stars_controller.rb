@@ -4,11 +4,15 @@ class StarsController < ApplicationController
   before_action :load_task, only: :create
   after_action  :broadcast, only: %i[create destroy]
 
+  before_action :stars, only: %i[heatmap_stat stars_stat current_stat]
+  before_action :tasks, only: :current_stat
+  before_action :goal,  only: :current_stat
+
   layout false
 
   def create
     @star = Star.new(star_params)
-    @star.user = User.first
+    @star.user = current_user
     @star.task = @task
 
     if @star.save!
@@ -33,20 +37,32 @@ class StarsController < ApplicationController
   # Stats
   # TODO: move to a separate service
   def heatmap_stat
-    render json: Statistics.new(stars: Star.all).date_count
+    render json: Statistics.new(stars: @stars).date_count
   end
 
   def stars_stat
-    render json: Statistics.new(stars: Star.all).stars_stat
+    render json: Statistics.new(stars: @stars).stars_stat
   end
 
   def current_stat
-    render json: Statistics.new(stars: Star.all,
-                                tasks: Task.all,
+    render json: Statistics.new(stars: @stars,
+                                tasks: @tasks,
                                 goal: Goal.created.first).current_stat
   end
 
   private
+
+  def stars
+    @stars = Star.where(user: current_user)
+  end
+
+  def tasks
+    @tasks = Task.where(user: current_user)
+  end
+
+  def goal
+    @goal = Goal.where(user: current_user).created.first
+  end
 
   def load_star
     @star ||= Star.find(params[:id])

@@ -5,14 +5,14 @@ class TasksController < ApplicationController
   layout false
 
   def index
-    scope = Task.preload(:stars)
+    scope = Task.where(user: current_user).preload(:stars)
     @tasks = ::QueryBuilder.new(params, scope)
     render status: :ok
   end
 
   def create
     @task = Task.new(task_params)
-    @task.user = User.first
+    @task.user = current_user
 
     if @task.save!
       render status: :created,

@@ -5,14 +5,14 @@ class GoalsController < ApplicationController
   layout false
 
   def index
-    scope = Goal.all
+    scope = Goal.where(user: current_user)
     @goals = ::QueryBuilder.new(params, scope)
     render status: :ok
   end
 
   def create
     @goal = Goal.new(goal_params)
-    @goal.user = User.first
+    @goal.user = current_user
 
     if @goal.save!
       render status: :created,
