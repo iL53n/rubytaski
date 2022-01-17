@@ -48,12 +48,15 @@ en:
     sessions:
       sign_in: "Sign in"
       sign_in_enter: "Sign In"
+      email_placeholder: "Enter email"
+      password_placeholder: "Enter password"
       remember_me: "Remember me"
       sign_in_description: "Enter your email address and password to access application."
       signed_in: "Signed in successfully."
-
       signed_out: "Signed out successfully."
       already_signed_out: "Signed out successfully."
+      img_title: "Free App for Highly Effective Kids and Teens"
+      img_description: "Learn how to succeed today to change the world tomorrow."
     unlocks:
       send_instructions: "You will receive an email with instructions for how to unlock your account in a few minutes."
       send_paranoid_instructions: "If your account exists, you will receive an email with instructions for how to unlock it in a few minutes."
