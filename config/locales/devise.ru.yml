@@ -39,6 +39,9 @@ ru:
       updated_not_active: "Пароль успешно изменён."
     registrations:
       sign_up: "Регистрация"
+      sign_up_enter: "Зарегестрироваться"
+      password_placeholder: "Введите пароль (минимум 6 символов)"
+      password_conf_placeholder: "Повторно введите пароль"
       forgot_password: "Забыли пароль?"
       destroyed: "До свидания! Ваша учётная запись успешно удалена. Надеемся снова увидеть вас."
       signed_up: "Добро пожаловать! Вы успешно зарегистрировались."
