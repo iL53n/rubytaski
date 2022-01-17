@@ -39,6 +39,11 @@ en:
       updated: "Your password has been changed successfully. You are now signed in."
       updated_not_active: "Your password has been changed successfully."
     registrations:
+      sign_up: "Sign Up"
+      sign_up_enter: "Sign Up"
+      password_placeholder: "Enter password (6 characters minimum)"
+      password_conf_placeholder: "Enter password again"
+      forgot_password: "Forgot Password?"
       destroyed: "Bye! Your account has been successfully cancelled. We hope to see you again soon."
       signed_up: "Welcome! You have signed up successfully."
       signed_up_but_inactive: "You have signed up successfully. However, we could not sign you in because your account is not yet activated."
@@ -48,7 +53,7 @@ en:
       updated: "Your account has been updated successfully."
       updated_but_not_signed_in: "Your account has been updated successfully, but since your password was changed, you need to sign in again."
     sessions:
-      sign_in: "Sign in"
+      sign_in: "Sign In"
       sign_in_enter: "Sign In"
       email_placeholder: "Enter email"
       password_placeholder: "Enter password"
