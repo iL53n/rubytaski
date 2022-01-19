@@ -7,14 +7,21 @@
       .text-h3.text-red ERROR!
     div(v-else)
       div(class="row no-wrap justify-between")
-        q-card(class="col-2 q-ma-md" style="background: linear-gradient(90deg, #847bf3 0%, #b47bf3 100%);")
+        q-card(class="col-2 q-ma-md gradient")
           q-card-section
             general-stat
         q-card(class="col q-ma-md")
+          q-toolbar(class="text-white gradient" align="right")
+            q-btn-group(flat)
+              q-btn(size="sm" icon="keyboard_arrow_left" @click="calendarPrev")
+              q-btn(size="sm" icon="horizontal_rule" @click="calendarToday")
+              q-btn(size="sm" icon="keyboard_arrow_right" @click="calendarNext")
+            q-toolbar-title {{ titleDate }}
           q-card-section
             q-calendar(
               ref="calendar"
               v-model="selectedDate"
+              no-active-date
               v-touch-swipe.mouse.left.right="handleSwipe"
               view="week-scheduler"
               :resources="resources.schedule.data"
@@ -24,17 +31,14 @@
               :locale="locale"
               style="height: 100%;"
               :weekdays=[1, 2, 3, 4, 5, 6, 0]
+              @change="onChange"
             )
-              template(#scheduler-resources-header)
-                div(class="full-height row justify-center items-center")
-                  q-btn-group(outline)
-                    q-btn(flat color="white" size="sm" text-color="grey" icon="keyboard_arrow_left" @click="calendarPrev")
-                    q-btn(flat color="white" size="sm" text-color="grey" icon="more_horiz" @click="calendarToday")
-                    q-btn(flat color="white" size="sm" text-color="grey" icon="keyboard_arrow_right" @click="calendarNext")
-              template(#scheduler-resource="{ resource /*, index */ }")
-                div(class="col-12")
-                  q-btn(@click="showTask(resource.id)" flat size="lg" align="left" style="width: 500px")
-                    div(class="ellipsis") {{ resource.title }}
+              //- template(#scheduler-resources-header)
+                //- div(class="full-height row justify-center items-center")
+                  //- div(class="text-h6") {{ titleDate }}
+              template(#scheduler-resource="{ resource /*, index */ }") 
+                q-btn(@click="showTask(resource.id)" flat size="lg" align="left" style="width: 500px")
+                  div(class="ellipsis") {{ resource.title }}
               template(#scheduler-resource-day="{ timestamp, /* index, */ resource }")
                 q-btn(flat class="fit" @click.stop="addStar(resource.id, timestamp.date)")
                   div(v-for="star in resource.stars_dates" :key="star.id")
@@ -60,10 +64,16 @@
   import generalStat from 'components/GeneralStat'
   import loadingMixin from 'mixins'
 
+  // TODO: remove it (DRY)
+  import QCalendar from '@quasar/quasar-ui-qcalendar'
+
   export default {
     data () {
       return {
         selectedDate: '',
+        titleDate: '',
+        dateFormatter: undefined,
+        start: undefined,
         locale: this.$i18n.locale,
         resources: {
           schedule: {
@@ -82,10 +92,21 @@
         }
       }
     },
-    created() {
+    beforeMount () {
       this.refresh()
+      this.updateFormatter()
+    },
+    watch: {
+      locale () {
+        // this.updateFormatter()
+        this.updateTitle()
+      }
     },
     methods: {
+      onChange ({ start }) {
+        this.start = start
+        this.updateTitle()
+      },
       refresh() {
         this.getTasks(),
         this.getStatistics()
@@ -145,6 +166,26 @@
         }
         evt.cancelable !== false && evt.preventDefault()
         evt.stopPropagation()
+      },
+      updateTitle () {
+        const myDate = QCalendar.makeDate(this.start)
+
+        if (this.dateFormatter !== undefined) {
+          this.titleDate = this.dateFormatter.format(myDate)
+        }
+      },
+      updateFormatter () {
+        try {
+          this.dateFormatter = new Intl.DateTimeFormat(this.locale || undefined, {
+            month: 'long',
+            year: 'numeric',
+            timeZone: 'UTC'
+          })
+        }
+        catch (e) {
+          // console.error('Intl.DateTimeFormat not supported')
+          this.dateFormatter = undefined
+        }
       }
     },
     mixins: [loadingMixin],
@@ -162,6 +203,10 @@
 </script>
 
 <style scoped>
+.gradient {
+  background: linear-gradient(90deg, #847bf3 0%, #b47bf3 100%);
+}
+
 .emergence { 
     animation: emergence-with-rotate 0.8s;
     animation-iteration-count: 1;
