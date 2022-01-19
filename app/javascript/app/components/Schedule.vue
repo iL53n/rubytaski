@@ -15,6 +15,7 @@
             q-calendar(
               ref="calendar"
               v-model="selectedDate"
+              v-touch-swipe.mouse.left.right="handleSwipe"
               view="week-scheduler"
               :resources="resources.schedule.data"
               resource-key="id"
@@ -134,6 +135,17 @@
       calendarPrev () {
         this.$refs.calendar.prev()
       },
+      handleSwipe ({ evt, ...info }) {
+        if (info.duration >= 30) {
+          if (info.direction === 'right') {
+            this.calendarPrev()
+          } else if (info.direction === 'left') {
+            this.calendarNext()
+          }
+        }
+        evt.cancelable !== false && evt.preventDefault()
+        evt.stopPropagation()
+      }
     },
     mixins: [loadingMixin],
     components: {

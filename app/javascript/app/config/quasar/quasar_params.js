@@ -10,6 +10,7 @@ import {
   date,
   Dialog,
   Notify,
+  TouchSwipe,
   QAvatar,
   QBadge,
   QBanner,
@@ -95,7 +96,8 @@ export default {
     QToolbarTitle    
   },
   directives: {
-    ClosePopup
+    ClosePopup,
+    TouchSwipe
   },
   iconSet: iconSet,
   utils: {
