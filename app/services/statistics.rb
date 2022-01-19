@@ -37,6 +37,7 @@ class Statistics
       done_today: stars_count_between_dates('day'),
       all_week: tasks_count * 7,
       done_week: stars_count_between_dates('week'),
+      goal_id: @goal.id,
       all_goal: all_goal,
       done_goal: done_goal
     }
