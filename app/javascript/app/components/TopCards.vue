@@ -1,6 +1,6 @@
 <template lang="pug">
   div(class="row justify-around")
-    q-card(class="col q-ma-lg")
+    q-card(class="col q-ma-md")
       q-card-section
         div(class="row")
           div(class="col text-grey" align="left")
@@ -24,7 +24,7 @@
         div(v-else)
           br
           q-chip(size="xl" outline color="blue-grey-4" icon="warning_amber") No information
-    q-card(class="col q-ma-lg")
+    q-card(class="col q-ma-md")
       q-card-section
         div(class="row")
           div(class="col text-grey" align="left")
@@ -41,7 +41,7 @@
         div(v-else)
           br
           q-chip(size="xl" outline color="blue-grey-4" icon="warning_amber") No information
-    q-card(class="col q-ma-lg")
+    q-card(class="col q-ma-md")
       q-card-section
         div(class="row")
           div(class="col text-grey" align="left")

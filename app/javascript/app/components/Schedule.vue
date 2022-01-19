@@ -6,9 +6,11 @@
     div(v-else-if="error")
       .text-h3.text-red ERROR!
     div(v-else)
-      div(class="row justify-around")
-        general-stat
-        q-card(class="col-grow q-ma-lg")
+      div(class="row no-wrap justify-between")
+        q-card(class="col-2 q-ma-md" style="background: linear-gradient(90deg, #847bf3 0%, #b47bf3 100%);")
+          q-card-section
+            general-stat
+        q-card(class="col q-ma-md")
           q-card-section
             q-calendar(
               ref="calendar"
