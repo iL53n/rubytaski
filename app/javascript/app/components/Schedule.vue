@@ -115,7 +115,9 @@
         this.$backend.tasks.index()
           .then((response) => this.resources = response.data)
           .catch(()        => this.error = true)
-          .finally(()      => this.loading = false)
+          .finally(()      => {
+            // this.loading = false
+          })
       },
       showTask(task_id) {
         this.$router.push({ name: 'dashboardShowTask', params: { id: task_id } })

@@ -130,7 +130,7 @@
           .catch(()   => this.error = true)
           .finally(() => {
             this.getGoal()
-            this.loading = false
+            // this.loading = false
           })
       },
       getGoal() {
