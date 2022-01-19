@@ -13,7 +13,8 @@
       q-list
         q-item(class="bg-primary text-grey-1")
           q-item-section(avatar)
-            div(id="square")
+            a(href="/")
+              div(id="square")
           q-item-section
             q-toolbar-title rubytaski
         div(class="text-primary")
