@@ -129,8 +129,8 @@
           })
           .catch(()   => this.error = true)
           .finally(() => {
-            this.loading = false
             this.getGoal()
+            this.loading = false
           })
       },
       getGoal() {

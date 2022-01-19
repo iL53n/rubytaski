@@ -4,4 +4,6 @@ unless User.any?
     password:              '123456',
     password_confirmation: '123456'
   )
+else
+  puts "  ---> Warning! Didn't load, already exists."
 end

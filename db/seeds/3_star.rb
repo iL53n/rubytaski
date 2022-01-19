@@ -1,32 +1,19 @@
-# unless Star.any?
-#   Task.all.each do |task|
-#     @date = Time.zone.now
-#
-#     [0, 1, 2].each do |state|
-#       Star.create!(
-#         state: state,
-#         user:     User.first,
-#         task:     task,
-#         due_date: @date
-#       )
-#
-#       @date += 86400
-#     end
-#   end
-# end
-
 unless Star.any?
-  @date = Time.zone.now
+  100.times do
+    @date ||= Time.zone.now
 
-  Task.all.each do |task|
-    @date = Time.zone.now
+    Task.all.each do |task|
+      create = [true, false].sample
 
       Star.create!(
         user:     User.first,
         task:     task,
         due_date: @date
-      )
-  end
+      ) if create
+    end
 
-  @date += 86400
+    @date -= 86_400
+  end
+else
+  puts "  ---> Warning! Didn't load, already exists."
 end

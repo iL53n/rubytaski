@@ -4,7 +4,7 @@ titles = [ 'Застелить кровать',
            'Убрать рабочий стол',
            'Позаниматься англ.яз',
            'Сделать ДЗ',
-           'Почиатать перед сном' ]
+           'Почитать перед сном' ]
 
 unless Task.any?
   titles.each do |title|
@@ -14,4 +14,6 @@ unless Task.any?
       user: User.first
     )
   end
+else
+  puts "  ---> Warning! Didn't load, already exists."
 end
