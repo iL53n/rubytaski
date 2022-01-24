@@ -57,23 +57,24 @@
     </div><!-- End -->
 
     <!-- The image half -->
-    <div class="col-md-4 d-none d-md-flex" style="background: linear-gradient(90deg, #7266ff 0%, #b47bf3 100%);">
-      <div class="d-flex align-items-center py-5">
+    <div class="col-md-4" style="background: linear-gradient(90deg, #7266ff 0%, #b47bf3 100%);">
+      <div class="login d-flex align-items-center py-5">
         <div class="container">
-          
-          <div class="col-12 rounded mx-auto d-block text-center text-white">
-            <%= image_tag "Login.svg", alt: "rubytaski" %>
-            <h4>
-              <%= t("devise.sessions.img_title") %>
-            </h4>
-            <p>
-              <%= t("devise.sessions.img_description") %>
-            </p>
+          <div class="row">
+            <div class="col-lg-10 col-xl-9 mx-auto text-center text-white">
+              <%= image_tag "Login.svg", alt: "rubytaski", style: 'display: block; margin: auto; width: 100%;'%>
+              <h4>
+                <%= t("devise.sessions.img_title") %>
+              </h4>
+              <p>
+                <%= t("devise.sessions.img_description") %>
+              </p>
+            </div>
           </div>
-          
         </div>
       </div>
     </div>
+    
     <div class="col-md-2 bg-light"></div>
   </div>
 </div>
