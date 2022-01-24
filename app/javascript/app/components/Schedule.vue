@@ -19,6 +19,7 @@
             q-toolbar-title {{ titleDate }}
           q-card-section
             //- v-touch-swipe.mouse.left.right="handleSwipe"
+            // TODO: fix resource-width
             q-calendar(
               ref="calendar"
               v-model="selectedDate"
@@ -26,7 +27,7 @@
               view="week-scheduler"
               :resources="resources.schedule.data"
               resource-key="id"
-              :resource-width="250"
+              :resource-width="this.$q.screen.width * 0.28"
               :resource-height="0"
               sticky
               cell-width="auto"
