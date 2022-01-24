@@ -1,5 +1,5 @@
 <template lang="pug">
-  div
+  div(class="desktop-only")
     div(v-if="loading")
       q-page-container(align="middle")
         q-spinner-dots(color="primary" size="lg")

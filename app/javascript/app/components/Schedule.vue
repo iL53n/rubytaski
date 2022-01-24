@@ -7,7 +7,7 @@
       .text-h3.text-red ERROR!
     div(v-else)
       div(class="row no-wrap justify-between")
-        q-card(class="col-2 q-ma-md gradient")
+        q-card(class="col-2 q-ma-md gradient desktop-only")
           q-card-section
             general-stat
         q-card(class="col q-ma-md")
@@ -26,8 +26,9 @@
               view="week-scheduler"
               :resources="resources.schedule.data"
               resource-key="id"
-              :resource-width="400"
+              :resource-width="250"
               :resource-height="0"
+              sticky
               cell-width="auto"
               :locale="locale"
               style="height: 100%;"

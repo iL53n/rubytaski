@@ -1,6 +1,6 @@
 <template lang="pug">
   div(class="q-ma-md")
-    top-cards
+    top-cards(class="desktop-only")
     schedule
 </template>
 
