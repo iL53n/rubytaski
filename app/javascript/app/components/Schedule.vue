@@ -26,8 +26,9 @@
               view="week-scheduler"
               :resources="resources.schedule.data"
               resource-key="id"
-              :resource-width="550"
+              :resource-width="400"
               :resource-height="0"
+              cell-width="auto"
               :locale="locale"
               style="height: 100%;"
               :weekdays=[1, 2, 3, 4, 5, 6, 0]
@@ -37,7 +38,7 @@
                 //- div(class="full-height row justify-center items-center")
                   //- div(class="text-h6") {{ titleDate }}
               template(#scheduler-resource="{ resource /*, index */ }") 
-                q-btn(@click="showTask(resource.id)" flat size="lg" align="left" style="width: 500px")
+                q-btn(@click="showTask(resource.id)" flat size="lg" class="full-width" align="left")
                   div(class="ellipsis") {{ resource.title }}
               template(#scheduler-resource-day="{ timestamp, /* index, */ resource }")
                 q-btn(flat class="fit" @click.stop="addStar(resource.id, timestamp.date)")
