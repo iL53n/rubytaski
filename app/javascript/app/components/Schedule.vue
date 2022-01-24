@@ -18,11 +18,11 @@
               q-btn(size="sm" icon="keyboard_arrow_right" @click="calendarNext")
             q-toolbar-title {{ titleDate }}
           q-card-section
+            //- v-touch-swipe.mouse.left.right="handleSwipe"
             q-calendar(
               ref="calendar"
               v-model="selectedDate"
               no-active-date
-              v-touch-swipe.mouse.left.right="handleSwipe"
               view="week-scheduler"
               :resources="resources.schedule.data"
               resource-key="id"
