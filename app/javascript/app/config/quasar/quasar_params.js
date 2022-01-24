@@ -49,7 +49,8 @@ import {
   QTable,
   QTd,
   QToolbar,
-  QToolbarTitle,  
+  QToolbarTitle,
+  QTooltip 
 } from 'quasar'
 
 export default {
@@ -93,7 +94,8 @@ export default {
     QTable,
     QTd,
     QToolbar,
-    QToolbarTitle    
+    QToolbarTitle,
+    QTooltip
   },
   directives: {
     ClosePopup,

@@ -42,6 +42,9 @@
               template(#scheduler-resource="{ resource /*, index */ }") 
                 q-btn(@click="showTask(resource.id)" flat size="lg" class="full-width" align="left")
                   div(class="ellipsis") {{ resource.title }}
+                q-tooltip(class="bg-primary" :delay="700") 
+                 .text-subtitle1 {{ resource.title }}
+                 .text-subtitle2 {{ resource.description }}
               template(#scheduler-resource-day="{ timestamp, /* index, */ resource }")
                 q-btn(flat class="fit" @click.stop="addStar(resource.id, timestamp.date)")
                   div(v-for="star in resource.stars_dates" :key="star.id")
