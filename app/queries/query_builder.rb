@@ -41,7 +41,10 @@ class QueryBuilder
 
   def perform_sort
     @sort = params[:sort]
-    return if @sort.blank?
+    if @sort.blank?
+      @performed_scope = @performed_scope.reorder(:order)
+      return
+    end
 
     sort_params = {}
     split_params = @sort.split(',')

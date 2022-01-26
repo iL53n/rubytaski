@@ -6,7 +6,9 @@ Rails.application.routes.draw do
     get :me, on: :collection
   end
 
-  resources :tasks, only: %i[index create show update destroy]
+  resources :tasks, only: %i[index create show update destroy] do
+    patch :update_order, to: 'tasks#update_order', on: :collection
+  end
   resources :goals, only: %i[index create show update destroy]
   resources :stars, only: %i[create destroy]
 

@@ -4,86 +4,134 @@
       q-card(class="col-2 q-ma-lg")
         q-card-section(class="row")
           div(class="col text-h3 text-blue-grey-14" align="left") {{ $t('tasks.title') }}
+          q-banner(v-if="bannerShow" inline-actions rounded class="bg-green-1")
+            template(v-slot:avatar)
+              q-icon(name="import_export" color="green-2")
+            .text-subtitle1.text-green-6 Вы изменили сортировку задач! Хотите сохранить (для всех видов)?
+            template(v-slot:action)
+              q-btn(@click="updateTasksOrder()" flat round color="green-7" icon="check")
+              q-btn(@click="getTasks()" flat round color="red-7" icon="close")
           div(class="col text-subtitle1 text-grey" align="right")
             br
             q-btn(unelevated rounded no-caps color="deep-purple-1" text-color="primary" @click="newTask()" icon="add" name="new_task" label="Add Task")
         q-card-section
-          q-table(
+          q-markup-table(
             ref="table"
-            :loading="loading"
-            :data="taskList.table.data"
-            :columns="taskList.table.columns"
-            :pagination.sync="taskList.table.pagination"
-            :rows-per-page-options="[10, 25, 100]"
-            :filter="taskList.filter"
-            binary-state-sort
             row-key="id"
             separator="cell"
-            class="no-shadow"
-            @request="onRequest")
-            template(v-slot:body-cell-actions="props")
-              q-td(key="actions")
-                actions-cell(
-                  :actions="props.row.actions",
-                  :title="props.row.title",
-                  :id="props.row.id"
-                  @changed="getTasks()")
+            class="no-shadow")
+            thead
+              tr
+                th(class="text-center") 
+                //- th(class="text-left") ID
+                th(class="text-left") #
+                th(class="text-left") Title
+                th(class="text-left") Description
+                th(class="text-left") Actions
+            //- https://codepen.io/kabanoki/pen/WXBKGY
+            draggable(
+              v-model="taskList.table.data"
+              @end="setTasksOrder"
+              class="dragArea"
+              tag="tbody"
+              :options="{animation:300, handle:'.handle'}"
+              )
+              tr(v-for="el in taskList.table.data" :key="el.id")
+                td
+                  q-icon(name="dehaze" class="handle text-grey" size="xs")
+                //- td {{ el.id }}
+                td {{ el.order + 1 }}
+                td {{ el.title }} 
+                td {{ el.description }}
+                td(key="actions") 
+                  actions-cell(
+                    :actions="el.actions",
+                    :title="el.title",
+                    :id="el.id"
+                    @refresh="getTasks()")
       router-view(@refresh="getTasks()")
 </template>
 
 <script>
   import NewTask from 'components/tasks/New'
-  import ActionsCell from 'components/tasks/ActionsCell'
+  import actionsCell from 'components/tasks/ActionsCell'
   import LoadingMixin from 'mixins'
+  import draggable from "vuedraggable";
 
   export default {
-    data () {
+    data() {
       return {
         taskList: {
           table: {
-            columns: [],
-            data: [],
-            filter: '',
-            pagination: {}
-          },
-          filter: ''
-        }
-      } 
+          columns: [],
+          data: []
+          }
+        },
+        order: {},
+        bannerShow: false
+      }
     },
-    created() {
+    created () {
       this.getTasks()
-      // TODO
-      // this.onRequest({ pagination: this.taskList.pagination })
     },
+    computed: {},
     methods: {
-      onRequest(props) {
-        let { page, rowsPerPage, sortBy, descending } = props.pagination
-        let filter = props.filter
-
-        this.getTasks(page, rowsPerPage, sortBy, descending, filter)
+      setTasksOrder() {
+        var data = this.taskList.table.data
+        // this.order = data.map(function(task, index) {
+        //   return { id: task.id, order: index }
+        // })
+        this.order = data.reduce(function(map, obj, index) {
+            map[obj.id] = index;
+            return map;
+        }, {});
+        this.bannerShow = true
       },
-      refresh() {
-        this.$refs.table.requestServerInteraction()
+      updateTasksOrder() {
+        this.$backend.tasks.update_order(this.order)
+          .then((response) => {
+            console.log("Order updated!")
+          })
+          .catch(()   => this.error = true)
+          .finally(() => {
+            this.getTasks()
+          })
       },
-      getTasks(page, rowsPerPage, sort, desc, filter, scopes) {
-        this.$backend.tasks.index({ page, rowsPerPage, sort, desc, filter, scopes })
-          .then((response) => this.taskList = response.data)
-          .catch(()        => this.error = true)
-          .finally(()      => this.loading = false)
+      getTasks() {
+        this.$backend.tasks.index()
+          .then((response) => {
+            this.taskList = response.data
+          })
+          .catch(()   => this.error = true)
+          .finally(() => {
+            this.loading = false
+            this.bannerShow = false
+          })
       },
       newTask() {
         this.$router.push({ name: 'newTask' })
       },
     },
     components: {
-      NewTask,
-      ActionsCell
+      NewTask,  
+      actionsCell,
+      draggable
     },
     mixins: [
       LoadingMixin
     ]
-  }
+  };
 </script>
 
-<style scoped></style>
-
+<style scoped>
+  .handle {
+    cursor: move;
+  }
+  .sortable-chosen {
+    opacity: 0.7;
+    background-color:#dcdcdc;
+  }
+  .sortable-ghost {
+    background-color:#dcdcdc;
+  }
+</style>

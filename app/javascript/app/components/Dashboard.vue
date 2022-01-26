@@ -6,7 +6,7 @@
 
 <script>
   import TopCards        from 'components/TopCards'
-  // import GeneralStat     from 'components/GeneralStat'
+  import GeneralStat     from 'components/GeneralStat'
   import Schedule        from 'components/Schedule'
 
 
@@ -17,7 +17,7 @@
     },
     components: {
       TopCards,
-      // GeneralStat,
+      GeneralStat,
       Schedule
     }
   }

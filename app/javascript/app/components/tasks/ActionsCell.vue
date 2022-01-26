@@ -30,16 +30,8 @@
         this.$q.dialog({
           title: "Delete the task '" + this.title + "' ?",
           message: "You are about to permanently delete the task '" + this.title + "' with all earned stars! Are you sure?",
-          ok: {
-            outline: true,
-            color: 'negative',
-            label: 'Yes'
-          },
-          cancel: {
-            flat: true,
-            color: 'black',
-            label: 'No'
-          }
+          ok: { outline: true, color: 'negative', label: 'Yes' },
+          cancel: { flat: true, color: 'black', label: 'No' }
         }).onOk(() => {
           this.$backend.tasks.destroy(this.id)
           .then((response) => {
@@ -58,7 +50,7 @@
               position: 'top'
             })
           })
-          .finally(() => this.$emit('changed'))
+          .finally(() => this.$emit('refresh'))
         }).onCancel(() => {
           // console.log('Cancel')
         }).onDismiss(() => {

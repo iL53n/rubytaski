@@ -37,6 +37,15 @@ class TasksController < ApplicationController
     end
   end
 
+  def update_order
+    if Task.change_order(order_params)
+      render status: :ok,
+        json: { notice: 'Successfully updated order.' }
+    else
+      render status: :unprocessable_entity
+    end
+  end
+
   def destroy
     if @task.destroy
       render status: :ok,
@@ -53,13 +62,19 @@ class TasksController < ApplicationController
     @task ||= Task.find(params[:id])
     unless @task
       render status: :not_found,
-        json: { error: t('task.not_found') }
+        json: { error: 'Task not found' }
     end
   end
 
   def task_params
     params.require(:task).permit(:id,
                                  :title,
-                                 :description)
+                                 :description,
+                                 :order)
+  end
+
+  # TODO: add keys for data :id, :order AND destroy .permit!
+  def order_params
+    params.require(:order).permit!
   end
 end
