@@ -5,7 +5,7 @@
     :mini="miniState"
     :width="260"
     :mini-width="10"
-    :breakpoint="500"
+    :breakpoint="1024"
     )
     q-scroll-area(class="fit")
       q-list

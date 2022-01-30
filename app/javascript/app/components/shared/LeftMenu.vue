@@ -7,7 +7,7 @@
     @mouseout="miniState = true"
     mini-to-overlay
     :width="200"
-    :breakpoint="500"
+    :breakpoint="1024"
     )
     q-scroll-area(class="fit")
       q-list
