@@ -18,10 +18,9 @@
           q-markup-table(
             ref="table"
             row-key="id"
-            separator="cell"
             class="no-shadow")
-            thead
-              tr
+            thead(style="background-color: rgb(248, 247, 253)")
+              tr(class="text-primary")
                 th(class="text-center") 
                 //- th(class="text-left") ID
                 //- th(class="text-left") #

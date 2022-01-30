@@ -18,8 +18,9 @@
             :filter="goalList.filter"
             binary-state-sort
             row-key="id",
-            separator="cell",
             class="no-shadow",
+            table-header-class="text-primary"
+            table-header-style="background-color: rgb(248, 247, 253)",
             @request="onRequest")
             template(v-slot:body-cell-actions="props")
               q-td(key="actions")
