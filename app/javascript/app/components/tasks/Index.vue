@@ -1,10 +1,10 @@
 <template lang="pug">
     div(class="q-pa-md")
       div(align="left")
-      q-card(class="col-2 q-ma-lg")
+      q-card(class="col q-ma-lg")
         q-card-section(class="row")
           div(class="col text-h3 text-blue-grey-14" align="left") {{ $t('tasks.title') }}
-          q-banner(v-if="bannerShow" inline-actions rounded class="bg-green-1")
+          q-banner(v-if="bannerShow" inline-actions rounded class="col-8 bg-green-1")
             template(v-slot:avatar)
               q-icon(name="import_export" color="green-2")
             .text-subtitle1.text-green-6 Вы изменили сортировку задач! Хотите сохранить (для всех видов)?
@@ -24,7 +24,7 @@
               tr
                 th(class="text-center") 
                 //- th(class="text-left") ID
-                th(class="text-left") #
+                //- th(class="text-left") #
                 th(class="text-left") Title
                 th(class="text-left") Description
                 th(class="text-left") Actions
@@ -40,7 +40,7 @@
                 td
                   q-icon(name="dehaze" class="handle text-grey" size="xs")
                 //- td {{ el.id }}
-                td {{ el.order + 1 }}
+                //- td {{ el.order + 1 }}
                 td {{ el.title }} 
                 td {{ el.description }}
                 td(key="actions") 

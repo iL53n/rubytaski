@@ -2,8 +2,7 @@
   q-layout(v-if="user" view="lHr lpR fFf")
     header-component
     left-menu
-    div(v-if="this.$q.platform.is.desktop")
-      right-menu
+    right-menu
 
     q-page-container(align="middle")
       router-view
