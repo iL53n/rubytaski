@@ -31,7 +31,9 @@
             color="primary"
             icon="chevron_left"
             @click="miniState = false")
-        heatmap
+        //- 'v-if' if I want lazy loading
+        div(v-show="!miniState")
+          heatmap
 </template>
 
 <script>
@@ -40,7 +42,16 @@
   export default {
     data () {
       return {
-        miniState: false
+      }
+    },
+    computed: {
+      miniState: {
+        get() {
+          return this.$store.state.miniStateRight
+        },
+        set(value) {
+          this.$store.commit('updateMiniStateRight', value)
+        }
       }
     },
     components: {

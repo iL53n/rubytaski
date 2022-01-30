@@ -8,11 +8,15 @@ import statistics from './modules/statistics'
 
 export default new Vuex.Store({
   state:     {
-    currentUser: null
+    currentUser: null,
+    miniStateRight: false
   },
   mutations: {
     updateCurrentUser(state, value) {
       state.currentUser = value
+    },
+    updateMiniStateRight(state, value) {
+      state.miniStateRight = value
     }
   },
   actions:   {},
