@@ -42,7 +42,7 @@ class QueryBuilder
   def perform_sort
     @sort = params[:sort]
     if @sort.blank?
-      @performed_scope = @performed_scope.reorder(:order)
+      @performed_scope = @performed_scope.reorder(:order) if @performed_scope.klass.column_names.include?(:order)
       return
     end
 
