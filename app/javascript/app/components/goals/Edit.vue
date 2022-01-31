@@ -125,7 +125,7 @@
           })
           .finally(() => {
             this.loading = false
-            this.$emit('refresh')
+            this.$emit('changed')
           })
       },
       afterShow() {

@@ -1,8 +1,8 @@
 <template lang="pug">
   div
     q-btn(
-      v-if="state === 'created'"
       v-for="action in actions"
+      v-if="state === 'created' && ['all', 'active'].includes(action.kind)"
       :key="action.name"
       :name="action.name"
       flat
@@ -13,14 +13,17 @@
       :icon="action.icon"
       @click="apply(action.name)")
     q-btn(
-      v-if="state !== 'created'"
+      v-for="action in actions"
+      v-if="state !== 'created' && ['all', 'unactive'].includes(action.kind)"
+      :key="action.name"
+      :name="action.name"
       flat
       bordered
       color="white"
-      text-color="info"
+      :text-color="action.color"
       size="11px"
-      icon="unarchive"
-      @click="unarchive()"
+      :icon="action.icon"
+      @click="apply(action.name)"
     )
 </template>
 

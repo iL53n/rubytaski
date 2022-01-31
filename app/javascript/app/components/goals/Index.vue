@@ -28,7 +28,7 @@
                   :color="statuses[props.row.state][1]",
                   :label="statuses[props.row.state][0]")
             template(v-slot:body-cell-actions="props")
-              q-td(key="actions")
+              q-td(key="actions" align="right")
                 actions-cell(
                   :actions="props.row.actions",
                   :state="props.row.state"
@@ -56,10 +56,10 @@
           filter: ''
         },
         statuses: {
-          'created':  ['Активная',     'green'],
-          'done':     ['Выполнена',    'grey'],
-          'undone':   ['Не выполнена', 'grey'],
-          'archived': ['В архиве',     'grey']
+          'created':  ['Активная',      'green'],
+          'done':     ['Достигнута',    'green-10'],
+          'undone':   ['Не достигнута', 'red-10'],
+          'archived': ['В архиве',      'grey']
         }
       } 
     },

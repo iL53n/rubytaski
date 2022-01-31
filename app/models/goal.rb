@@ -21,12 +21,12 @@ class Goal < ApplicationRecord
     end
 
     event :unarchive do
-      transition archived: :created
+      transition %i[archived done undone] => :created
     end
   end
 
   def can_be_only_one_active_goal
-    if Goal.where(user: self.user).created.exists? && created?
+    if Goal.where(user: user).created.exists? && created?
       errors.add(:goal, 'can be only one active instance')
     end
   end
