@@ -4,16 +4,24 @@ class Goal < ApplicationRecord
             :due_date,
             :number_of_stars,
             :prize, presence: true
-  validate :can_be_only_one_active_goal, on: :create
+  validate :can_be_only_one_active_goal, on: %i[create update]
   belongs_to :user
 
-  enum state: { created: 0, done: 1, archived: 5 } do
+  enum state: { created: 0, done: 1, undone: 2, archived: 5 } do
     event :complete do
       transition created: :done
     end
 
+    event :uncomplete do
+      transition created: :undone
+    end
+
     event :archive do
       transition created: :archived
+    end
+
+    event :unarchive do
+      transition archived: :created
     end
   end
 

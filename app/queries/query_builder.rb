@@ -43,6 +43,7 @@ class QueryBuilder
     @sort = params[:sort]
     if @sort.blank?
       @performed_scope = @performed_scope.reorder(:order) if @performed_scope.klass.column_names.include?('order')
+      @performed_scope = @performed_scope.reorder(:state) if @performed_scope.klass.column_names.include?('state')
       return
     end
 

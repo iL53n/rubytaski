@@ -23,8 +23,9 @@ class GoalPresenter < BasePresenter
 
   def actions
     [
-      { name: :edit,    label: 'Edit',    color: 'green-5',  icon: 'edit' },
-      { name: :archive, label: 'Archive', color: 'orange-5', icon: 'archive' },
+      { name: :done,    label: 'Done',    color: 'green-5',  icon: 'check_circle' },
+      { name: :edit,    label: 'Edit',    color: 'orange-5', icon: 'edit' },
+      { name: :archive, label: 'Archive', color: 'brown-5',  icon: 'archive' },
       { name: :destroy, label: 'Delete',  color: 'red-5',    icon: 'delete' }
     ]
   end

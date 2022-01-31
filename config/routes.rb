@@ -9,7 +9,11 @@ Rails.application.routes.draw do
   resources :tasks, only: %i[index create show update destroy] do
     patch :update_order, to: 'tasks#update_order', on: :collection
   end
-  resources :goals, only: %i[index create show update destroy]
+
+  resources :goals, only: %i[index create show update destroy] do
+    patch :set_state, to: 'goals#set_state', on: :member
+  end
+
   resources :stars, only: %i[create destroy]
 
   # TODO: add set locale in user profile
@@ -20,6 +24,6 @@ Rails.application.routes.draw do
   get '/heatmap_stat', to: 'stars#heatmap_stat'
   get '/stars_stat',   to: 'stars#stars_stat'
   get '/current_stat', to: 'stars#current_stat'
-  
+
   get '/*path', to: 'application#index', format: false
 end

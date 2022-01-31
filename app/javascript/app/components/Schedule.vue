@@ -66,7 +66,7 @@
                         name="star"
                         color="amber-5"
                         text-color="yellow-2"
-                        size="25px"
+                        size="xl"
                         icon="star"
                         @click.stop="removeStar(star.id)"
                       )

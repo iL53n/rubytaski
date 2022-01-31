@@ -1,6 +1,6 @@
 class GoalsController < ApplicationController
   # before_action :authenticate_user!
-  before_action :load_goal, only: %i[show update destroy]
+  before_action :load_goal, only: %i[show update set_state destroy]
 
   layout false
 
@@ -31,6 +31,17 @@ class GoalsController < ApplicationController
     if @goal.update(goal_params)
       render status: :ok,
         json: { notice: 'Successfully updated goal.' }
+    else
+      render status: :unprocessable_entity,
+        json: { error: @goal.errors.full_messages.to_sentence }
+    end
+  end
+
+  def set_state
+    state = goal_params[:state]
+    if @goal.send(state)
+      render status: :ok,
+        json: { notice: 'Successfully changed goals state.' }
     else
       render status: :unprocessable_entity,
         json: { error: @goal.errors.full_messages.to_sentence }

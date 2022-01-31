@@ -20,11 +20,12 @@ const backend = {
     destroy:      (id)     => adapter.delete(`tasks/${id}`)
   },
   goals: {
-    index:   (params) => adapter.get('goals', { params: params }),
-    create:  (params) => adapter.post('goals', params),
-    show:    (id)     => adapter.get(`goals/${id}`),
-    update:  (goal)   => adapter.patch(`goals/${goal.id}`, goal),
-    destroy: (id)     => adapter.delete(`goals/${id}`)
+    index:   (params)   => adapter.get('goals', { params: params }),
+    create:  (params)   => adapter.post('goals', params),
+    show:    (id)       => adapter.get(`goals/${id}`),
+    update:  (goal)     => adapter.patch(`goals/${goal.id}`, goal),
+    set_state: (params) => adapter.patch(`goals/${params.id}/set_state`, params),
+    destroy: (id)       => adapter.delete(`goals/${id}`)
   },
   stars: {
     create:  (params) => adapter.post('stars', params),
