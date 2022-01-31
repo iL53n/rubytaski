@@ -70,6 +70,7 @@
                         icon="star"
                         @click.stop="removeStar(star.id)"
                       )
+    router-view
 </template>
 
 <script>

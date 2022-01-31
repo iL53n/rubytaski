@@ -34,7 +34,7 @@
         this.$backend.tasks.show(this.id)
           // .then(({ data }) => this.task = data)
           .then((response) => {
-            this.task = response.data.data.attributes
+            this.task = response.data.task
           })
           .catch(()   => this.error = true)
           .finally(() => this.loading = false)
