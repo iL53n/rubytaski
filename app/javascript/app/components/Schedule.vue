@@ -36,9 +36,15 @@
               :weekdays=[1, 2, 3, 4, 5, 6, 0]
               @change="onChange"
             )
-              //- template(#scheduler-resources-header)
+              template(#scheduler-resources-header)
                 //- div(class="full-height row justify-center items-center")
-                  //- div(class="text-h6") {{ titleDate }}
+                //-   div(class="text-h6") {{ titleDate }}
+                div(class="col-auto")
+                  q-btn(color="grey-4" round flat icon="tune")
+                    q-menu(cover auto-close)
+                      q-list
+                        q-item(clickable to="/tasks_list" class="text-primary")
+                          q-item-section Настроить список задач
               template(#scheduler-resource="{ resource /*, index */ }") 
                 q-btn(@click="showTask(resource.id)" flat size="lg" class="full-width" align="left")
                   div(class="ellipsis") {{ resource.title }}

@@ -23,7 +23,7 @@
               tr(class="text-primary")
                 th(class="text-center") 
                 //- th(class="text-left") ID
-                th(class="text-left") #
+                //- th(class="text-left") #
                 th(class="text-left") Title
                 th(class="text-left") Description
                 th(class="text-left") Actions
@@ -39,7 +39,7 @@
                 td
                   q-icon(name="dehaze" class="handle text-grey" size="xs")
                 //- td {{ el.id }}
-                td {{ el.order + 1 }}
+                //- td {{ el.order + 1 }}
                 td {{ el.title }} 
                 td {{ el.description }}
                 td(key="actions") 
