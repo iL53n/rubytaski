@@ -105,7 +105,7 @@
         }
       }
     },
-    beforeMount () {
+    created () {
       this.refresh()
       this.updateFormatter()
     },
@@ -129,7 +129,7 @@
           .then((response) => this.resources = response.data)
           .catch(()        => this.error = true)
           .finally(()      => {
-            // this.loading = false
+            this.loading = false
           })
       },
       showTask(task_id) {
@@ -160,7 +160,9 @@
             this.stats = response.data
           })
           .catch(()   => this.error = true)
-          .finally(() => this.loading = false)
+          .finally(() => { 
+            // this.loading = false 
+          })
       },
       calendarNext () {
         this.$refs.calendar.next()
