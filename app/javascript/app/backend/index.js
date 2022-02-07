@@ -1,13 +1,15 @@
 import axios from 'axios'
 
-let token = document.head.querySelector('meta[name="csrf-token"]')
-axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content
+let token = document.head.querySelector('meta[name="csrf-token"]').content
+// let token = document.getElementsByName("csrf-token")[0].content
+
+axios.defaults.headers.common['X-CSRF-TOKEN'] = token
 
 const adapter = axios.create({
   baseURL: '/',
   headers: {
     'Accept': 'application/json'
-  }  
+  }
 })
 
 const backend = {

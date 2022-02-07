@@ -1,5 +1,5 @@
 <template lang="pug">
-  q-layout(v-if="user" view="lHr lpR fFf")
+  q-layout(v-if="!!user" view="lHr lpR fFf")
     header-component
     left-menu
     right-menu
@@ -35,6 +35,13 @@
         .then((response) => {
           this.setLocale(response.data.locale)
         })
+        .catch((error) => {
+          this.error = true
+          console.log('ERROR! Message: ' + error.message)
+        })
+        .finally(() => {
+          this.loading = false
+        })
     },
     methods: {
       setCurrentUser() {
@@ -42,7 +49,14 @@
           .then((response) => {
             this.user = response.data.user
             // this.setLocale(response.data.user.locale)
-        })
+          })
+          .catch((error) => {
+            this.error = true
+            console.log('ERROR! Message: ' + error.message)
+          })
+          .finally(() => {
+            this.loading = false
+          })
       },
       setLocale(locale) {
         this.$i18n.locale = locale
