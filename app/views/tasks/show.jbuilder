@@ -3,6 +3,8 @@ json.task do
     :id,
     :title,
     :description,
+    :created_at,
+    :updated_at,
     :order,
     :stars_count
 end
