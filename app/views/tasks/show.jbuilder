@@ -3,5 +3,6 @@ json.task do
     :id,
     :title,
     :description,
-    :order
+    :order,
+    :stars_count
 end

@@ -9,14 +9,17 @@
     )
       q-card(class="text-grey-10" style="width: 800px; max-width: 80vw;")
         .text-h3 {{ task.title }}
-        .text-h5 {{ task }}
+        .text-h5 {{ task.stars_count }}
 </template>
 
 <script>
   export default {
     data: function () {
       return {
-        task: Object,
+        task: {
+          type: Object,
+          required: true
+        },
         error: Boolean,
         maximizedToggle: false
       }

@@ -11,6 +11,18 @@ class Task < ApplicationRecord
     end
   end
 
+  # calculated values
+  # TODO: move to separate space?)
+  def stars_count
+    stars.count
+  end
+
+  def current_streak
+  end
+
+  def longest_streak
+  end
+
   private
 
   def set_order
