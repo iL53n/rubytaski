@@ -18,12 +18,31 @@ class Task < ApplicationRecord
   end
 
   def current_streak
+    streaks.last
   end
 
   def longest_streak
+    streaks.max
   end
 
   private
+
+  def streaks
+    streaks = []
+    n = 1
+    previous_date = stars.first.due_date
+
+    stars.each do |star|
+      current_date = star.due_date
+
+      current_date == previous_date + 1.day ? n += 1 : n = 1
+
+      previous_date = current_date
+      streaks << n
+    end
+
+    streaks
+  end
 
   def set_order
     self.order ||= Task.count

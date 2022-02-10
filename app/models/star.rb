@@ -5,6 +5,8 @@ class Star < ApplicationRecord
   belongs_to :user
   belongs_to :task
 
+  default_scope { order(due_date: :asc) }
+
   # https://github.com/amatsuda/stateful_enum
   # enum state: { created: 0, planned: 1, done: 2 } do
   #   event :plan do

@@ -35,14 +35,14 @@
             q-item-section(avatar)
               q-icon(color="teal-4" name="insights" size="md")
             q-item-section
-              q-item-label 8
+              q-item-label {{ task.current_streak }}
               q-item-label(caption) Current streak
           q-item
             q-item-section(avatar)
               q-icon(color="deep-purple-4" name="linear_scale" size="md")
             q-item-section
-              q-item-label 17
-              q-item-label(caption) Best streak
+              q-item-label {{ task.longest_streak }}
+              q-item-label(caption) Longest streak
 </template>
 
 <script>

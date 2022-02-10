@@ -6,5 +6,7 @@ json.task do
     :created_at,
     :updated_at,
     :order,
-    :stars_count
+    :stars_count,
+    :current_streak,
+    :longest_streak
 end
