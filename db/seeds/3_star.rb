@@ -1,6 +1,6 @@
 unless Star.any?
   100.times do
-    @date ||= Time.zone.now
+    @date ||= Time.now
 
     Task.all.each do |task|
       create = [true, false].sample
