@@ -32,7 +32,10 @@
               sticky
               cell-width="auto"
               :locale="locale"
-              style="height: 100%;"
+              animated
+              transition-prev="slide-right"
+              transition-next="slide-left"
+              style="height: 100%"
               :weekdays=[1, 2, 3, 4, 5, 6, 0]
               @change="onChange"
             )
@@ -66,7 +69,7 @@
                         name="star"
                         color="amber-5"
                         text-color="yellow-2"
-                        size="xl"
+                        size="lg"
                         icon="star"
                         @click.stop="removeStar(star.id)"
                       )
@@ -225,8 +228,8 @@
 }
 
 .emergence { 
-    animation: emergence-with-rotate 0.8s;
-    animation-iteration-count: 1;
+  animation: emergence-with-rotate 0.8s;
+  animation-iteration-count: 1;
 }
 
 @keyframes emergence-with-rotate {

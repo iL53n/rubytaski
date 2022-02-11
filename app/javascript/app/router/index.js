@@ -4,7 +4,7 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 const Tasks      = () => import(/* webpackChunkName: "tasks" */ 'components/tasks/Index')
-const Task       = () => import(/* webpackChunkName: "tasks" */ 'components/tasks/Show')
+const Task       = () => import(/* webpackChunkName: "dashboard" */ 'components/tasks/Show')
 const NewTask    = () => import(/* webpackChunkName: "tasks" */ 'components/tasks/New')
 const EditTask   = () => import(/* webpackChunkName: "tasks" */ 'components/tasks/Edit')
 const Goals      = () => import(/* webpackChunkName: "goals" */ 'components/goals/Index')
@@ -14,6 +14,7 @@ const EditGoal   = () => import(/* webpackChunkName: "goals" */ 'components/goal
 const DoneGoal   = () => import(/* webpackChunkName: "goals" */ 'components/goals/Done')
 const Dashboard  = () => import(/* webpackChunkName: "dashboard" */ 'components/Dashboard')
 const Statistics = () => import(/* webpackChunkName: "statistics" */ 'components/Statistics')
+const Profile    = () => import(/* webpackChunkName: "profile" */ 'components/Profile')
 
 export default new VueRouter ({
   mode: 'history',
@@ -40,6 +41,7 @@ export default new VueRouter ({
       { path: ':id/', component: Task, name: 'dashboardShowTask' }
     ]
     },
-    { path: '/statistics', component: Statistics }
+    { path: '/statistics', component: Statistics },
+    { path: '/profile', component: Profile }
   ]
 })
