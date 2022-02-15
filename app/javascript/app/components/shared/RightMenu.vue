@@ -11,16 +11,14 @@
       q-list
         q-item(style="background: rgb(248, 247, 253)" align="center")
           //- q-icon(size="md" name="date_range")
-          q-toolbar-title(v-if="!miniState" class="text-blue-grey-10") {{ $t('heatmap.title') }}
           q-btn(
-            class="q-mini-drawer-hide"
-            dense
-            round
+            v-if="!miniState"
             flat
-            unelevated
-            color="primary"
-            icon="chevron_right"
-            @click="miniState = true")
+            no-caps
+            class=" full-width text-blue-grey-10"
+            :label="$t('heatmap.title')"
+            @click="miniState = true"
+            icon-right="chevron_right")
           q-btn(
             class="absolute"
             style="top: 280px"

@@ -19,6 +19,7 @@
             q-toolbar-title {{ titleDate }}
           q-card-section
             //- v-touch-swipe.mouse.left.right="handleSwipe"
+            //- short-weekday-label?
             // TODO: fix resource-width
             q-calendar(
               ref="calendar"

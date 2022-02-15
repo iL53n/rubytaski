@@ -3,9 +3,18 @@
     q-card(class="col-4" align="left")
       q-item
         q-item-section(avatar)
-          q-avatar(size="80px")
-            img(src="https://cdn.quasar.dev/img/boy-avatar.png")
-
+          q-file(borderless style="width: 80px" v-model="avatar")
+            template(v-slot:file="{ index, file }")
+              q-chip(class="full-width q-my-xs"
+                
+                square
+                @remove="avatar = {}")
+            q-avatar(size="80px")      
+              q-img(src="https://cdn.quasar.dev/img/boy-avatar.png" @mouseover="showUpload = true" @mouseleave="showUpload = false")
+                div(class="justify-center")
+                  q-icon(v-if="showUpload" size="xl" name="photo_camera" class="text-indigo-1" @click="upload()")
+            
+        
         q-item-section
           q-item-label(class="text-h5") Bogdan Gribko
           q-item-label(caption) Registered: 2021-02-21
@@ -34,17 +43,26 @@
   export default {
     data () {
       return {
-
+        showUpload: false,
+        user: {}
       } 
     },
     created() {
 
     },
     methods: {
+      getUser() {
+
+      },
+      updateUser() {
+
+      },
+      uploadFile() {
+        this.user.avatar = this.avatar
+      }
 
     },
     components: {
-
     }
   }
 </script>
