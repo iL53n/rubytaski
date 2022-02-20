@@ -132,9 +132,7 @@
         this.$backend.tasks.index()
           .then((response) => this.resources = response.data)
           .catch(()        => this.error = true)
-          .finally(()      => {
-            this.loading = false
-          })
+          .finally(()      =>  this.loading = false)
       },
       showTask(task_id) {
         this.$router.push({ name: 'dashboardShowTask', params: { id: task_id } })
@@ -144,7 +142,7 @@
 
         this.$backend.stars.create(params)
           .then((response) => {
-            this.refresh()
+            // this.refresh()
             // this.$emit('add-star')
           })
           .catch(()   => this.error = true)
@@ -153,16 +151,14 @@
       removeStar(id) {
         this.$backend.stars.destroy(id)
           .then((response) => {
-            this.refresh()
+            // this.refresh()
           })
           .catch(()   => this.error = true)
           .finally(() => this.loading = false)
       },
       getStatistics() {
         this.$backend.statistics.stars()
-          .then((response) => {
-            this.stats = response.data
-          })
+          .then((response) => this.stats = response.data)
           .catch(()   => this.error = true)
           .finally(() => { 
             // this.loading = false 
