@@ -83,9 +83,14 @@
                   q-item-section(avatar)
                     q-icon(name="emoji_events" color="red-4")
                   q-item-section {{ goal.prize }}
-            div(v-else)
-                br
-                q-chip(size="xl" outline color="blue-grey-4" icon="warning_amber") No information
+            q-card-section(v-else horizontal)
+              .col-9
+                q-card-section
+                  .text-h6.text-red-5 У вас нет ни одной активной цели!
+                  .text-caption.text-blue-grey-8 Создайтие новую цель, кликнув на иконку.
+              .col-3
+                q-card-section
+                  q-btn(size="25px" class="text-red-4 bg-red-1" flat round icon="add" @click="newGoal()")
 </template>
 
 <script>
@@ -129,8 +134,11 @@
           })
           .catch(()   => this.error = true)
           .finally(() => {
-            this.getGoal()
-            // this.loading = false
+            if (this.stat.goal_id) {
+              this.getGoal()
+            } else {
+              this.loading = false
+            }
           })
       },
       getGoal() {
@@ -140,6 +148,9 @@
           })
           .catch(()   => this.error = true)
           .finally(() => this.loading = false)
+      },
+      newGoal() {
+        this.$router.push({ name: 'dashboardNewGoal' })
       },
     },
     mixins: [loadingMixin]

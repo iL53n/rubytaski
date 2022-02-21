@@ -38,7 +38,8 @@ export default new VueRouter ({
     },
     { path: '/dashboard', component: Dashboard,
     children: [
-      { path: ':id/', component: Task, name: 'dashboardShowTask' }
+      { path: ':id/', component: Task, name: 'dashboardShowTask' },
+      { path: 'new_goal/', component: NewGoal, name: 'dashboardNewGoal' }
     ]
     },
     { path: '/statistics', component: Statistics },
