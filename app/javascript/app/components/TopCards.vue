@@ -16,18 +16,22 @@
               div(class="col text-subtitle1 text-grey" align="right") {{ $t('stat.today') }}
             q-separator
             br
-            br
-            q-slider(
-              v-model="stat.done_today"
-              :min="0"
-              :max="stat.all_today"
-              readonly
-              label
-              :label-value="leftToCompleteDay + $t('stat.left_to_complete')"
-              label-always
-              color="orange-4"
-            )
-            div(class="text-h3 text-blue-grey-14") {{stat.done_today}}/{{stat.all_today}}
+            div(v-if="leftToCompleteDay")
+              br
+              q-slider(
+                v-model="stat.done_today"
+                :min="0"
+                :max="stat.all_today"
+                readonly
+                label
+                :label-value="leftToCompleteDay + $t('stat.left_to_complete')"
+                label-always
+                color="orange-4"
+              )
+              div(class="text-h3 text-blue-grey-14") {{stat.done_today}}/{{stat.all_today}}
+            div(v-else)
+              q-btn(push glossy round class="text-yellow-2 bg-amber-5" padding="xs" size="60px" icon="emoji_events")
+                .text-h4.text-blue-grey-14.absolute {{stat.done_today}}/{{stat.all_today}}
         //- WEEK progress Card
         q-card(class="col q-ma-md")
           q-card-section
@@ -93,8 +97,8 @@
           q-card-section
             div(class="row")
               div(class="col text-grey" align="left")
-                q-icon(name="warning" color="red" size="sm")
-              div(class="col text-subtitle1 text-grey" align="right") {{ $t('stat.goal') }}
+                q-icon(name="add_task" color="red-5" size="sm")
+              div(class="col text-subtitle1 text-grey" align="right") {{ $t('tasks.title') }}
             q-separator
             br
             q-card-section(horizontal)
@@ -116,8 +120,7 @@
     data () {
       return {
         stat: {},
-        goal: {},
-        msg: this.$t('message.tasks')
+        goal: {}
       }
     },
     computed: {
