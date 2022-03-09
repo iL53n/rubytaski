@@ -18,11 +18,11 @@ class Task < ApplicationRecord
   end
 
   def current_streak
-    streaks.last
+    stars.exists? ? streaks.last : 0
   end
 
   def longest_streak
-    streaks.max
+    stars.exists? ? streaks.max : 0
   end
 
   private
