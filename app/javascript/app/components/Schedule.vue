@@ -214,6 +214,11 @@
         received(data) {
           this.refresh()
         }
+      },
+      TasksChannel: {
+        received(data) {
+          this.refresh()
+        }
       }
     }
   }

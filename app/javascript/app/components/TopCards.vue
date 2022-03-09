@@ -104,7 +104,7 @@
           q-card-section
             .row
               .col.text-grey(align="left")
-                q-icon(name="add_task" color="red-5" size="sm")
+                q-icon(name="playlist_add" color="red-4" size="sm")
               .col.text-subtitle1.text-grey(align="right") {{ $t('tasks.title') }}
             q-separator
             br
@@ -131,7 +131,7 @@
       }
     },
     computed: {
-      starsStats() {
+      starsCount() {
         return this.$store.state.statistics.stars.all
       },
       weekProgress() {
@@ -154,7 +154,7 @@
       this.getStatistics()
     },
     watch: {
-      starsStats() {
+      starsCount() {
         this.getStatistics()
       }
     },
@@ -188,7 +188,19 @@
         this.$router.push({ name: 'dashboardNewTask' })
       },
     },
-    mixins: [loadingMixin]
+    mixins: [loadingMixin],
+    subscriptions: {
+      TasksChannel: {
+        received(data) {
+          this.getStatistics()
+        }
+      },
+      GoalsChannel: {
+        received(data) {
+          this.getStatistics()
+        }
+      }
+    }
   }
 </script>
 

@@ -1,6 +1,7 @@
 class TasksController < ApplicationController
   # before_action :authenticate_user!
   before_action :load_task, only: %i[show update destroy]
+  after_action  :broadcast, only: %i[create update destroy]
 
   layout false
 
@@ -76,5 +77,11 @@ class TasksController < ApplicationController
   # TODO: add keys for data :id, :order AND destroy .permit!
   def order_params
     params.require(:order).permit!
+  end
+
+  def broadcast
+    return if @task.errors.any?
+
+    ActionCable.server.broadcast('tasks', { task: @task })
   end
 end

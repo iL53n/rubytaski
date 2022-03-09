@@ -1,6 +1,7 @@
 class GoalsController < ApplicationController
   # before_action :authenticate_user!
   before_action :load_goal, only: %i[show update set_state destroy]
+  after_action  :broadcast, only: %i[create update destroy]
 
   layout false
 
@@ -71,5 +72,11 @@ class GoalsController < ApplicationController
                                  :due_date,
                                  :number_of_stars,
                                  :prize)
+  end
+
+  def broadcast
+    return if @goal.errors.any?
+
+    ActionCable.server.broadcast('goals', { goal: @goal })
   end
 end
