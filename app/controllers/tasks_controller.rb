@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
   # before_action :authenticate_user!
   before_action :load_task, only: %i[show update destroy]
-  after_action  :broadcast, only: %i[create update update_order destroy]
+  after_action  :broadcast, only: %i[create update destroy]
 
   layout false
 

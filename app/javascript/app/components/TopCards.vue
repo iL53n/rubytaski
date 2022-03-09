@@ -169,6 +169,7 @@
             if (this.stat.goal_id) {
               this.getGoal()
             } else {
+              this.goal = {}
               this.loading = false
             }
           })

@@ -95,7 +95,14 @@
     },
     mixins: [
       LoadingMixin
-    ]
+    ],
+    subscriptions: {
+      GoalsChannel: {
+        received(data) {
+          this.getGoals()
+        }
+      }
+    }
   }
 </script>
 

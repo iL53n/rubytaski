@@ -118,7 +118,14 @@
     },
     mixins: [
       LoadingMixin
-    ]
+    ],
+    subscriptions: {
+      TasksChannel: {
+        received(data) {
+          this.getTasks()
+        }
+      }
+    }
   };
 </script>
 
