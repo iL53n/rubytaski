@@ -60,7 +60,9 @@
             q-separator
             br
             q-card-section(v-if="goal.due_date" horizontal)
+              //- why don't work `>=` ?
               q-knob.col.text-blue-grey-14(
+                v-if="leftToCompleteGoal > 0"
                 readonly
                 v-model="goalProgress"
                 show-value
@@ -71,6 +73,8 @@
                 )
                 .text-h3 {{ goalProgress }}
                 .text-h6.text-grey %
+              .col(v-else)
+                q-btn.text-yellow-2.bg-amber-5(push glossy round padding="xs" size="60px" icon="emoji_events")
               q-separator(vertical)
               q-list.col-5.text-blue-grey-6(align="left" dense)
                 q-item
@@ -138,6 +142,9 @@
       },
       leftToCompleteWeek() {
         return this.stat.all_week - this.stat.done_week
+      },
+      leftToCompleteGoal() {
+        return this.stat.all_goal - this.stat.done_goal
       },
       goalProgress() {
         return Math.round(this.stat.done_goal / this.stat.all_goal * 100)
