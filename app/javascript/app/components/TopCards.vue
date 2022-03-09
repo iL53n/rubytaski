@@ -30,8 +30,9 @@
               )
               .text-h3.text-blue-grey-14 {{stat.done_today}}/{{stat.all_today}}
             div(v-else)
-              q-btn.text-yellow-2.bg-amber-5(push glossy round padding="xs" size="60px" icon="emoji_events")
-                .text-h4.text-blue-grey-14.absolute {{stat.done_today}}/{{stat.all_today}}
+              q-btn.text-yellow-2.bg-amber-5(push glossy round padding="xs" size="60px" icon="verified")
+                q-tooltip(anchor="center middle" :delay="200")
+                  .text-h5 {{stat.done_today}}/{{stat.all_today}}
         //- WEEK progress Card
         q-card.col.q-ma-md
           q-card-section
@@ -49,7 +50,8 @@
               .text-h3.text-blue-grey-14 {{stat.done_week}}/{{stat.all_week}}
             div(v-else)
               q-btn.text-yellow-2.bg-amber-5(push glossy round padding="xs" size="60px" icon="emoji_events")
-                .text-h4.text-blue-grey-14.absolute {{stat.done_week}}/{{stat.all_week}}
+                q-tooltip(anchor="center middle" :delay="200")
+                  .text-h5 {{stat.done_week}}/{{stat.all_week}}
         //- GOAL Card
         q-card.col.q-ma-md
           q-card-section
@@ -169,7 +171,6 @@
             if (this.stat.goal_id) {
               this.getGoal()
             } else {
-              this.goal = {}
               this.loading = false
             }
           })
