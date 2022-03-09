@@ -41,11 +41,15 @@
               div(class="col text-subtitle1 text-grey" align="right") {{ $t('stat.week') }}
             q-separator
             br
-            q-linear-progress(size="60px" :value="weekProgress / 100" color="green-4")
-              div(class="absolute-full flex flex-center")
-                q-badge(color="white" text-color="green")
-                  | {{  weekProgress }}%
-            div(class="text-h3 text-blue-grey-14") {{stat.done_week}}/{{stat.all_week}}
+            div(v-if="stat.all_week - stat.done_week")
+              q-linear-progress(size="60px" :value="weekProgress / 100" color="green-4")
+                div(class="absolute-full flex flex-center")
+                  q-badge(color="white" text-color="green")
+                    | {{  weekProgress }}%
+              div(class="text-h3 text-blue-grey-14") {{stat.done_week}}/{{stat.all_week}}
+            div(v-else)
+              q-btn(push glossy round class="text-yellow-2 bg-amber-5" padding="xs" size="60px" icon="emoji_events")
+                .text-h4.text-blue-grey-14.absolute {{stat.done_week}}/{{stat.all_week}}
         //- GOAL Card
         q-card(class="col q-ma-md")
           q-card-section
