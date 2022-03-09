@@ -1,7 +1,7 @@
 class GoalsController < ApplicationController
   # before_action :authenticate_user!
   before_action :load_goal, only: %i[show update set_state destroy]
-  after_action  :broadcast, only: %i[create update destroy]
+  after_action  :broadcast, only: %i[create update set_state destroy]
 
   layout false
 
