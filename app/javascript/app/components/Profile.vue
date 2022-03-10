@@ -2,7 +2,7 @@
   div(class="q-pa-xl row items-start q-gutter-xl")
     q-card(class="col-4" align="left")
       q-item
-        q-item-section(avatar)
+        //- q-item-section(avatar)
           q-file(borderless style="width: 80px" v-model="avatar")
             template(v-slot:file="{ index, file }")
               q-chip(class="full-width q-my-xs"
@@ -21,10 +21,30 @@
       q-separator
       q-card-section
         q-card-section(class="text-subtitle1") Personal info
-        p Email: {{ user.email }}
-        p Date of birth: {{ user.date_of_birth }}
-        p Parent: {{ user.parent }}
-        p Locale: {{ user.locale }}
+        q-card-section
+          .q-gutter-y-md.column
+            q-input(square filled label="Email" v-model="user.email")
+              template(v-slot:append)
+                q-icon(name="email")
+            q-input(square filled label="Date of birth" v-model="user.date_of_birth" mask="date")
+              template(v-slot:append)
+                q-icon(name="calendar_today")
+                  q-popup-proxy(ref="qDateProxy" transition-show="scale" transition-hide="scale")
+                    q-date(v-model="user.date_of_birth")
+                      div(class="row items-center justify-end")
+                        q-btn(v-close-popup label="Close" color="primary" flat)
+            q-select(square filled label="Locale" v-model="user.locale" :options="localesOptions")
+              //- template(v-slot:append)
+              //-   q-icon(name="language") 
+          p(v-if="user.parent") Parent: {{ user.parent }}
+
+        q-card-section
+          q-banner(v-if="bannerShow" inline-actions rounded class="bg-green-1")
+            .text-subtitle1.text-green-6 Сохранить изменения?
+            template(v-slot:action)
+              q-btn(@click="updateTasksOrder()" flat round color="green-7" icon="check")
+              q-btn(@click="getTasks()" flat round color="red-7" icon="close")
+
     q-card(class="col")
       q-item
         q-item-section(avatar)
@@ -45,6 +65,8 @@
   export default {
     data () {
       return {
+        localesOptions: ['ru', 'en'],
+        bannerShow: false,
         showUpload: false
       } 
     },
@@ -60,6 +82,13 @@
     },
     created() {
 
+    },
+    watch: {
+      user(newValue, oldValue) {
+        console.log(user)
+        console.log(`Updating from ${oldValue} to ${newValue}`);
+        this.bannerShow = true
+      }
     },
     methods: {
       getUser() {
