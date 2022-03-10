@@ -30,7 +30,7 @@
               )
               .text-h3.text-blue-grey-14 {{stat.done_today}}/{{stat.all_today}}
             div(v-else)
-              q-btn.text-yellow-2.bg-amber-5(push glossy round padding="xs" size="60px" icon="verified")
+              q-btn.shine.text-yellow-2.bg-amber-5(push glossy round padding="xs" size="60px" icon="verified")
                 q-tooltip(anchor="center middle" :delay="200")
                   .text-h5 {{stat.done_today}}/{{stat.all_today}}
         //- WEEK progress Card
@@ -49,7 +49,7 @@
                     | {{  weekProgress }}%
               .text-h3.text-blue-grey-14 {{stat.done_week}}/{{stat.all_week}}
             div(v-else)
-              q-btn.text-yellow-2.bg-amber-5(push glossy round padding="xs" size="60px" icon="emoji_events")
+              q-btn.shine.text-yellow-2.bg-amber-5(push glossy round padding="xs" size="60px" icon="emoji_events")
                 q-tooltip(anchor="center middle" :delay="200")
                   .text-h5 {{stat.done_week}}/{{stat.all_week}}
         //- GOAL Card
@@ -76,7 +76,7 @@
                 .text-h3 {{ goalProgress }}
                 .text-h6.text-grey %
               .col(v-else)
-                q-btn.text-yellow-2.bg-amber-5(push glossy round padding="xs" size="60px" icon="emoji_events")
+                q-btn.shine.text-yellow-2.bg-amber-5(push glossy round padding="xs" size="60px" icon="emoji_events")
               q-separator(vertical)
               q-list.col-5.text-blue-grey-6(align="left" dense)
                 q-item
@@ -206,4 +206,43 @@
   }
 </script>
 
-<style scoped></style>
+<style scoped>
+.shine:after {
+    content: "";
+    height: 200%;
+    left: -230%;
+    opacity: 0;
+    position: absolute;
+    top: -20%;
+    transform: rotate(-30deg);
+    width: 200%;
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.13);
+  background: linear-gradient(
+    to right, 
+    rgba(255, 255, 255, 0.13) 0%,
+    rgba(255, 255, 255, 0.13) 77%,
+    rgba(255, 255, 255, 0.5) 92%,
+    rgba(255, 255, 255, 0.0) 100%
+  );
+  animation: 10s anim linear 3s infinite;
+}
+
+@keyframes anim {
+  0% {
+     left: -230%;
+     top: -20%;
+  }
+  5% {
+    left: -50%;
+    top: -50%;
+  }
+  10% {
+     left: -230%;
+     top: -20%;
+  }
+  100% {
+  /* delay */
+  }
+}
+</style>
