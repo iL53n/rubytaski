@@ -4,5 +4,7 @@ json.user do
     :email,
     :nick_name,
     :date_of_birth,
-    :parent
+    :locale,
+    :parent,
+    :created_at
 end

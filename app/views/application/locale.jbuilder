@@ -1,1 +1,1 @@
-json.locale :ru
+json.locale @locale

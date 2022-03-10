@@ -7,6 +7,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   validates :email, presence: true
+  validates :locale, inclusion: { in: %w(ru en), message: "%{value} is not valid value" }
 
   has_many :tasks
   has_many :stars

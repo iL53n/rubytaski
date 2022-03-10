@@ -31,24 +31,26 @@
     },
     created () {
       this.setCurrentUser()
-      this.$backend.locale()
-        .then((response) => {
-          this.setLocale(response.data.locale)
-        })
-        .catch((error) => {
-          this.error = true
-          console.log('ERROR! Message: ' + error.message)
-        })
-        .finally(() => {
-          this.loading = false
-        })
+      this.user.locale ? this.setLocale(this.user.locale) : this.getLocale()
     },
     methods: {
       setCurrentUser() {
         this.$backend.users.current()
           .then((response) => {
             this.user = response.data.user
-            // this.setLocale(response.data.user.locale)
+          })
+          .catch((error) => {
+            this.error = true
+            console.log('ERROR! Message: ' + error.message)
+          })
+          .finally(() => {
+            this.loading = false
+          })
+      },
+      getLocale() {
+        this.$backend.locale()
+          .then((response) => {
+            this.setLocale(response.data.locale)
           })
           .catch((error) => {
             this.error = true

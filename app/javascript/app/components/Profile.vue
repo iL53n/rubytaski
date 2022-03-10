@@ -16,13 +16,15 @@
             
         
         q-item-section
-          q-item-label(class="text-h5") Bogdan Gribko
-          q-item-label(caption) Registered: 2021-02-21
+          q-item-label(class="text-h5") {{ user.nick_name }}
+          q-item-label(caption) Registered: {{ user.created_at }}
       q-separator
       q-card-section
         q-card-section(class="text-subtitle1") Personal info
-        p Email
-        p Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        p Email: {{ user.email }}
+        p Date of birth: {{ user.date_of_birth }}
+        p Parent: {{ user.parent }}
+        p Locale: {{ user.locale }}
     q-card(class="col")
       q-item
         q-item-section(avatar)
@@ -43,9 +45,18 @@
   export default {
     data () {
       return {
-        showUpload: false,
-        user: {}
+        showUpload: false
       } 
+    },
+    computed: {
+      user: {
+        get() {
+          return this.$store.state.currentUser
+        },
+        set(value) {
+          this.$store.commit('updateCurrentUser', value)
+        }
+      }
     },
     created() {
 
