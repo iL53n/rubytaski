@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  include Rails.application.routes.url_helpers
+
   EMAIL = /(?<login>\S+)\@(?<domain>\S+)/.freeze
   before_save :set_nick_name
 
@@ -11,6 +13,13 @@ class User < ApplicationRecord
 
   has_many :tasks
   has_many :stars
+
+  has_one_attached :avatar
+
+  def avatar_url
+    # avatar.attached? ? url_for(avatar) : nil
+    avatar.attached? ? rails_blob_path(avatar, only_path: true) : nil
+  end
 
   private
 

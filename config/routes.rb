@@ -27,5 +27,7 @@ Rails.application.routes.draw do
     get '/current_stat', to: 'stars#current_stat'
   end
 
-  get '/*path', to: 'application#index', format: false
+  # get '/*path', to: 'application#index', format: false
+  get '/*slug', to: 'application#index',
+                constraints: ->(request) { !request.fullpath.include?('rails/active_storage') }
 end

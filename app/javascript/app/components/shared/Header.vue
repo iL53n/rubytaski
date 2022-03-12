@@ -4,7 +4,7 @@
         q-toolbar-title(class="text-primary") rubytaski
         q-chip(size="20px" square color="primary" text-color="white")
           q-avatar
-            img(src="https://cdn.quasar.dev/img/boy-avatar.png")
+            q-img(:src="user.avatar_url")
           | {{ user.nick_name }}
           q-menu(anchor="bottom end" self="top end")
             q-list(style="min-width: 250px")

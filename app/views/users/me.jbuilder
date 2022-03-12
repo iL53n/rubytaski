@@ -6,5 +6,6 @@ json.user do
     :date_of_birth,
     :locale,
     :parent,
-    :created_at
+    :created_at,
+    :avatar_url
 end

@@ -1,63 +1,91 @@
 <template lang="pug">
-  div(class="q-pa-xl row items-start q-gutter-xl")
+  .q-pa-xl.row.items-start.justify-around.q-gutter-xl
     q-card(class="col-4" align="left")
-      q-item
-        //- q-item-section(avatar)
-          q-file(borderless style="width: 80px" v-model="avatar")
-            template(v-slot:file="{ index, file }")
-              q-chip(class="full-width q-my-xs"
-                
-                square
-                @remove="avatar = {}")
-            q-avatar(size="80px")      
-              q-img(src="https://cdn.quasar.dev/img/boy-avatar.png" @mouseover="showUpload = true" @mouseleave="showUpload = false")
-                div(class="justify-center")
-                  q-icon(v-if="showUpload" size="xl" name="photo_camera" class="text-indigo-1" @click="upload()")
-            
-        
-        q-item-section
-          q-item-label(class="text-h5") {{ user.nick_name }}
-          q-item-label(caption) Registered: {{ user.created_at }}
+      q-card-section
+        q-item
+          q-item-section(avatar)
+            q-avatar.shadow-5(size="100px")
+              q-img( :src="user.avatar_url")
+              //- TODO: version with mouseover icon
+              //- q-img( :src="user.avatar_url" @mouseover="showUpload = true" @mouseleave="showUpload = false")
+              //-   p 
+              //-     q-file(
+              //-       v-model="avatar"
+              //-       accept=".jpg,.png,.gif"
+              //-       borderless
+              //-       display-value
+              //-       style="width: 100px"
+              //-       @input="bannerShow=true; showUpload = true")
+              //-       q-avatar(size="100px")      
+              //-         q-img( :src="user.avatar_url" @mouseover="showUpload = true" @mouseleave="showUpload = false")
+              //-           div
+              //-             q-icon(v-if="showUpload" padding="xl"  size="70px" name="photo_camera" class="text-indigo-1")
+          q-item-section
+            q-item-label(class="text-h5") {{ user.nick_name }}
+            q-item-label(caption) Registered: {{ user.created_at }}
       q-separator
       q-card-section
-        q-card-section(class="text-subtitle1") Personal info
+        q-card-section.text-h5.text-primary(align="center") Profile settings
+        q-card-section.q-gutter-y-md.column
+          q-file( 
+            v-model="avatar"
+            accept=".jpg,.jpeg,.png,.gif"
+            label="Upload avatar"
+            borderless
+            use-chips
+            style="width: 200px"
+            @input="bannerShow=true")
+            template(v-slot:prepend)
+              q-icon(name="photo_camera" @click.stop)
+          q-input(
+            square
+            filled
+            label="Nickname"
+            v-model="user.nick_name"
+            @input="bannerShow=true")
+            template(v-slot:append)
+              q-icon(name="person_pin")
+          q-input(
+            square
+            filled
+            label="Email"
+            v-model="user.email"
+            @input="bannerShow=true")
+            template(v-slot:append)
+              q-icon(name="email")
+          //- TODO: add change password request
+          q-input(
+            square
+            filled
+            label="Date of birth"
+            v-model="user.date_of_birth"
+            mask="date"
+            @input="bannerShow=true")
+            template(v-slot:append)
+              q-icon(name="calendar_today")
+                q-popup-proxy(ref="qDateProxy" transition-show="scale" transition-hide="scale")
+                  q-date(v-model="user.date_of_birth" @input="bannerShow=true")
+                    div(class="row items-center justify-end")
+                      q-btn(v-close-popup label="Close" color="primary" flat)
+          q-select(
+            square
+            filled
+            label="Language"
+            v-model="user.locale"
+            :options="localesOptions"
+            option-value="id"
+            option-label="desc"
+            option-disable="inactive"
+            emit-value
+            map-options
+            @input="bannerShow=true")
+        p(v-if="user.parent") Parent: {{ user.parent }}
         q-card-section
-          .q-gutter-y-md.column
-            q-input(square filled label="Email" v-model="user.email")
-              template(v-slot:append)
-                q-icon(name="email")
-            q-input(square filled label="Date of birth" v-model="user.date_of_birth" mask="date")
-              template(v-slot:append)
-                q-icon(name="calendar_today")
-                  q-popup-proxy(ref="qDateProxy" transition-show="scale" transition-hide="scale")
-                    q-date(v-model="user.date_of_birth")
-                      div(class="row items-center justify-end")
-                        q-btn(v-close-popup label="Close" color="primary" flat)
-            q-select(square filled label="Locale" v-model="user.locale" :options="localesOptions")
-              //- template(v-slot:append)
-              //-   q-icon(name="language") 
-          p(v-if="user.parent") Parent: {{ user.parent }}
-
-        q-card-section
-          q-banner(v-if="bannerShow" inline-actions rounded class="bg-green-1")
+          q-banner(v-if="bannerShow" disable inline-actions rounded class="bg-green-1")
             .text-subtitle1.text-green-6 Сохранить изменения?
             template(v-slot:action)
-              q-btn(@click="updateTasksOrder()" flat round color="green-7" icon="check")
-              q-btn(@click="getTasks()" flat round color="red-7" icon="close")
-
-    q-card(class="col")
-      q-item
-        q-item-section(avatar)
-          q-icon(class="text-primary bg-deep-purple-1 profile-icon" name="settings")
-        q-item-section(class="text-blue-grey-8" align="left")
-          q-item-label(class="text-subtitle1") {{ $t('menu.top.profile.my_config') }}
-          q-item-label(caption) {{ $t('menu.top.profile.my_config_description') }}
-      q-separator
-      q-card-section(horizontal)
-        q-card-section Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        q-separator(vertical)
-        q-card-section(class="col-4") col4Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-
+              q-btn(@click="updateUser()" flat round color="green-7" icon="check")
+              q-btn(@click="getCurrentUser()" flat round color="red-7" icon="close")
 </template>
 
 <script>
@@ -65,9 +93,10 @@
   export default {
     data () {
       return {
-        localesOptions: ['ru', 'en'],
+        localesOptions: [{id: 'ru', desc: 'Русский' }, { id: 'en', desc: 'English'}],
         bannerShow: false,
-        showUpload: false
+        showUpload: false,
+        avatar: null
       } 
     },
     computed: {
@@ -81,26 +110,66 @@
       }
     },
     created() {
-
-    },
-    watch: {
-      user(newValue, oldValue) {
-        console.log(user)
-        console.log(`Updating from ${oldValue} to ${newValue}`);
-        this.bannerShow = true
-      }
     },
     methods: {
-      getUser() {
-
+      getCurrentUser() {
+        this.$backend.users.current()
+          .then((response) => {
+            this.user = response.data.user
+            this.avatar = null
+          })
+          .catch((error) => {
+            this.error = true
+            console.log('ERROR! Message: ' + error.message)
+          })
+          .finally(() => {
+            this.loading = false
+            this.bannerShow = false
+          })
       },
       updateUser() {
+        const params = {
+          'id'           : this.user.id,
+          'nick_name'    : this.user.nick_name,
+          'email'        : this.user.email,
+          'date_of_birth': this.user.date_of_birth,
+          'locale'       : this.user.locale,
+        }
 
+        let formData = new FormData()
+        Object.entries(params).forEach(
+          ([key, value]) => formData.append(key, value)
+        )
+
+        let newAvatar = false
+        if (this.avatar !== null) {
+          newAvatar = true
+          formData.append('avatar', this.avatar)
+        }
+
+        this.$backend.users.update(formData)
+          .then((response) => {
+            this.$q.notify({
+              message: "Updated the user!",
+              color: 'positive',
+              position: 'top'
+            })
+          })
+          .catch((error) => {
+            this.error = true
+            console.log(error)
+            this.$q.notify({
+              message: "The user didn't update!",
+              color: 'negative',
+              position: 'top'
+            })
+          })
+          .finally(() => {
+            this.loading = false
+            this.bannerShow = false
+            if (newAvatar) { window.location.reload() }
+          })
       },
-      uploadFile() {
-        this.user.avatar = this.avatar
-      }
-
     },
     components: {
     }

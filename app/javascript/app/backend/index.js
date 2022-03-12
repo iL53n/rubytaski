@@ -40,7 +40,8 @@ const backend = {
     current: ()       => adapter.get('current_stat')
   },
   users: {
-    current: ()       => adapter.get('users/me')
+    current: ()       => adapter.get('users/me'),
+    update:  (user)   => adapter.patch(`users/${user.get('id')}`, user)
   },
   locale: () => adapter.get('locale')
 }
