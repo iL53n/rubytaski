@@ -5,8 +5,9 @@
         q-item
           q-item-section(avatar)
             q-avatar.shadow-5(size="100px")
-              q-img( :src="user.avatar_url")
-              //- TODO: version with mouseover icon
+              q-img(v-if="user.avatar_url" :src="user.avatar_url")
+              q-img(v-else :src="require('images/star.png')")
+              //- TODO: version with mouseover icon (maybe like https://v1.quasar.dev/vue-components/img#example--captions)
               //- q-img( :src="user.avatar_url" @mouseover="showUpload = true" @mouseleave="showUpload = false")
               //-   p 
               //-     q-file(
@@ -25,7 +26,7 @@
             q-item-label(caption) Registered: {{ user.created_at }}
       q-separator
       q-card-section
-        q-card-section.text-h5.text-primary(align="center") Profile settings
+        .text-h5.text-primary(align="center") Profile settings
         q-card-section.q-gutter-y-md.column
           q-file( 
             v-model="avatar"

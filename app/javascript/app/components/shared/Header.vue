@@ -2,9 +2,12 @@
     q-header(class="bg-white" style="height: 50px")
       q-toolbar
         q-toolbar-title(class="text-primary") rubytaski
+        //- q-badge(align="top" color="orange") v1.0.0b
+        //img(src='~/images/star.png')
         q-chip(size="20px" square color="primary" text-color="white")
           q-avatar
-            q-img(:src="user.avatar_url")
+            q-img(v-if="user.avatar_url" :src="user.avatar_url")
+            q-img(v-else :src="require('images/star.png')")
           | {{ user.nick_name }}
           q-menu(anchor="bottom end" self="top end")
             q-list(style="min-width: 250px")
@@ -46,6 +49,7 @@
   export default {
     data () {
       return {
+        no_photo: require('../../assets/images/star.png')
       }
     },
     computed: {
