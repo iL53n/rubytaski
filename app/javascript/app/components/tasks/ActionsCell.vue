@@ -2,6 +2,19 @@
   div
     q-btn(
       v-for="action in actions"
+      v-if="state === 'created' && ['all', 'active'].includes(action.kind)"
+      :key="action.name"
+      :name="action.name"
+      flat
+      bordered
+      color="white"
+      :text-color="action.color"
+      size="11px"
+      :icon="action.icon"
+      @click="apply(action.name)")
+    q-btn(
+      v-for="action in actions"
+      v-if="state !== 'created' && ['all', 'unactive'].includes(action.kind)"
       :key="action.name"
       :name="action.name"
       flat
@@ -15,7 +28,7 @@
 
 <script>
   export default {
-    props: ['actions', 'title', 'id'],
+    props: ['actions', 'title', 'state', 'id'],
     methods: {
       apply(action) {
         if (typeof this[action] === 'function') this[action]()
@@ -24,7 +37,42 @@
         this.$router.push({ name: 'editTask', params: { id: this.id } })
       },
       archive() {
-        this.$router.push({ name: 'archiveTask', params: { id: this.id } })
+        this.$q.dialog({
+          title: "Archive the task?",
+          message: "You are about to archive the task? Are you sure?",
+          ok: { outline: true, color: 'negative', label: 'Yes' },
+          cancel: { flat: true, color: 'black', label: 'No' }
+        }).onOk(() => {
+          this.$backend.tasks.set_state({ id: this.id, state: 'archive' })
+          .then((response) => {
+            this.$q.notify({ message: "The task archived!", color: 'positive', position: 'top' })
+          })
+          .catch((error) => {
+            this.error = true
+            console.log(error)
+            this.$q.notify({ message: "The task didn't archive!", color: 'negative', position: 'top' })
+          })
+          .finally(() => this.$emit('changed'))
+        }).onCancel(() => {}).onDismiss(() => {})
+      },
+      unarchive() {
+        this.$q.dialog({
+          title: "Unarchive the task?",
+          message: "You are about to unarchive the taks? Are you sure?",
+          ok: { outline: true, color: 'positive', label: 'Yes' },
+          cancel: { flat: true, color: 'black', label: 'No' }
+        }).onOk(() => {
+          this.$backend.tasks.set_state({ id: this.id, state: 'unarchive' })
+          .then((response) => {
+            this.$q.notify({ message: "The task unarchived!", color: 'positive', position: 'top' })
+          })
+          .catch((error) => {
+            this.error = true
+            console.log(error)
+            this.$q.notify({ message: "The task didn't unarchive!", color: 'negative', position: 'top' })
+          })
+          .finally(() => this.$emit('changed'))
+        }).onCancel(() => {}).onDismiss(() => {})
       },
       destroy() {
         this.$q.dialog({
@@ -50,12 +98,8 @@
               position: 'top'
             })
           })
-          .finally(() => this.$emit('refresh'))
-        }).onCancel(() => {
-          // console.log('Cancel')
-        }).onDismiss(() => {
-          // console.log('I am triggered on both OK and Cancel')
-        })
+          .finally(() => this.$emit('changed'))
+        }).onCancel(() => {}).onDismiss(() => {})
       },
     }
   }

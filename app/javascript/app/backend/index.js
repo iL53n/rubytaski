@@ -19,6 +19,7 @@ const backend = {
     show:         (id)     => adapter.get(`tasks/${id}`),
     update:       (task)   => adapter.patch(`tasks/${task.id}`, task),
     update_order: (order)  => adapter.patch(`tasks/update_order`, { order: order }),
+    set_state:    (params) => adapter.patch(`tasks/${params.id}/set_state`, params),
     destroy:      (id)     => adapter.delete(`tasks/${id}`)
   },
   goals: {

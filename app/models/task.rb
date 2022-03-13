@@ -5,6 +5,16 @@ class Task < ApplicationRecord
   belongs_to :user
   has_many :stars, dependent: :destroy
 
+  enum state: { created: 0, archived: 5 } do
+    event :archive do
+      transition created: :archived
+    end
+
+    event :unarchive do
+      transition archived: :created
+    end
+  end
+
   def self.change_order(order)
     order.each do |id, value|
       Task.find(id).update(order: value)

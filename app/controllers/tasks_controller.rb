@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   # before_action :authenticate_user!
-  before_action :load_task, only: %i[show update destroy]
+  before_action :load_task, only: %i[show update set_state destroy]
   after_action  :broadcast, only: %i[create update destroy]
 
   layout false
@@ -47,6 +47,17 @@ class TasksController < ApplicationController
     end
   end
 
+  def set_state
+    state = task_params[:state]
+    if @task.send(state)
+      render status: :ok,
+        json: { notice: 'Successfully changed tasks state.' }
+    else
+      render status: :unprocessable_entity,
+        json: { error: @task.errors.full_messages.to_sentence }
+    end
+  end
+
   def destroy
     if @task.destroy
       render status: :ok,
@@ -69,6 +80,7 @@ class TasksController < ApplicationController
 
   def task_params
     params.require(:task).permit(:id,
+                                 :state,
                                  :title,
                                  :description,
                                  :order)

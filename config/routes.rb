@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   constraints format: :json do
     resources :tasks, only: %i[index create show update destroy] do
       patch :update_order, to: 'tasks#update_order', on: :collection
+      patch :set_state, to: 'tasks#set_state', on: :member
     end
 
     resources :goals, only: %i[index create show update destroy] do

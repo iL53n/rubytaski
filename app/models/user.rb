@@ -4,6 +4,9 @@ class User < ApplicationRecord
   EMAIL = /(?<login>\S+)\@(?<domain>\S+)/.freeze
   before_save :set_nick_name
 
+  # Fix it, set default firstly from browser
+  before_validation :default_locale
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -22,6 +25,10 @@ class User < ApplicationRecord
   end
 
   private
+
+  def default_locale
+    self.locale ||= 'en'
+  end
 
   def set_nick_name
     self.nick_name ||= login

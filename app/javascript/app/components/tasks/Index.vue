@@ -26,6 +26,7 @@
                 //- th(class="text-left") #
                 th(class="text-left") Title
                 th(class="text-left") Description
+                th(class="text-left") Status
                 th(class="text-left") Actions
             //- https://codepen.io/kabanoki/pen/WXBKGY
             draggable(
@@ -42,13 +43,18 @@
                 //- td {{ el.order + 1 }}
                 td {{ el.title }} 
                 td {{ el.description }}
+                td 
+                  q-badge(
+                    :color="statuses[el.state][1]",
+                    :label="statuses[el.state][0]")
                 td(key="actions") 
                   actions-cell(
                     :actions="el.actions",
                     :title="el.title",
+                    :state="el.state"
                     :id="el.id"
-                    @refresh="getTasks()")
-      router-view(@refresh="getTasks()")
+                    @changed="getTasks()")
+      router-view(@rchanged="getTasks()")
 </template>
 
 <script>
@@ -67,6 +73,10 @@
           }
         },
         order: {},
+        statuses: {
+          'created':  ['Активная', 'green'],
+          'archived': ['В архиве', 'grey']
+        },
         bannerShow: false
       }
     },
