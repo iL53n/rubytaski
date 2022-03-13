@@ -26,8 +26,12 @@ class Goal < ApplicationRecord
   end
 
   def can_be_only_one_active_goal
-    if Goal.where(user: user).created.exists? && created?
+    if current_user_created_goal.exists? && current_user_created_goal != self && created?
       errors.add(:goal, 'can be only one active instance')
     end
+  end
+
+  def current_user_created_goal
+    Goal.where(user: user).created
   end
 end
