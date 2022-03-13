@@ -6,6 +6,7 @@ class Star < ApplicationRecord
   belongs_to :task
 
   default_scope { order(due_date: :asc) }
+  scope :active, -> { joins(:task).where(task: { state: 'created' }) }
 
   # https://github.com/amatsuda/stateful_enum
   # enum state: { created: 0, planned: 1, done: 2 } do

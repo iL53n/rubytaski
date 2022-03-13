@@ -59,8 +59,8 @@ class StarsController < ApplicationController
   end
 
   def current_stat
-    render json: Statistics.new(stars: @stars,
-                                tasks: @tasks,
+    render json: Statistics.new(stars: @stars.active,
+                                tasks: @tasks.created,
                                 goal: Goal.created.first).current_stat
   end
 
