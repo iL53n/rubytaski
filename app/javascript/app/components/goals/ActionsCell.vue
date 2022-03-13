@@ -23,8 +23,7 @@
       :text-color="action.color"
       size="11px"
       :icon="action.icon"
-      @click="apply(action.name)"
-    )
+      @click="apply(action.name)")
 </template>
 
 <script>

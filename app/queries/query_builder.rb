@@ -42,8 +42,9 @@ class QueryBuilder
   def perform_sort
     @sort = params[:sort]
     if @sort.blank?
-      @performed_scope = @performed_scope.reorder(:order) if @performed_scope.klass.column_names.include?('order')
-      @performed_scope = @performed_scope.reorder(:state) if @performed_scope.klass.column_names.include?('state')
+      %w[state order].each do |attr|
+        @performed_scope = @performed_scope.reorder(attr.to_sym) if @performed_scope.klass.column_names.include?(attr)
+      end
       return
     end
 

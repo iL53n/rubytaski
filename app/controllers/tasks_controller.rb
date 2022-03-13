@@ -83,7 +83,8 @@ class TasksController < ApplicationController
                                  :state,
                                  :title,
                                  :description,
-                                 :order)
+                                 :order,
+                                 :scopes)
   end
 
   # TODO: add keys for data :id, :order AND destroy .permit!

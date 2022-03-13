@@ -129,7 +129,7 @@
         this.getStatistics()
       },
       getTasks() {
-        this.$backend.tasks.index()
+        this.$backend.tasks.indexCreated({ scopes: 'created' })
           .then((response) => this.resources = response.data)
           .catch(()        => this.error = true)
           .finally(()      =>  this.loading = false)
