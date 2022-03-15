@@ -27,20 +27,12 @@
         set(value) {
           this.$store.commit('updateHeatmapStatistics', value)
         }
-      },
-      starsStats() {
-        return this.$store.state.statistics.stars
-      },
+      }
     },
     created() {
       this.getStatistics(),
       // TODO: computer better?
       this.getLastMonthsDay()
-    },
-    watch: {
-      starsStats() {
-        this.getStatistics()
-      }
     },
     methods: {
       getStatistics() {

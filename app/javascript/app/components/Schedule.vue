@@ -107,6 +107,14 @@
         set (values) {
           this.$store.commit('updateStarsStatistics', values)
         }
+      },
+      heatmap: {
+        get () {
+          // return this.$store.state.statistics.heatmap
+        },
+        set (values) {
+          this.$store.commit('updateHeatmapStatistics', values)
+        }
       }
     },
     created () {
@@ -157,9 +165,10 @@
           .finally(() => this.loading = false)
       },
       getStatistics() {
-        this.$backend.statistics.index({ scopes: 'stars_stat' })
-          .then((response) => { 
+        this.$backend.statistics.index({ scopes: 'stars_stat,heatmap_chart' })
+          .then((response) => {
             this.stat = response.data.stat.stars
+            this.heatmap = response.data.stat.heatmap
           })
           .catch(()   => this.error = true)
           .finally(() => { 
