@@ -34,7 +34,7 @@
               q-icon(name="flag_circle")
             q-item-section
               div(class="text-subtitle1") {{ $t('menu.left.goals') }}
-          q-item(to="/statistics")
+          q-item(to="/my_statistics")
             q-item-section(avatar)
               q-icon(name="insert_chart")
             q-item-section

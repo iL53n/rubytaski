@@ -19,7 +19,7 @@
       q-btn(color="grey-1" round flat icon="more_vert")
         q-menu(cover auto-close)
           q-list
-            q-item(clickable to="/statistics" class="text-primary")
+            q-item(clickable to="/my_statistics" class="text-primary")
               q-item-section {{ $t('stat.show_all') }}
           //- q-item(clickable)
           //-   q-item-section Send Feedback
