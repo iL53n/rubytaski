@@ -128,13 +128,17 @@
   export default {
     data () {
       return {
-        stat: {},
         goal: {}
       }
     },
     computed: {
-      starsCount() {
-        return this.$store.state.statistics.stars.all
+      stat: {
+        get() {
+          return this.$store.state.statistics
+        },
+        set(value) {
+          this.$store.commit('updateAllStatistics', value)
+        }
       },
       weekProgress() {
         return Math.round( this.stat.stars.current_week / (this.stat.tasks.all_active * 7) * 100)
@@ -155,8 +159,9 @@
     created () {
       this.getStatistics()
     },
+    // TODO: remove it after schedule fix
     watch: {
-      starsCount() {
+      stat() {
         this.getStatistics()
       }
     },
