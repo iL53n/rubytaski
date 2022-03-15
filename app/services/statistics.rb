@@ -1,49 +1,85 @@
 class Statistics
-  def initialize(params = {})
-    @stars = params[:stars]
-    @tasks = params[:tasks]
-    @goal  = params[:goal]
+  attr_reader :performed_scope
+
+  def initialize(params)
+    @params = params
+    @performed_scope = {}
+    perform_scope
   end
 
-  def date_count
-    @stars.group_by(&:due_date).transform_values(&:count).map do |key, value|
-      { date: key, count: value }
+  # TODO
+  # private
+
+  def perform_scope
+    @scopes = @params[:scopes]
+    return unless @scopes.present?
+
+    @scopes = @scopes.split(',')
+    @scopes.each do |scope|
+      p scope
+      @performed_scope[scope] = send(scope.to_sym) if respond_to?(scope.to_sym)
     end
+    @performed_scope
+  end
+
+  # Stats
+  def general_stat
+    {
+      active_days: stars.uniq(&:due_date).count
+    }
+  end
+
+  def tasks_stat
+    {
+      all: tasks.count
+    }
+  end
+
+  def goals_stat
+    {
+      all: tasks.count,
+      current: {
+        id: goal.id,
+        number_of_stars: goal.number_of_stars,
+        completed_stars: stars.where('due_date BETWEEN ? AND ?',
+                                goal.start_date, @goal.due_date).count
+      }
+    }
   end
 
   def stars_stat
     {
-      all:           @stars.count,
+      all:           stars.count,
       current_year:  stars_count_between_dates('year'),
       current_month: stars_count_between_dates('month'),
       current_week:  stars_count_between_dates('week'),
-      today:         stars_count_between_dates('day')
+      current_day:   stars_count_between_dates('day')
     }
   end
 
-  def current_stat
-    stat = {}
-
-    if @goal
-      stat[:goal_id] = @goal.id
-      stat[:all_goal] = @goal.number_of_stars
-      stat[:done_goal] = @stars.where('due_date BETWEEN ? AND ?',
-                                @goal.start_date, @goal.due_date).count
+  # Charts
+  def heatmap_chart
+    stars.group_by(&:due_date).transform_values(&:count).map do |key, value|
+      { date: key, count: value }
     end
-
-    if @tasks
-      count = @tasks.count
-      stat[:all_today] = count
-      stat[:all_week] = count * 7
-      stat[:done_today] = stars_count_between_dates('day')
-      stat[:done_week] = stars_count_between_dates('week')
-    end
-
-    stat
   end
 
   private
 
+  # Varilables (lazy loading)
+  def stars
+    @stars ||= Star.all
+  end
+
+  def tasks
+    @tasks ||= Task.all
+  end
+
+  def goals
+    @goals ||= Goal.all
+  end
+
+  # Methods
   def stars_count_between_dates(period)
     @stars.where('due_date BETWEEN ? AND ?',
                   DateTime.now.send("beginning_of_#{period}"), DateTime.now.send("end_of_#{period}")).count
