@@ -5,14 +5,14 @@
       q-card.col.q-ma-md
         q-card-section(horizontal)
           q-card-section.col(align="left")
-            .text-h3.text-blue-grey-14 {{ stat.tasks_stat.all }}
+            .text-h3.text-blue-grey-14 {{ stat.tasks.all }}
             .text-caption.text-blue-grey-8 Tasks
           q-card-section.flex.flex-center(align="right")
             q-btn.text-blue-4.bg-blue-1(unelevated round size="lg" icon="format_list_bulleted")
       q-card.col.q-ma-md
         q-card-section(horizontal)
           q-card-section.col(align="left")
-            .text-h3.text-blue-grey-14 {{ stat.stars_stat.all }}
+            .text-h3.text-blue-grey-14 {{ stat.stars.all }}
             .text-caption.text-blue-grey-8 Completed
           q-card-section.flex.flex-center(align="right")
             q-btn.text-green-4.bg-green-1(unelevated round size="lg" icon="done_all")
@@ -28,7 +28,7 @@
       q-card.col.q-ma-md
         q-card-section(horizontal)
           q-card-section.col(align="left")
-            .text-h3.text-blue-grey-14 {{ stat.general_stat.active_days }}
+            .text-h3.text-blue-grey-14 {{ stat.general.active_days }}
             .text-caption.text-blue-grey-8 Days
           q-card-section.flex.flex-center(align="right")
             q-btn.text-teal-4.bg-teal-1(unelevated round size="lg" icon="date_range")
@@ -63,8 +63,6 @@
   export default {
     data () {
       return {
-        stat: {},
-
         options: {
           chart: {
             id: 'vuechart-example'
@@ -80,16 +78,16 @@
       }
     },
     computed: {
-      // stat: {
-      //   get() {
-      //     return this.$store.state.statistics
-      //   },
-      //   set(value) {
-      //     this.$store.commit('updateStatistics', value)
-      //   }
-      // },
+      stat: {
+        get() {
+          return this.$store.state.statistics
+        },
+        set(value) {
+          this.$store.commit('updateAllStatistics', value)
+        }
+      },
       efficiency() {
-        return Math.round(this.stat.stars_stat.all / (this.stat.tasks_stat.all * this.stat.general_stat.active_days) * 100)
+        return Math.round(this.stat.stars.all / (this.stat.tasks.all * this.stat.general.active_days) * 100)
       },
     },
     created() {

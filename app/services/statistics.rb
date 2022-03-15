@@ -39,7 +39,7 @@ class Statistics
         id: current_active_goal.id,
         number_of_stars: current_active_goal.number_of_stars,
         completed_stars: stars.where('due_date BETWEEN ? AND ?',
-                         current_active_goal.start_date, current_active_goal.due_date).count
+                        current_active_goal.start_date, current_active_goal.due_date).count
       }
     }
   end

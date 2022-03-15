@@ -17,7 +17,10 @@ export default new Vuex.Store({
     },
     updateMiniStateRight(state, value) {
       state.miniStateRight = value
-    }
+    },
+    updateAllStatistics(state, values) {
+      state.statistics = values
+    },
   },
   actions:   {},
   modules:   {
