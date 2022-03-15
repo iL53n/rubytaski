@@ -43,7 +43,7 @@ export default new VueRouter ({
       { path: 'new_task/', component: NewTask, name: 'dashboardNewTask' }
     ]
     },
-    { path: '/statistics', component: Statistics },
+    { path: '/my_statistics', component: Statistics },
     { path: '/profile', component: Profile }
   ]
 })

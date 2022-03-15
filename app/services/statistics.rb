@@ -1,6 +1,4 @@
 class Statistics
-  attr_reader :performed_scope
-
   def initialize(params)
     @params = params
     @performed_scope = {}
@@ -16,7 +14,6 @@ class Statistics
 
     @scopes = @scopes.split(',')
     @scopes.each do |scope|
-      p scope
       @performed_scope[scope] = send(scope.to_sym) if respond_to?(scope.to_sym)
     end
     @performed_scope
@@ -39,10 +36,10 @@ class Statistics
     {
       all: tasks.count,
       current: {
-        id: goal.id,
-        number_of_stars: goal.number_of_stars,
+        id: current_active_goal.id,
+        number_of_stars: current_active_goal.number_of_stars,
         completed_stars: stars.where('due_date BETWEEN ? AND ?',
-                                goal.start_date, @goal.due_date).count
+                         current_active_goal.start_date, current_active_goal.due_date).count
       }
     }
   end
@@ -77,6 +74,10 @@ class Statistics
 
   def goals
     @goals ||= Goal.all
+  end
+
+  def current_active_goal
+    goals.created.first
   end
 
   # Methods

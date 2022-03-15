@@ -15,7 +15,7 @@
                 q-item-section
                   .text-subtitle3 {{ user.email }}
                   div(v-if="user.date_of_birth" class="text-subtitle1 ") {{ $t('menu.top.profile.age', { msg: age }) }}
-              q-item(to="/statistics" v-ripple)
+              q-item(to="/my_statistics" v-ripple)
                 q-item-section(avatar)
                   q-icon(class="text-primary bg-deep-purple-1 profile-icon" name="insert_chart_outlined")
                 q-item-section(class="text-blue-grey-8")
