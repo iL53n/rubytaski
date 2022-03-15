@@ -15,12 +15,19 @@
     // props: ['values'],
     data () {
       return {
-        data: [],
         last_months_day: {},
         current_date: new Date()
       }
     },
     computed: {
+      data: {
+        get() {
+          return this.$store.state.statistics.charts.heatmap
+        },
+        set(value) {
+          this.$store.commit('updateHeatmapStatistics', value)
+        }
+      },
       starsStats() {
         return this.$store.state.statistics.stars.all
       },
@@ -37,10 +44,9 @@
     },
     methods: {
       getStatistics() {
-        this.$backend.statistics.heatmap()
+        this.$backend.statistics.index({ scopes: 'heatmap' })
           .then((response) => {
-            this.data = response.data
-            this.getTasks()
+            this.data = response.data.stat.heatmap
           })
           .catch(()   => this.error = true)
           .finally(() => this.loading = false)
