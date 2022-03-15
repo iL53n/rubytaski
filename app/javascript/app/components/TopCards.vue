@@ -159,17 +159,11 @@
     created () {
       this.getStatistics()
     },
-    // TODO: remove it after schedule fix
-    watch: {
-      stat() {
-        this.getStatistics()
-      }
-    },
     methods: {
       getStatistics() {
         this.$backend.statistics.index({ scopes: 'general_stat,tasks_stat,goals_stat,stars_stat' })
           .then((response) => {
-            this.stat = response.data .stat      
+            this.stat = response.data.stat      
           })
           .catch(()   => this.error = true)
           .finally(() => {

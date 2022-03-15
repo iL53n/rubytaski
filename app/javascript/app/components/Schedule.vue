@@ -100,7 +100,7 @@
       }
     },
     computed: {
-      stats: {
+      stat: {
         get () {
           return this.$store.state.statistics.stars
         },
@@ -132,7 +132,7 @@
         this.$backend.tasks.indexCreated({ scopes: 'created' })
           .then((response) => this.resources = response.data)
           .catch(()        => this.error = true)
-          .finally(()      =>  this.loading = false)
+          .finally(()      => this.loading = false)
       },
       showTask(task_id) {
         this.$router.push({ name: 'dashboardShowTask', params: { id: task_id } })
@@ -157,8 +157,10 @@
           .finally(() => this.loading = false)
       },
       getStatistics() {
-        this.$backend.statistics.stars()
-          .then((response) => this.stats = response.data)
+        this.$backend.statistics.index({ scopes: 'stars_stat' })
+          .then((response) => { 
+            this.stat = response.data.stat.stars
+          })
           .catch(()   => this.error = true)
           .finally(() => { 
             // this.loading = false 

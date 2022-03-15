@@ -22,9 +22,7 @@ export default {
       current_week: 0,
       current_day: 0
     },
-    charts: {
-      heatmap: []
-    }
+    heatmap: {}
   },
   mutations: {
     updateTasksStatistics(state, values) {
@@ -47,7 +45,7 @@ export default {
       state.stars.current_goal  = values.current_goal
     },
     updateHeatmapStatistics(state, values) {
-      state.charts.heatmap = values
+      state.heatmap = values
     },
   },
   actions:   {}

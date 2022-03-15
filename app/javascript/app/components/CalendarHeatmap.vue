@@ -22,14 +22,14 @@
     computed: {
       data: {
         get() {
-          return this.$store.state.statistics.charts.heatmap
+          return this.$store.state.statistics.heatmap
         },
         set(value) {
           this.$store.commit('updateHeatmapStatistics', value)
         }
       },
       starsStats() {
-        return this.$store.state.statistics.stars.all
+        return this.$store.state.statistics.stars
       },
     },
     created() {
