@@ -4,7 +4,8 @@ export default {
       active_days: 0
     },
     tasks: {
-      all: 0
+      all: 0,
+      all_active: 0
     },
     goals: {
       all: 0,
@@ -30,7 +31,8 @@ export default {
       state.general.active_days = values.active_days
     },
     updateTasksStatistics(state, values) {
-      state.tasks.all = values.all
+      state.tasks.all        = values.all,
+      state.tasks.all_active = values.all_active
     },
     updateGoalsStatistics(state, values) {
       state.goals.all                     = values.all,

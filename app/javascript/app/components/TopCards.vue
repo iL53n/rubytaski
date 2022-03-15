@@ -6,7 +6,7 @@
     div(v-else-if="error")
       .text-h3.text-red ERROR!
     div(v-else)
-      .row.justify-around(v-if="stat.all_today")
+      .row.justify-around(v-if="stat.tasks.all_active")
         //- DAY preogress Card
         q-card.col.q-ma-md
           q-card-section
@@ -19,20 +19,20 @@
             div(v-if="leftToCompleteDay")
               br
               q-slider(
-                v-model="stat.done_today"
+                v-model="stat.stars.current_day"
                 :min="0"
-                :max="stat.all_today"
+                :max="stat.tasks.all_active"
                 readonly
                 label
                 :label-value="leftToCompleteDay + $t('stat.left_to_complete')"
                 label-always
                 color="orange-4"
               )
-              .text-h3.text-blue-grey-14 {{stat.done_today}}/{{stat.all_today}}
+              .text-h3.text-blue-grey-14 {{stat.stars.current_day}}/{{stat.tasks.all_active}}
             div(v-else)
               q-btn.shine.text-yellow-2.bg-amber-5(push glossy round padding="xs" size="60px" icon="verified")
                 q-tooltip(anchor="center middle" :delay="200")
-                  .text-h5 {{stat.done_today}}/{{stat.all_today}}
+                  .text-h5 {{stat.stars.current_day}}/{{stat.tasks.all_active}}
         //- WEEK progress Card
         q-card.col.q-ma-md
           q-card-section
@@ -47,11 +47,11 @@
                 .absolute-full.flex.flex-center
                   q-badge(color="white" text-color="green")
                     | {{  weekProgress }}%
-              .text-h3.text-blue-grey-14 {{stat.done_week}}/{{stat.all_week}}
+              .text-h3.text-blue-grey-14 {{stat.stars.current_week}}/{{stat.tasks.all_active * 7}}
             div(v-else)
               q-btn.shine.text-yellow-2.bg-amber-5(push glossy round padding="xs" size="60px" icon="emoji_events")
                 q-tooltip(anchor="center middle" :delay="200")
-                  .text-h5 {{stat.done_week}}/{{stat.all_week}}
+                  .text-h5 {{stat.stars.current_week}}/{{stat.tasks.all_active * 7}}
         //- GOAL Card
         q-card.col.q-ma-md
           q-card-section
@@ -86,7 +86,7 @@
                 q-item
                   q-item-section(avatar)
                     q-icon(name="stars" color="amber-4")
-                  q-item-section {{ this.stat.done_goal }}/{{ this.stat.all_goal }}
+                  q-item-section {{ this.stat.goals.current.completed_stars }}/{{ this.stat.goals.current.number_of_stars }}
                 q-item
                   q-item-section(avatar)
                     q-icon(name="emoji_events" color="red-4")
@@ -137,19 +137,19 @@
         return this.$store.state.statistics.stars.all
       },
       weekProgress() {
-        return Math.round(this.stat.done_week / this.stat.all_week * 100)
+        return Math.round( this.stat.stars.current_week / (this.stat.tasks.all_active * 7) * 100)
       },
       leftToCompleteDay() {
-        return this.stat.all_today - this.stat.done_today
+        return this.stat.tasks.all_active - this.stat.stars.current_day
       },
       leftToCompleteWeek() {
-        return this.stat.all_week - this.stat.done_week
+        return (this.stat.tasks.all_active * 7) - this.stat.stars.current_week
       },
       leftToCompleteGoal() {
-        return this.stat.all_goal - this.stat.done_goal
+        return this.stat.goals.current.number_of_stars - this.stat.goals.current.completed_stars
       },
       goalProgress() {
-        return Math.round(this.stat.done_goal / this.stat.all_goal * 100)
+        return Math.round(this.stat.goals.current.completed_stars / this.stat.goals.current.number_of_stars * 100)
       }
     },
     created () {
@@ -162,13 +162,13 @@
     },
     methods: {
       getStatistics() {
-        this.$backend.statistics.current()
+        this.$backend.statistics.index({ scopes: 'general_stat,tasks_stat,goals_stat,stars_stat' })
           .then((response) => {
-            this.stat = response.data       
+            this.stat = response.data .stat      
           })
           .catch(()   => this.error = true)
           .finally(() => {
-            if (this.stat.goal_id) {
+            if (this.stat.goals.current.id) {
               this.getGoal()
             } else {
               this.loading = false
@@ -176,7 +176,7 @@
           })
       },
       getGoal() {
-        this.$backend.goals.show(this.stat.goal_id)
+        this.$backend.goals.show(this.stat.goals.current.id)
           .then((response) => {
             this.goal = response.data.goal
           })

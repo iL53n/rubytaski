@@ -28,7 +28,8 @@ class Statistics
 
   def tasks_stat
     {
-      all: tasks.count
+      all:        tasks.count,
+      all_active: tasks.created.count
     }
   end
 
