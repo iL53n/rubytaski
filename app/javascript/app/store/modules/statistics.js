@@ -1,29 +1,39 @@
 export default {
   state:     {
+    tasks: {
+      all: 0
+    },
+    goals: {
+      all: 0,
+      current: {
+        number_of_stars: 0
+      }
+    },
     stars: {
       all: 0,
       current_year: 0,
       current_month: 0,
       current_week: 0,
-      current_day: 0
-    },
-    current: {
-      all_today: 0,
-      done_today: 0,
-      all_week: 0,
-      done_week: 0,
-      all_goal: 0,
-      done_goal: 0
+      current_day: 0,
+      current_goal: 0
     },
   },
   mutations: {
+    updateTasksStatistics(state, values) {
+      state.tasks.all                     = values.all
+      state.tasks.current.number_of_stars = values.number_of_stars
+    },
+    updateGoalsStatistics(state, values) {
+      state.gaols.all = values.all
+    },
     updateStarsStatistics(state, values) {
       state.stars.all           = values.all,
       state.stars.current_year  = values.current_year,
       state.stars.current_month = values.current_month,
       state.stars.current_week  = values.current_week,
-      state.stars.current_day   = values.today
-    }
+      state.stars.current_day   = values.current_day
+      state.stars.current_gaol  = values.current_goal
+    },
   },
   actions:   {}
 }
