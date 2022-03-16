@@ -63,14 +63,29 @@ class Statistics
   end
 
   def treemap_chart
-    [{
-      data: stars.preload(:task).group_by(&:task).transform_values(&:count).map do |key, value|
-        { x: key.title, y: value }
-      end
-    }]
+    data = stars_group_by_task.transform_values(&:count).map do |key, value|
+      { x: key.title, y: value }
+    end
+    wrap_for_apexchart(data)
+
+    # wday-count
+    # stars_by_due_date('%A').transform_values(&:count).map ...
   end
 
   private
+
+  def wrap_for_apexchart(data)
+    [{ data: data }]
+  end
+
+  # Data for charts
+  def stars_group_by_task
+    @stars_group_by_task ||= stars.preload(:task).group_by(&:task)
+  end
+
+  def stars_by_due_date(format)
+    stars.group_by { |star| star.due_date.strftime(format) }
+  end
 
   # Varilables (lazy loading)
   def stars

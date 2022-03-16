@@ -37,12 +37,6 @@
       q-card.col.q-ma-md
         q-card-section.flex.flex-center
           apexchart(:options="treemap.options" :series="stat.treemap")
-
-
-    .row.justify-around
-      q-card.col.q-ma-md
-        | DEMO
-        apexchart(height="200" width="500" type="bar" :options="options" :series="series")
       q-card.col.q-ma-md
         | DEMO
         apexchart(height="200" width="500" type="line" :options="options" :series="series")
@@ -76,7 +70,8 @@
               show: false
             },
             chart: {
-              height: 350,
+              // height: 200,
+              // width: 500,
               type: 'treemap'
             },
             title: {
@@ -116,7 +111,7 @@
     },
     methods: {
       getStatistics() {
-        this.$backend.statistics.index({ scopes: 'general_stat,tasks_stat,goals_stat,stars_stat, treemap_chart' })
+        this.$backend.statistics.index({ scopes: 'general_stat,tasks_stat,goals_stat,stars_stat,treemap_chart' })
           .then((response) => {
             this.stat = response.data.stat
           })
