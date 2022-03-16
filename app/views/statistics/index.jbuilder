@@ -5,4 +5,5 @@ json.stat do
   json.stars   @stat.stars_stat
 
   json.heatmap @stat.heatmap_chart
+  json.treemap @stat.treemap_chart
 end

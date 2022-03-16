@@ -62,6 +62,14 @@ class Statistics
     end
   end
 
+  def treemap_chart
+    [{
+      data: stars.preload(:task).group_by(&:task).transform_values(&:count).map do |key, value|
+        { x: key.title, y: value }
+      end
+    }]
+  end
+
   private
 
   # Varilables (lazy loading)
@@ -78,7 +86,7 @@ class Statistics
   end
 
   def current_active_goal
-    goals.created.first
+    @current_active_goal ||= goals.created.first
   end
 
   # Methods

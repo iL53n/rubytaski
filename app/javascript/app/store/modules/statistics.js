@@ -22,7 +22,8 @@ export default {
       current_week: 0,
       current_day: 0
     },
-    heatmap: {}
+    heatmap: {},
+    treemap: {}
   },
   mutations: {
     updateTasksStatistics(state, values) {

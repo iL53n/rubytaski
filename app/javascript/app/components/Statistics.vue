@@ -32,6 +32,13 @@
             .text-caption.text-blue-grey-8 Days
           q-card-section.flex.flex-center(align="right")
             q-btn.text-teal-4.bg-teal-1(unelevated round size="lg" icon="date_range")
+
+    .row.justify-around
+      q-card.col.q-ma-md
+        q-card-section.flex.flex-center
+          apexchart(:options="treemap.options" :series="stat.treemap")
+
+
     .row.justify-around
       q-card.col.q-ma-md
         | DEMO
@@ -63,6 +70,20 @@
   export default {
     data () {
       return {
+        treemap: {
+          options: {
+            legend: {
+              show: false
+            },
+            chart: {
+              height: 350,
+              type: 'treemap'
+            },
+            title: {
+              text: 'Tasks Treemap'
+            }
+          },
+        },
         options: {
           chart: {
             id: 'vuechart-example'
@@ -95,7 +116,7 @@
     },
     methods: {
       getStatistics() {
-        this.$backend.statistics.index({ scopes: 'general_stat,tasks_stat,goals_stat,stars_stat' })
+        this.$backend.statistics.index({ scopes: 'general_stat,tasks_stat,goals_stat,stars_stat, treemap_chart' })
           .then((response) => {
             this.stat = response.data.stat
           })
