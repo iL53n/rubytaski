@@ -2,7 +2,7 @@ class StatisticsController < ApplicationController
   layout false
 
   def index
-    @stat = Statistics.new(params)
+    @stat = StatisticsService.new(params)
     render status: :ok
   end
 end

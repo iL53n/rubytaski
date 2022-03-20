@@ -1,4 +1,4 @@
-class Statistics
+class StatisticsService
   def initialize(params)
     @params = params
     @performed_scope = {}
