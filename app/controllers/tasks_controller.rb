@@ -19,9 +19,8 @@ class TasksController < ApplicationController
       render status: :created,
         json: {notice: "Task was successfully created."}
     else
-      fail!(:unprocessable_entity, full_errors_msg(@task))
+      error_response(@task, :unprocessable_entity)
     end
-    # fail!(:unprocessable_entity, @task.errors.full_messages.to_sentence) unless @task.save
   end
 
   def show
@@ -33,7 +32,7 @@ class TasksController < ApplicationController
       render status: :ok,
         json: {notice: "Successfully updated task."}
     else
-      fail!(:unprocessable_entity, full_errors_msg(@task))
+      error_response(@task, :unprocessable_entity)
     end
   end
 
@@ -42,7 +41,7 @@ class TasksController < ApplicationController
       render status: :ok,
         json: {notice: "Successfully updated order."}
     else
-      fail!(:unprocessable_entity)
+      error_response("Order has not been updated", :unprocessable_entity)
     end
   end
 
@@ -52,7 +51,7 @@ class TasksController < ApplicationController
       render status: :ok,
         json: {notice: "Successfully changed tasks state."}
     else
-      fail!(:unprocessable_entity, full_errors_msg(@task))
+      error_response(@task, :unprocessable_entity)
     end
   end
 
@@ -61,7 +60,7 @@ class TasksController < ApplicationController
       render status: :ok,
         json: {notice: "Successfully deleted task."}
     else
-      fail!(:unprocessable_entity, full_errors_msg(@task))
+      error_response(@task, :unprocessable_entity)
     end
   end
 
@@ -69,7 +68,6 @@ class TasksController < ApplicationController
 
   def load_task
     @task ||= Task.find(params[:id])
-    fail!(:not_found, "Task not found") unless @task
   end
 
   def task_params

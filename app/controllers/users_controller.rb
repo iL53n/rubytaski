@@ -14,8 +14,7 @@ class UsersController < ApplicationController
       render status: :ok, methods: [:avatar_url],
         json: {notice: "Successfully updated user."}
     else
-      render status: :unprocessable_entity,
-        json: {error: @user.errors.full_messages.to_sentence}
+      error_response(@user, :unprocessable_entity)
     end
   end
 
@@ -23,10 +22,6 @@ class UsersController < ApplicationController
 
   def load_user
     @user ||= User.find(params[:id])
-    unless @user
-      render status: :not_found,
-        json: {error: "User not found"}
-    end
   end
 
   def user_params

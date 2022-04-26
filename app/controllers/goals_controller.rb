@@ -19,7 +19,7 @@ class GoalsController < ApplicationController
       render status: :created,
         json: {notice: "Goal was successfully created."}
     else
-      fail!(:unprocessable_entity, full_errors_msg(@goal))
+      error_response(@goal, :unprocessable_entity)
     end
   end
 
@@ -32,7 +32,7 @@ class GoalsController < ApplicationController
       render status: :ok,
         json: {notice: "Successfully updated goal."}
     else
-      fail!(:unprocessable_entity, full_errors_msg(@goal))
+      error_response(@goal, :unprocessable_entity)
     end
   end
 
@@ -42,7 +42,7 @@ class GoalsController < ApplicationController
       render status: :ok,
         json: {notice: "Successfully changed goals state."}
     else
-      fail!(:unprocessable_entity, full_errors_msg(@goal))
+      error_response(@goal, :unprocessable_entity)
     end
   end
 
@@ -51,7 +51,7 @@ class GoalsController < ApplicationController
       render status: :ok,
         json: {notice: "Successfully deleted goal."}
     else
-      fail!(:unprocessable_entity, full_errors_msg(@goal))
+      error_response(@goal, :unprocessable_entity)
     end
   end
 
@@ -59,7 +59,6 @@ class GoalsController < ApplicationController
 
   def load_goal
     @goal ||= Goal.find(params[:id])
-    fail!(:not_found, "Goal not found") unless @goal
   end
 
   def goal_params

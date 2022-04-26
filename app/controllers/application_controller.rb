@@ -2,6 +2,8 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :set_locale, only: :locale
 
+  include ApiErrors
+
   # def after_sign_in_path_for(resource)
   #   if resource.admin?
   #     root_path

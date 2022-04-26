@@ -19,7 +19,7 @@ class StarsController < ApplicationController
       render status: :created,
         json: {notice: "Star was successfully created."}
     else
-      fail!(:unprocessable_entity, full_errors_msg(@star))
+      error_response(@star, :unprocessable_entity)
     end
   end
 
@@ -42,7 +42,7 @@ class StarsController < ApplicationController
       render status: :ok,
         json: {notice: "Successfully deleted star."}
     else
-      fail!(:unprocessable_entity, full_errors_msg(@star))
+      error_response(@star, :unprocessable_entity)
     end
   end
 
@@ -81,12 +81,10 @@ class StarsController < ApplicationController
 
   def load_star
     @star ||= Star.find(params[:id])
-    fail!(:not_found, "Star not found") unless @star
   end
 
   def load_task
     @task = Task.find(params[:task_id])
-    fail!(:not_found, "Task not found") unless @task
   end
 
   def star_params
