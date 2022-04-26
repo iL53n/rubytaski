@@ -21,14 +21,6 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  def fail!(status, message = "Error!")
-    render status: status, json: {error: message}
-  end
-
-  def full_errors_msg(object)
-    object.errors&.full_messages&.to_sentence
-  end
-
   private
 
   def set_locale
