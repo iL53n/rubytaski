@@ -7,7 +7,7 @@ class Goal < ApplicationRecord
   validate :can_be_only_one_active_goal, on: %i[create update]
   belongs_to :user
 
-  enum state: { created: 0, done: 1, undone: 2, archived: 5 } do
+  enum state: {created: 0, done: 1, undone: 2, archived: 5} do
     event :complete do
       transition created: :done
     end
@@ -27,7 +27,7 @@ class Goal < ApplicationRecord
 
   def can_be_only_one_active_goal
     if current_user_created_goal.exists? && current_user_created_goal != self && created?
-      errors.add(:goal, 'can be only one active instance')
+      errors.add(:goal, "can be only one active instance")
     end
   end
 

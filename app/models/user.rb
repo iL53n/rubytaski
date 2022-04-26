@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   include Rails.application.routes.url_helpers
 
-  EMAIL = /(?<login>\S+)\@(?<domain>\S+)/.freeze
+  EMAIL = /(?<login>\S+)\@(?<domain>\S+)/
   before_save :set_nick_name
 
   # Fix it, set default firstly from browser
@@ -12,7 +12,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   validates :email, presence: true
-  validates :locale, inclusion: { in: %w(ru en), message: "%{value} is not valid value" }
+  validates :locale, inclusion: {in: %w[ru en], message: "%{value} is not valid value"}
 
   has_many :tasks
   has_many :stars
@@ -27,7 +27,7 @@ class User < ApplicationRecord
   private
 
   def default_locale
-    self.locale ||= 'en'
+    self.locale ||= "en"
   end
 
   def set_nick_name

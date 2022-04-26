@@ -6,7 +6,7 @@ class Star < ApplicationRecord
   belongs_to :task
 
   default_scope { order(due_date: :asc) }
-  scope :active, -> { joins(:task).where(task: { state: 'created' }) }
+  scope :active, -> { joins(:task).where(task: {state: "created"}) }
 
   # https://github.com/amatsuda/stateful_enum
   # enum state: { created: 0, planned: 1, done: 2 } do
@@ -25,7 +25,7 @@ class Star < ApplicationRecord
 
   def uniqueness_task_user_date
     if Star.where(user_id: user_id, task_id: task_id, due_date: due_date).exists?
-      self.errors.add(:star, "already exists for the specified user, task and date")
+      errors.add(:star, "already exists for the specified user, task and date")
     end
   end
 
