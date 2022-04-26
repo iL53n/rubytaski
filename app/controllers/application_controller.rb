@@ -11,21 +11,25 @@ class ApplicationController < ActionController::Base
   #   end
   # end
 
-  def index; end
+  def index
+  end
 
-  def locale; end
+  def locale
+  end
+
+  protected
+
+  def fail!(status, message = "Error!")
+    render status: status, json: {error: message}
+  end
+
+  def full_errors_msg(object)
+    object.errors&.full_messages&.to_sentence
+  end
 
   private
 
   def set_locale
-    if current_user.locale
-      locale = current_user.locale
-    else
-      # logger.debug "* Accept-Language: #{request.env['HTTP_ACCEPT_LANGUAGE']}"
-      locale = request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
-    end
-    @locale = locale
-    # logger.debug "* Locale set to '#{@locale}'"
-    I18n.locale = @locale
+    I18n.locale = current_user.locale || request.env["HTTP_ACCEPT_LANGUAGE"].scan(/^[a-z]{2}/).first
   end
 end

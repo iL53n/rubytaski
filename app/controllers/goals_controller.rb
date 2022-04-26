@@ -17,10 +17,9 @@ class GoalsController < ApplicationController
 
     if @goal.save
       render status: :created,
-        json: { notice: 'Goal was successfully created.' }
+        json: {notice: "Goal was successfully created."}
     else
-      render status: :unprocessable_entity,
-        json: { error: @goal.errors.full_messages.to_sentence }
+      fail!(:unprocessable_entity, full_errors_msg(@goal))
     end
   end
 
@@ -31,10 +30,9 @@ class GoalsController < ApplicationController
   def update
     if @goal.update(goal_params)
       render status: :ok,
-        json: { notice: 'Successfully updated goal.' }
+        json: {notice: "Successfully updated goal."}
     else
-      render status: :unprocessable_entity,
-        json: { error: @goal.errors.full_messages.to_sentence }
+      fail!(:unprocessable_entity, full_errors_msg(@goal))
     end
   end
 
@@ -42,20 +40,18 @@ class GoalsController < ApplicationController
     state = goal_params[:state]
     if @goal.send(state)
       render status: :ok,
-        json: { notice: 'Successfully changed goals state.' }
+        json: {notice: "Successfully changed goals state."}
     else
-      render status: :unprocessable_entity,
-        json: { error: @goal.errors.full_messages.to_sentence }
+      fail!(:unprocessable_entity, full_errors_msg(@goal))
     end
   end
 
   def destroy
     if @goal.destroy
       render status: :ok,
-        json: { notice: 'Successfully deleted goal.' }
+        json: {notice: "Successfully deleted goal."}
     else
-      render status: :unprocessable_entity,
-        json: { error: @goal.errors.full_messages.to_sentence }
+      fail!(:unprocessable_entity, full_errors_msg(@goal))
     end
   end
 
@@ -63,20 +59,23 @@ class GoalsController < ApplicationController
 
   def load_goal
     @goal ||= Goal.find(params[:id])
+    fail!(:not_found, "Goal not found") unless @goal
   end
 
   def goal_params
-    params.require(:goal).permit(:id,
-                                 :state,
-                                 :start_date,
-                                 :due_date,
-                                 :number_of_stars,
-                                 :prize)
+    params.require(:goal).permit(
+      :id,
+      :state,
+      :start_date,
+      :due_date,
+      :number_of_stars,
+      :prize
+    )
   end
 
   def broadcast
     return if @goal.errors.any?
 
-    ActionCable.server.broadcast('goals', { goal: @goal })
+    ActionCable.server.broadcast("goals", {goal: @goal})
   end
 end

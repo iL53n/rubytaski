@@ -17,11 +17,11 @@ class TasksController < ApplicationController
 
     if @task.save
       render status: :created,
-        json: { notice: 'Task was successfully created.' }
+        json: {notice: "Task was successfully created."}
     else
-      render status: :unprocessable_entity,
-        json: { error: @task.errors.full_messages.to_sentence }
+      fail!(:unprocessable_entity, full_errors_msg(@task))
     end
+    # fail!(:unprocessable_entity, @task.errors.full_messages.to_sentence) unless @task.save
   end
 
   def show
@@ -31,19 +31,18 @@ class TasksController < ApplicationController
   def update
     if @task.update(task_params)
       render status: :ok,
-        json: { notice: 'Successfully updated task.' }
+        json: {notice: "Successfully updated task."}
     else
-      render status: :unprocessable_entity,
-        json: { error: @task.errors.full_messages.to_sentence }
+      fail!(:unprocessable_entity, full_errors_msg(@task))
     end
   end
 
   def update_order
     if Task.change_order(order_params)
       render status: :ok,
-        json: { notice: 'Successfully updated order.' }
+        json: {notice: "Successfully updated order."}
     else
-      render status: :unprocessable_entity
+      fail!(:unprocessable_entity)
     end
   end
 
@@ -51,20 +50,18 @@ class TasksController < ApplicationController
     state = task_params[:state]
     if @task.send(state)
       render status: :ok,
-        json: { notice: 'Successfully changed tasks state.' }
+        json: {notice: "Successfully changed tasks state."}
     else
-      render status: :unprocessable_entity,
-        json: { error: @task.errors.full_messages.to_sentence }
+      fail!(:unprocessable_entity, full_errors_msg(@task))
     end
   end
 
   def destroy
     if @task.destroy
       render status: :ok,
-        json: { notice: 'Successfully deleted task.' }
+        json: {notice: "Successfully deleted task."}
     else
-      render status: :unprocessable_entity,
-        json: { error: @task.errors.full_messages.to_sentence }
+      fail!(:unprocessable_entity, full_errors_msg(@task))
     end
   end
 
@@ -72,19 +69,18 @@ class TasksController < ApplicationController
 
   def load_task
     @task ||= Task.find(params[:id])
-    unless @task
-      render status: :not_found,
-        json: { error: 'Task not found' }
-    end
+    fail!(:not_found, "Task not found") unless @task
   end
 
   def task_params
-    params.require(:task).permit(:id,
-                                 :state,
-                                 :title,
-                                 :description,
-                                 :order,
-                                 :scopes)
+    params.require(:task).permit(
+      :id,
+      :state,
+      :title,
+      :description,
+      :order,
+      :scopes
+    )
   end
 
   # TODO: add keys for data :id, :order AND destroy .permit!
@@ -95,6 +91,6 @@ class TasksController < ApplicationController
   def broadcast
     return if @task.errors.any?
 
-    ActionCable.server.broadcast('tasks', { task: @task })
+    ActionCable.server.broadcast("tasks", {task: @task})
   end
 end
