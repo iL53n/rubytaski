@@ -19,7 +19,9 @@ class ApplicationController < ActionController::Base
   def locale
   end
 
-  protected
+  def current_user
+    super
+  end
 
   private
 
