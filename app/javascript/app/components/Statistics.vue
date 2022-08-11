@@ -33,30 +33,36 @@
           q-card-section.flex.flex-center(align="right")
             q-btn.text-teal-4.bg-teal-1(unelevated round size="lg" icon="date_range")
 
-    .row.justify-around
-      q-card.col.q-ma-md
-        q-card-section.flex.flex-center
-          apexchart(:options="treemap.options" :series="stat.treemap")
-      q-card.col.q-ma-md
-        | DEMO
-        apexchart(height="200" width="500" type="line" :options="options" :series="series")
-      q-card.col.q-ma-md
-        | DEMO
-        apexchart(height="200" width="500" type="area" :options="options" :series="series")
-    .row.justify-around
-      q-card.col.q-ma-md
-        | DEMO
-        apexchart(height="200" width="500" type="heatmap" :options="options" :series="series")
-      q-card.col.q-ma-md
-        | DEMO
-        apexchart(height="200" width="500" type="scatter" :options="options" :series="series")
-    .row.justify-around
-      q-card.col.q-ma-md
-        | DEMO
-        apexchart(height="200" width="500" type="radar" :options="options" :series="series")
-      q-card.col.q-ma-md
-        | DEMO
-        apexchart(height="200" width="500" type="area" :options="options" :series="series")
+    .text-h6.text-blue-grey-14 IN DEVELOPMENT
+    .text-h5.text-blue-grey-14 IN DEVELOPMENT
+    .text-h4.text-blue-grey-14 IN DEVELOPMENT
+    .text-h3.text-blue-grey-14 IN DEVELOPMENT
+    .text-h2.text-blue-grey-14 IN DEVELOPMENT
+    .text-h1.text-blue-grey-14 IN DEVELOPMENT
+    //.row.justify-around
+    //  q-card.col.q-ma-md
+    //    q-card-section.flex.flex-center
+    //      apexchart(:options="treemap.options" :series="stat.treemap")
+    //  q-card.col.q-ma-md
+    //    | DEMO
+    //    apexchart(height="200" width="500" type="line" :options="options" :series="series")
+    //  q-card.col.q-ma-md
+    //    | DEMO
+    //    apexchart(height="200" width="500" type="area" :options="options" :series="series")
+    //.row.justify-around
+    //  q-card.col.q-ma-md
+    //    | DEMO
+    //    apexchart(height="200" width="500" type="heatmap" :options="options" :series="series")
+    //  q-card.col.q-ma-md
+    //    | DEMO
+    //    apexchart(height="200" width="500" type="scatter" :options="options" :series="series")
+    //.row.justify-around
+    //  q-card.col.q-ma-md
+    //    | DEMO
+    //    apexchart(height="200" width="500" type="radar" :options="options" :series="series")
+    //  q-card.col.q-ma-md
+    //    | DEMO
+    //    apexchart(height="200" width="500" type="area" :options="options" :series="series")
 </template>
 
 <script>
