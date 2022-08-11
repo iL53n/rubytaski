@@ -67,7 +67,8 @@ class QueryBuilder
     total = @performed_scope.count
 
     page = (@params[:page] || 1).to_i
-    per_page = (@params[:per_page] || 10).to_i
+    # TODO: fix it: add pagination to tables
+    per_page = (@params[:per_page] || 50).to_i
     @resources = @performed_scope.page(page).per(per_page)
 
     total_pages = @resources.total_pages
