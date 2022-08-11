@@ -210,7 +210,7 @@
 .shine:after {
     content: "";
     height: 200%;
-    left: -230%;
+    left: -200%;
     opacity: 0;
     position: absolute;
     top: -20%;
@@ -220,7 +220,8 @@
   background: rgba(255, 255, 255, 0.13);
   background: linear-gradient(
     to right, 
-    rgba(255, 255, 255, 0.13) 0%,
+    /*rgba(255, 255, 255, 0.13) 0%,*/
+    rgba(255, 255, 255, 0.0) 0%,
     rgba(255, 255, 255, 0.13) 77%,
     rgba(255, 255, 255, 0.5) 92%,
     rgba(255, 255, 255, 0.0) 100%
@@ -230,7 +231,7 @@
 
 @keyframes anim {
   0% {
-     left: -230%;
+     left: -200%;
      top: -20%;
   }
   5% {
@@ -238,7 +239,7 @@
     top: -50%;
   }
   10% {
-     left: -230%;
+     left: -200%;
      top: -20%;
   }
   100% {
