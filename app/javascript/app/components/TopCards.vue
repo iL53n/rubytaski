@@ -4,10 +4,11 @@
       q-page-container(align="middle")
         q-spinner-dots(color="primary" size="lg")
     div(v-else-if="error")
-      .text-h3.text-red ERROR!
+      .text-h5.text-red ERROR!
+      .text-h3.text-black Try to reload the page!
     div(v-else)
       .row.justify-around(v-if="stat.tasks.all_active")
-        //- DAY preogress Card
+        //- DAY progress Card
         q-card.col.q-ma-md
           q-card-section
             .row
