@@ -13,5 +13,6 @@ html
     / p.notice= notice
     / p.alert= alert
     = yield
-    = javascript_pack_tag 'application'
-    = stylesheet_pack_tag 'application'
+    - if current_user
+      = javascript_pack_tag 'application'
+      = stylesheet_pack_tag 'application'
