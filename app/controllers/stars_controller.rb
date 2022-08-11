@@ -15,11 +15,13 @@ class StarsController < ApplicationController
     @star.user = current_user
     @star.task = @task
 
-    if @star.save
-      render status: :created,
-        json: {notice: "Star was successfully created."}
-    else
-      error_response(@star, :unprocessable_entity)
+    if @star.is_unique?
+      if @star.save
+        render status: :created,
+          json: {notice: "Star was successfully created."}
+      else
+        error_response(@star, :unprocessable_entity)
+      end
     end
   end
 
