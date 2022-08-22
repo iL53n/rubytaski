@@ -6168,9 +6168,9 @@ qs@6.7.0:
   integrity sha512-VCdBRNFTX1fyE7Nb6FYoURo/SPe62QCaAyzJvUjwRaIsc+NePBEniHlvxFmmX56+HZphIGtV0XeCirBtpDrTyQ==
 
 quasar@^1.16:
-  version "1.16.0"
-  resolved "https://registry.yarnpkg.com/quasar/-/quasar-1.16.0.tgz#b3eeba6c03860279fa6d423aeb0b83c884517481"
-  integrity sha512-w+XajlXYi1dRYHHD/oRydTv1G3G2edtZ+tWJjnPk4vYUlllUiVsredqrBwqoOogn8qRhpLVS6Og6pona+zIg5A==
+  version "1.19.5"
+  resolved "https://registry.yarnpkg.com/quasar/-/quasar-1.19.5.tgz#dbcfbee59b4a8e8d46a1d4a4c255d9553998243a"
+  integrity sha512-g3zDHnK2bT5A5moR5nBFtp45jrMRkpRpyCHe8vLl7lOIb7l3cv4MWimFYEnaNs8Lqo2Cf3jrXm7afHSoH0Im8w==
 
 query-string@^4.1.0:
   version "4.3.4"

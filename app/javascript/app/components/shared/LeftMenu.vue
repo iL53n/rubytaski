@@ -6,7 +6,7 @@
     @mouseover="miniState = false"
     @mouseout="miniState = true"
     mini-to-overlay
-    :width="240"
+    :width="230"
     :breakpoint="1024"
     )
     q-scroll-area(class="fit")

@@ -1,20 +1,20 @@
 <template lang="pug">
   div(class="row no-wrap")
     div(class="col text-uppercase" align="left")
-      .text-h1.text-white {{ stars_stat.all }}
-      .text-subtitle1.text-grey-1 {{ $t('stat.all_stars') }}
+      .text-h2.text-white {{ stars_stat.all }}
+      .text-caption.text-grey-1 {{ $t('stat.all_stars') }}
       br
-      .text-h2.text-white {{ stars_stat.current_year }}
-      .text-subtitle2.text-grey-1 {{ $t('stat.this_year') }}
+      .text-h3.text-white {{ stars_stat.current_year }}
+      .text-caption.text-grey-1 {{ $t('stat.this_year') }}
       br
-      .text-h2.text-white {{ stars_stat.current_month }}
-      .text-subtitle2.text-grey-1 {{ $t('stat.this_month') }}
+      .text-h4.text-white {{ stars_stat.current_month }}
+      .text-caption.text-grey-1 {{ $t('stat.this_month') }}
       br
-      .text-h4.text-white {{ stars_stat.current_week }}
-      .text-subtitle2.text-grey-1 {{ $t('stat.this_week') }}
+      .text-h5.text-white {{ stars_stat.current_week }}
+      .text-caption.text-grey-1 {{ $t('stat.this_week') }}
       br
-      .text-h5.text-white {{ stars_stat.current_day }}
-      .text-subtitle2.text-grey-1 {{ $t('stat.today') }}
+      .text-h6.text-white {{ stars_stat.current_day }}
+      .text-caption.text-grey-1 {{ $t('stat.today') }}
     div(class="col-auto" align="bottom")
       q-btn(color="grey-1" round flat icon="more_vert")
         q-menu(cover auto-close)

@@ -25,6 +25,7 @@
               ref="calendar"
               v-model="selectedDate"
               no-active-date
+              short-weekday-label
               view="week-scheduler"
               :resources="resources.schedule.data"
               resource-key="id"

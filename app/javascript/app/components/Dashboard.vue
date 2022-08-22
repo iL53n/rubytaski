@@ -9,7 +9,6 @@
   import GeneralStat     from 'components/GeneralStat'
   import Schedule        from 'components/Schedule'
 
-
   export default {
     data () {
       return {

@@ -21,14 +21,25 @@
             class="no-shadow",
             table-header-class="text-primary"
             table-header-style="background-color: rgb(248, 247, 253)",
+            wrap-cells,
             @request="onRequest")
+            // TODO: fixit
+            //template(v-slot:header-cell="props")
+            //  q-tr(:props="props")
+            //  q-th(
+            //    v-for="col in props.cols"
+            //    :key="col.name"
+            //    :props="props"
+            //    class="text-italic text-purple")
+            //    //q-th(class="text-left") 1
+            //    //q-th(class="text-left") 2
             template(v-slot:body-cell-state="props")
               q-td(align="left")
                 q-badge(
                   :color="statuses[props.row.state][1]",
                   :label="statuses[props.row.state][0]")
             template(v-slot:body-cell-actions="props")
-              q-td(key="actions" align="right")
+              q-td(key="actions" align="right" style="width: 240px")
                 actions-cell(
                   :actions="props.row.actions",
                   :state="props.row.state"

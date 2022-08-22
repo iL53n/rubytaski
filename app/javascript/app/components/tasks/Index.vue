@@ -18,7 +18,8 @@
           q-markup-table(
             ref="table"
             row-key="id"
-            class="no-shadow")
+            class="no-shadow"
+            wrap-cells)
             thead(style="background-color: rgb(248, 247, 253)")
               tr(class="text-primary")
                 th(class="text-center") 
@@ -47,7 +48,7 @@
                   q-badge(
                     :color="statuses[el.state][1]",
                     :label="statuses[el.state][0]")
-                td(key="actions") 
+                td(key="actions" style="width: 185px")
                   actions-cell(
                     :actions="el.actions",
                     :title="el.title",

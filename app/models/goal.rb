@@ -4,10 +4,10 @@ class Goal < ApplicationRecord
             :due_date,
             :number_of_stars,
             :prize, presence: true
-  validate :can_be_only_one_active_goal, on: %i[create update]
+  # validate :can_be_only_one_active_goal, on: %i[create update]
   belongs_to :user
 
-  enum state: {created: 0, done: 1, undone: 2, archived: 5} do
+  enum state: { created: 0, done: 1, undone: 2, archived: 5 } do
     event :complete do
       transition created: :done
     end
@@ -25,11 +25,12 @@ class Goal < ApplicationRecord
     end
   end
 
-  def can_be_only_one_active_goal
-    if current_user_created_goal.exists? && current_user_created_goal != self && created?
-      errors.add(:goal, "can be only one active instance")
-    end
-  end
+  # TODO: fix it, doesn't work
+  # def can_be_only_one_active_goal
+  #   if current_user_created_goal.exists? && current_user_created_goal != self && created?
+  #     errors.add(:goal, "can be only one active instance")
+  #   end
+  # end
 
   def current_user_created_goal
     Goal.where(user: user).created

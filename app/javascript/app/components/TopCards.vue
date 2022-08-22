@@ -14,7 +14,7 @@
             .row
               .col.text-grey(align="left")
                 q-icon(name="event" color="primary" size="sm")
-              .col.text-subtitle1.text-grey(align="right") {{ $t('stat.today') }}
+              .col.text-subtitle1.text-grey.ellipsis(align="right") {{ $t('stat.today') }}
             q-separator
             br
             div(v-if="leftToCompleteDay")
@@ -29,10 +29,10 @@
                 label-always
                 color="orange-4"
               )
-              .text-h3.text-blue-grey-14 {{stat.stars.current_day}}/{{stat.tasks.all_active}}
+              .text-h4.text-blue-grey-14 {{stat.stars.current_day}}/{{stat.tasks.all_active}}
             div(v-else)
               q-btn.shine.text-yellow-2.bg-amber-5(push glossy round padding="xs" size="60px" icon="verified")
-                q-tooltip(anchor="center middle" :delay="200")
+                q-tooltip(class="bg-primary" :offset="[10, 10]" :delay="200")
                   .text-h5 {{stat.stars.current_day}}/{{stat.tasks.all_active}}
         //- WEEK progress Card
         q-card.col.q-ma-md
@@ -40,7 +40,7 @@
             .row
               .col.text-grey(align="left")
                 q-icon(name="calendar_view_week" color="primary" size="sm")
-              .col.text-subtitle1.text-grey(align="right") {{ $t('stat.week') }}
+              .col.text-subtitle1.text-grey.ellipsis(align="right") {{ $t('stat.week') }}
             q-separator
             br
             div(v-if="leftToCompleteWeek")
@@ -48,10 +48,10 @@
                 .absolute-full.flex.flex-center
                   q-badge(color="white" text-color="green")
                     | {{  weekProgress }}%
-              .text-h3.text-blue-grey-14 {{stat.stars.current_week}}/{{stat.tasks.all_active * 7}}
+              .text-h4.text-blue-grey-14 {{stat.stars.current_week}}/{{stat.tasks.all_active * 7}}
             div(v-else)
-              q-btn.shine.text-yellow-2.bg-amber-5(push glossy round padding="xs" size="60px" icon="emoji_events")
-                q-tooltip(anchor="center middle" :delay="200")
+              q-btn.text-yellow-2.bg-amber-5(push glossy round padding="xs" size="60px" icon="emoji_events")
+                q-tooltip(class="bg-primary" :offset="[10, 10]" :delay="200")
                   .text-h5 {{stat.stars.current_week}}/{{stat.tasks.all_active * 7}}
         //- GOAL Card
         q-card.col.q-ma-md
@@ -59,7 +59,7 @@
             .row
               .col.text-grey(align="left")
                 q-icon(name="track_changes" color="primary" size="sm")
-              .col.text-subtitle1.text-grey(align="right") {{ $t('stat.goal') }}
+              .col.text-subtitle1.text-grey.ellipsis(align="right") {{ $t('stat.goal') }}
             q-separator
             br
             q-card-section(v-if="goal.due_date" horizontal)
@@ -74,24 +74,21 @@
                 color="red-4"
                 track-color="grey-3"
                 )
-                .text-h3 {{ goalProgress }}
+                .text-h4 {{ goalProgress }}
                 .text-h6.text-grey %
               .col(v-else)
                 q-btn.shine.text-yellow-2.bg-amber-5(push glossy round padding="xs" size="60px" icon="emoji_events")
               q-separator(vertical)
-              q-list.col-5.text-blue-grey-6(align="left" dense)
+              q-list.col.text-blue-grey-6(align="left" dense padding)
                 q-item
-                  q-item-section(avatar)
-                    q-icon(name="date_range" color="teal-4")
-                  q-item-section {{ goal.due_date }}
+                  q-icon(name="date_range" size="sm" color="teal-4" left)
+                  div {{ goal.due_date }}
                 q-item
-                  q-item-section(avatar)
-                    q-icon(name="stars" color="amber-4")
-                  q-item-section {{ this.stat.goals.current.completed_stars }}/{{ this.stat.goals.current.number_of_stars }}
+                  q-icon(name="stars" size="sm" color="amber-4" left)
+                  div {{ this.stat.goals.current.completed_stars }}/{{ this.stat.goals.current.number_of_stars }}
                 q-item
-                  q-item-section(avatar)
-                    q-icon(name="emoji_events" color="red-4")
-                  q-item-section {{ goal.prize }}
+                  q-icon(name="emoji_events" size="sm" color="red-4" left)
+                  div.ellipsis {{ goal.prize }}
             //- NO GOAL
             q-card-section(v-else horizontal)
               .col-9

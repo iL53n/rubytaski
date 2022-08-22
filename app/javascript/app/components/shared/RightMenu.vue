@@ -3,7 +3,7 @@
     side="right"
     show-if-above
     :mini="miniState"
-    :width="260"
+    :width="230"
     :mini-width="10"
     :breakpoint="1024"
     )
@@ -15,13 +15,14 @@
             v-if="!miniState"
             flat
             no-caps
-            class=" full-width text-blue-grey-10"
+            class="full-width text-blue-grey-10"
             :label="$t('heatmap.title')"
+            padding="none"
             @click="miniState = true"
             icon-right="chevron_right")
           q-btn(
             class="absolute"
-            style="top: 280px"
+            style="top: 270px"
             v-if="miniState"
             dense
             flat
