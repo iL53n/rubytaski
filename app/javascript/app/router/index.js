@@ -15,6 +15,7 @@ const DoneGoal   = () => import(/* webpackChunkName: "goals" */ 'components/goal
 const Dashboard  = () => import(/* webpackChunkName: "dashboard" */ 'components/Dashboard')
 const Statistics = () => import(/* webpackChunkName: "statistics" */ 'components/Statistics')
 const Profile    = () => import(/* webpackChunkName: "profile" */ 'components/Profile')
+const Feedback   = () => import(/* webpackChunkName: "profile" */ 'components/Feedback')
 const About      = () => import(/* webpackChunkName: "profile" */ 'components/About')
 
 export default new VueRouter ({
@@ -46,6 +47,7 @@ export default new VueRouter ({
     },
     { path: '/my_statistics', component: Statistics },
     { path: '/profile', component: Profile },
+    { path: '/feedback', component: Feedback },
     { path: '/about', component: About }
   ]
 })
