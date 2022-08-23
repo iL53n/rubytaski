@@ -42,11 +42,11 @@
           q-item
           q-item
           q-separator          
-          q-item(to="/")
+          q-item(to="/feedback")
             q-item-section(avatar)
               q-icon(name="chat_bubble_outline")
             q-item-section {{ $t('menu.left.feedback') }}
-          q-item(to="/")
+          q-item(to="/about")
             q-item-section(avatar)
               q-icon(name="info_outline")
             q-item-section {{ $t('menu.left.about') }}
