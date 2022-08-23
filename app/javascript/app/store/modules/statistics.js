@@ -27,15 +27,13 @@ export default {
   },
   mutations: {
     updateTasksStatistics(state, values) {
-      state.general.active_days = values.active_days
-    },
-    updateTasksStatistics(state, values) {
-      state.tasks.all        = values.all,
-      state.tasks.all_active = values.all_active
+      state.general.active_days = values.active_days,
+      state.tasks.all           = values.all,
+      state.tasks.all_active    = values.all_active
     },
     updateGoalsStatistics(state, values) {
-      state.goals.all                     = values.all,
-      state.tasks.current.number_of_stars = values.number_of_stars
+      state.goals.all     = values.all,
+      state.goals.current = values.current
     },
     updateStarsStatistics(state, values) {
       state.stars.all           = values.all,

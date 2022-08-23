@@ -101,6 +101,14 @@
       }
     },
     computed: {
+      goal_stat: {
+        get () {
+          // return this.$store.state.statistics.goals
+        },
+        set (values) {
+          this.$store.commit('updateGoalsStatistics', values)
+        }
+      },
       stat: {
         get () {
           return this.$store.state.statistics.stars
@@ -166,9 +174,10 @@
           .finally(() => this.loading = false)
       },
       getStatistics() {
-        this.$backend.statistics.index({ scopes: 'stars_stat,heatmap_chart' })
+        this.$backend.statistics.index({ scopes: 'stars_stat,goals_stat,heatmap_chart' })
           .then((response) => {
             this.stat = response.data.stat.stars
+            this.goal_stat = response.data.stat.goals
             this.heatmap = response.data.stat.heatmap
           })
           .catch(()   => this.error = true)
