@@ -1,7 +1,7 @@
 presenter = GoalPresenter.new
 
 json.table do
-  json.colums = GoalPresenter::COLUMNS
+  json.columns GoalPresenter::COLUMNS
 
   json.data @goals.resources do |resource|
     json.extract! presenter.present(resource), *presenter.columns_keys

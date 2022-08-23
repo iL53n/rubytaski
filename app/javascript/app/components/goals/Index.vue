@@ -23,16 +23,6 @@
             table-header-style="background-color: rgb(248, 247, 253)",
             wrap-cells,
             @request="onRequest")
-            // TODO: fixit
-            //template(v-slot:header-cell="props")
-            //  q-tr(:props="props")
-            //  q-th(
-            //    v-for="col in props.cols"
-            //    :key="col.name"
-            //    :props="props"
-            //    class="text-italic text-purple")
-            //    //q-th(class="text-left") 1
-            //    //q-th(class="text-left") 2
             template(v-slot:body-cell-state="props")
               q-td(align="left")
                 q-badge(
@@ -66,6 +56,7 @@
           },
           filter: ''
         },
+        loading: true,
         statuses: {
           'created':  ['Активная',      'green'],
           'done':     ['Достигнута',    'green-10'],
@@ -91,7 +82,10 @@
       },
       getGoals(page, rowsPerPage, sort, desc, filter, scopes) {
         this.$backend.goals.index({ page, rowsPerPage, sort, desc, filter, scopes })
-          .then((response) => this.goalList = response.data)
+          .then((response) => {
+            console.log(response.data)
+            this.goalList = response.data
+          })
           .catch(()        => this.error = true)
           .finally(()      => this.loading = false)
       },
