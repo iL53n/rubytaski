@@ -78,7 +78,7 @@
                 .text-h6.text-grey %
               .col(v-else)
                 q-btn.shine.text-yellow-2.bg-amber-5(push glossy round padding="xs" size="60px" icon="emoji_events")
-              q-separator(vertical)
+              //q-separator(vertical)
               q-list.col.text-blue-grey-6(align="left" dense padding)
                 q-item
                   q-icon(name="date_range" size="sm" color="teal-4" left)
