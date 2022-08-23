@@ -4,7 +4,7 @@
       q-card-section
         q-item
           q-item-section(avatar)
-            q-avatar.shadow-5(size="100px")
+            q-avatar.shadow-5(rounded, size="100px")
               q-img(v-if="user.avatar_url" :src="user.avatar_url")
               q-img(v-else :src="require('images/star.png')")
               //- TODO: version with mouseover icon (maybe like https://v1.quasar.dev/vue-components/img#example--captions)

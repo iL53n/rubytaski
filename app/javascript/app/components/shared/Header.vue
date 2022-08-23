@@ -6,10 +6,11 @@
           q-btn(flat to="/" class="text-primary" size="lg" label="rubytaski" no-caps)
           //q-badge(align="top" color="orange") v1.0.0b
         q-chip(size="20px" square color="primary" text-color="white")
-          q-avatar
+          //q-item-section(avatar) add some gap between avatar and nik
+          q-avatar(rounded)
             q-img(v-if="user.avatar_url" :src="user.avatar_url")
             q-img(v-else :src="require('images/star.png')")
-          | {{ user.nick_name }}
+          q-item-section.text-subtitle2.text-weight-bold {{ user.nick_name }}
           q-menu(anchor="bottom end" self="top end")
             q-list(style="min-width: 250px")
               q-item(class="text-white" style="background: linear-gradient(90deg, #847bf3 0%, #b47bf3 100%);")
