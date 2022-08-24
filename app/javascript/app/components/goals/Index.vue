@@ -13,6 +13,7 @@
             :loading="loading"
             :data="goalList.table.data",
             :columns="goalList.table.columns",
+            :visible-columns="goalList.table.visible_columns"
             :pagination.sync="goalList.table.pagination"
             :rows-per-page-options="[10, 25, 100]"
             :filter="goalList.filter"
@@ -50,6 +51,7 @@
         goalList: {
           table: {
             columns: [],
+            visible_columns: [],
             data: [],
             filter: '',
             pagination: {}

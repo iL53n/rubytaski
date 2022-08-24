@@ -4,7 +4,7 @@ class GoalPresenter < BasePresenter
   delegate :id, :state, :start_date, :due_date, :number_of_stars, :prize, to: :resource
 
   COLUMNS = [
-    # { name: :id,              field: :id,              required: true, label: 'ID',              align: 'left', sortable: true },
+    { name: :id,              field: :id,                              label: 'ID',         align: 'left', sortable: true },
     { name: :start_date,      field: :start_date,      required: true, label: 'Start Date', align: 'left', sortable: true, style: 'width: 105px' },
     { name: :due_date,        field: :due_date,        required: true, label: 'Due Date',   align: 'left', sortable: true, style: 'width: 105px' },
     { name: :number_of_stars, field: :number_of_stars, required: true, label: 'Stars',      align: 'left', sortable: true },
@@ -19,6 +19,10 @@ class GoalPresenter < BasePresenter
 
   def columns_keys
     columns.map { |column| column[:name] }
+  end
+
+  def visible_columns
+    columns_keys[1..]
   end
 
   def actions
