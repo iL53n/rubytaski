@@ -204,6 +204,11 @@
 </script>
 
 <style scoped>
+.shine {
+  position: relative;
+  overflow: hidden;
+}
+
 .shine:after {
   content: "";
   height: 200%;
@@ -224,7 +229,6 @@
   );
   animation: 10s anim linear 3s infinite;
 }
-
 @keyframes anim {
   0% {
      left: -200%;
