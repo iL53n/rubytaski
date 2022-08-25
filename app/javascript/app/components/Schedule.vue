@@ -57,7 +57,7 @@
                  .text-subtitle1 {{ resource.title }}
                  .text-subtitle2 {{ resource.description }}
               template(#scheduler-resource-day="{ timestamp, /* index, */ resource }")
-                q-btn(flat class="fit" @click.stop="addStar(resource.id, timestamp.date)")
+                q-btn(flat class="fit" @click="addStar(resource.id, timestamp.date)")
                   div(v-for="star in resource.stars_dates" :key="star.id")
                     div(v-show="star.due_date == timestamp.date")
                       //star options: stars, verified, check_circle, task_alt
@@ -259,18 +259,18 @@
   0% {
     transform: rotate(0deg) scale(0.5);
   }
-  60% {
+  50% {
     transform: 
     rotate(360deg) scale(1);
+  }
+  65% {
+    transform: scale(1.1);
   }
   80% {
     transform: scale(1.2);
   }
-  90% {
-    transform: scale(1.1);
-  }
   100% {
-    transform: scale(1);
+    transform: scale(1.1);
   }
 }
 
@@ -279,6 +279,6 @@
 }
 
 .zoom-box:hover {
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
 </style>

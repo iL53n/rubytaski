@@ -207,6 +207,44 @@
 .shine {
   position: relative;
   overflow: hidden;
+  animation: emergence-with-rotate 0.4s;
+  animation-iteration-count: 1;
+}
+
+@keyframes emergence-with-rotate {
+  0% {
+    transform: scale(0.1);
+  }
+  10% {
+    transform: scale(0.3);
+  }
+  20% {
+    transform: scale(0.4);
+  }
+  30% {
+    transform: scale(0.5);
+  }
+  40% {
+    transform: scale(0.7);
+  }
+  50% {
+    transform: scale(0.7);
+  }
+  60% {
+    transform: scale(0.8);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  80% {
+    transform: scale(1);
+  }
+  90% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .shine:after {
