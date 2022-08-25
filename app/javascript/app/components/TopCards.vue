@@ -9,7 +9,7 @@
     div(v-else)
       .row.justify-around(v-if="stat.tasks.all_active")
         //- DAY progress Card
-        q-card.col.q-ma-md
+        q-card.col.q-ma-md.zoom-box
           q-card-section
             .row
               .col.text-grey(align="left")
@@ -35,7 +35,7 @@
                 q-tooltip(class="bg-primary" :offset="[10, 10]" :delay="200")
                   .text-h5 {{stat.stars.current_day}}/{{stat.tasks.all_active}}
         //- WEEK progress Card
-        q-card.col.q-ma-md
+        q-card.col.q-ma-md.zoom-box
           q-card-section
             .row
               .col.text-grey(align="left")
@@ -54,7 +54,7 @@
                 q-tooltip(class="bg-primary" :offset="[10, 10]" :delay="200")
                   .text-h5 {{stat.stars.current_week}}/{{stat.tasks.all_active * 7}}
         //- GOAL Card
-        q-card.col.q-ma-md
+        q-card.col.q-ma-md.zoom-box
           q-card-section
             .row
               .col.text-grey(align="left")
@@ -205,14 +205,13 @@
 
 <style scoped>
 .shine:after {
-    content: "";
-    height: 200%;
-    left: -200%;
-    opacity: 0;
-    position: absolute;
-    top: -20%;
-    transform: rotate(-30deg);
-    width: 200%;
+  content: "";
+  height: 200%;
+  left: -200%;
+  position: absolute;
+  top: -20%;
+  transform: rotate(-30deg);
+  width: 200%;
   opacity: 1;
   background: rgba(255, 255, 255, 0.13);
   background: linear-gradient(
@@ -242,5 +241,13 @@
   100% {
   /* delay */
   }
+}
+
+.zoom-box {
+  transition: transform .4s; /* Animation */
+}
+
+.zoom-box:hover {
+  transform: scale(1.05);
 }
 </style>

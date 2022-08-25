@@ -66,7 +66,7 @@
                         glossy
                         round
                         padding="xs"
-                        class="fit emergence"
+                        class="fit emergence zoom-box"
                         align="around"
                         name="star"
                         color="amber-5"
@@ -272,5 +272,13 @@
   100% {
     transform: scale(1);
   }
+}
+
+.zoom-box {
+  transition: transform .4s; /* Animation */
+}
+
+.zoom-box:hover {
+  transform: scale(1.2);
 }
 </style>
