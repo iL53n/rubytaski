@@ -4,6 +4,8 @@
       q-card(class="col q-ma-lg")
         q-card-section(class="row")
           div(class="col text-h3 text-blue-grey-14" align="left") {{ $t('tasks.title') }}
+            //q-btn(round color="deep-purple-1" text-color="primary" icon="add" size="lg" style="bottom: 45px;" @click="newTask()")
+
           q-banner(v-if="bannerShow" inline-actions rounded class="col-8 bg-green-1")
             template(v-slot:avatar)
               q-icon(name="import_export" color="green-2")
@@ -11,7 +13,7 @@
             template(v-slot:action)
               q-btn(@click="updateTasksOrder()" flat round color="green-7" icon="check")
               q-btn(@click="getTasks()" flat round color="red-7" icon="close")
-          div(class="col text-subtitle1 text-grey" align="right")
+          div(class="col" align="right")
             br
             q-btn(unelevated rounded no-caps color="deep-purple-1" text-color="primary" @click="newTask()" icon="add" name="new_task" label="Add Task")
         q-card-section

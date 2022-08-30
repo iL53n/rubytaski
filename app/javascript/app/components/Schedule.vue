@@ -57,7 +57,7 @@
                  .text-subtitle1 {{ resource.title }}
                  .text-subtitle2 {{ resource.description }}
               template(#scheduler-resource-day="{ timestamp, /* index, */ resource }")
-                q-btn(flat class="fit" @click="addStar(resource.id, timestamp.date)")
+                q-btn(flat class="fit" @click.stop="addStar(resource.id, timestamp.date)")
                   div(v-for="star in resource.stars_dates" :key="star.id")
                     div(v-show="star.due_date == timestamp.date")
                       //star options: stars, verified, check_circle, task_alt
