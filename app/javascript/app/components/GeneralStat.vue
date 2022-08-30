@@ -17,12 +17,11 @@
         .text-h6.text-white {{ stars_stat.current_day }}
         .text-caption.text-grey-1 {{ $t('stat.today') }}
       div(class="col-auto" align="bottom")
-        q-btn(color="grey-1" round flat icon="more_vert")
+        q-btn(color="grey-1" round flat icon="more_vert" style="bottom: 13px; left: 13px")
           q-menu(cover auto-close)
             q-list
               q-item(clickable to="/my_statistics" class="text-primary")
                 q-item-section {{ $t('stat.show_all') }}
-    q-img(:src="require('images/astroman.png')" style="bottom: 40px; left: 40px")
 </template>
 
 <script>
