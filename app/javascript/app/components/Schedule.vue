@@ -10,7 +10,7 @@
         q-card(class="col-2 q-ma-md gradient desktop-only")
           q-card-section
             general-stat
-          q-img(:src="require('images/astroman.png')" style="position:absolute; bottom:3px; left: 30px")
+          q-img.zoom-image(:src="require('images/astroman.png')" style="position:absolute; bottom:3px; left: 30px")
         q-card(class="col q-ma-md")
           q-toolbar(class="text-white gradient" align="right")
             q-btn-group(flat)
@@ -281,5 +281,13 @@
 
 .zoom-box:hover {
   transform: scale(1.1);
+}
+
+.zoom-image {
+  transition: transform 5s; /* Animation */
+}
+
+.zoom-image:hover {
+  transform: scale(110%) translateY(-4.5%) translateX(3%);
 }
 </style>
