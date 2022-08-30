@@ -2,21 +2,21 @@
   div
     .text-h3.text-blue-grey-14 {{ $t('stat.title') }} DEMO
     .row.justify-around
-      q-card.col.q-ma-md
+      q-card.col.q-ma-md.zoom-box
         q-card-section(horizontal)
           q-card-section.col(align="left")
             .text-h3.text-blue-grey-14 {{ stat.tasks.all }}
             .text-caption.text-blue-grey-8 Tasks
           q-card-section.flex.flex-center(align="right")
             q-btn.text-blue-4.bg-blue-1(unelevated round size="lg" icon="format_list_bulleted")
-      q-card.col.q-ma-md
+      q-card.col.q-ma-md.zoom-box
         q-card-section(horizontal)
           q-card-section.col(align="left")
             .text-h3.text-blue-grey-14 {{ stat.stars.all }}
             .text-caption.text-blue-grey-8 Completed
           q-card-section.flex.flex-center(align="right")
             q-btn.text-green-4.bg-green-1(unelevated round size="lg" icon="done_all")
-      q-card.col.q-ma-md
+      q-card.col.q-ma-md.zoom-box
         q-card-section(horizontal)
           q-card-section.col(align="left")
             .row
@@ -25,7 +25,7 @@
             .text-caption.text-blue-grey-8 Efficiency
           q-card-section.flex.flex-center(align="right")
             q-btn.text-red-4.bg-red-1(unelevated round size="lg" icon="speed")  
-      q-card.col.q-ma-md
+      q-card.col.q-ma-md.zoom-box
         q-card-section(horizontal)
           q-card-section.col(align="left")
             .text-h3.text-blue-grey-14 {{ stat.general.active_days }}
@@ -132,5 +132,13 @@
   }
 </script>
 
-<style scoped></style>
+<style scoped>
+.zoom-box {
+  transition: transform .4s; /* Animation */
+}
+
+.zoom-box:hover {
+  transform: scale(1.05);
+}
+</style>
 
