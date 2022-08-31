@@ -34,4 +34,13 @@ class Goal < ApplicationRecord
   def current_user_created_goal
     Goal.where(user: user).created
   end
+
+  def progress
+    (completed_stars.to_f / number_of_stars * 100).round(0)
+  end
+
+
+  def completed_stars
+    Star.where('due_date BETWEEN ? AND ?', start_date, due_date).count
+  end
 end

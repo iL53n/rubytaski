@@ -85,7 +85,6 @@
       getGoals(page, rowsPerPage, sort, desc, filter, scopes) {
         this.$backend.goals.index({ page, rowsPerPage, sort, desc, filter, scopes })
           .then((response) => {
-            console.log(response.data)
             this.goalList = response.data
           })
           .catch(()        => this.error = true)

@@ -16,12 +16,12 @@
           q-separator
           q-card-section(class="q-gutter-md row justify-around")
             q-slider(
-              v-model="donePercent"
+              v-model="goal.progress"
               :min="0"
               :max="100"
               readonly
               label
-              :label-value="donePercent + '%'"
+              :label-value="goal.progress + '%'"
               label-always
               color="orange-4"
             )
@@ -60,8 +60,7 @@
   export default {
     data: function () {
       return {
-        goal: {},
-        donePercent: 56
+        goal: {}
       }
     },
     created() {
