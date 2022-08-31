@@ -1,7 +1,6 @@
 <template lang="pug">
     q-header(class="bg-white" style="height: 50px")
       q-toolbar
-        //q-toolbar-title(to="/" class="text-primary") rubytaski
         q-toolbar-title
           q-btn(flat to="/" class="text-primary" size="lg" label="rubytaski" no-caps)
           //q-badge(align="top" color="orange") v1.0.0b

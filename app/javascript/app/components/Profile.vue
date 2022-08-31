@@ -1,6 +1,6 @@
 <template lang="pug">
   .q-pa-xl.row.items-start.justify-around.q-gutter-xl
-    q-card(class="col-4" align="left")
+    q-card.my-card(align="left")
       q-card-section
         q-item
           q-item-section(avatar)
@@ -178,6 +178,10 @@
 </script>
 
 <style scoped>
+.my-card {
+  width: 100%;
+  max-width: 500px
+}
 .profile-icon {
   border-radius: 5px;
   padding: 10px
