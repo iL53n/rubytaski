@@ -6,7 +6,7 @@ class TasksController < ApplicationController
   layout false
 
   def index
-    @start_of_week = Date.parse(params[:start_date])
+    @start_of_week = Date.parse(params[:start_date]) if params[:start_date]
 
     scope = Task.where(user: current_user).preload(:stars)
     @tasks = ::QueryBuilder.new(params, scope)

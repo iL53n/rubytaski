@@ -16,11 +16,13 @@ json.schedule do
   json.data @tasks.resources do |resource|
     json.extract! presenter.present(resource), *presenter.columns_keys
 
-    json.stars_dates resource.stars.where(due_date: @start_of_week..@start_of_week + 7) do |star|
-      json.id        star.id
-      json.state     star.state
-      json.due_date  star.due_date&.to_date
-      json.done_date star.done_date&.to_date
+    if @start_of_week
+      json.stars_dates resource.stars.where(due_date: @start_of_week..@start_of_week + 7) do |star|
+        json.id        star.id
+        json.state     star.state
+        json.due_date  star.due_date&.to_date
+        json.done_date star.done_date&.to_date
+      end
     end
   end
 end

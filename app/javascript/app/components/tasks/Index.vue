@@ -89,7 +89,7 @@
     computed: {},
     methods: {
       setTasksOrder() {
-        var data = this.taskList.table.data
+        let data = this.taskList.table.data
         // this.order = data.map(function(task, index) {
         //   return { id: task.id, order: index }
         // })
