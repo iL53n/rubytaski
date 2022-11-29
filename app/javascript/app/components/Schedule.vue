@@ -19,8 +19,6 @@
               q-btn(size="sm" icon="keyboard_arrow_right" @click="calendarNext")
             q-toolbar-title {{ titleDate }}
           q-card-section
-            //- v-touch-swipe.mouse.left.right="handleSwipe"
-            //- short-weekday-label?
             // TODO: fix resource-width
             q-calendar(
               ref="calendar"
@@ -84,6 +82,7 @@
   import loadingMixin from 'mixins'
 
   // TODO: remove it (DRY)
+  import { date } from 'quasar'
   import QCalendar from '@quasar/quasar-ui-qcalendar'
 
   export default {
@@ -92,7 +91,7 @@
         selectedDate: '',
         titleDate: '',
         dateFormatter: undefined,
-        start: undefined,
+        start: '1963-01-01',
         locale: this.$i18n.locale,
         resources: {
           schedule: {
@@ -100,6 +99,10 @@
           }
         }
       }
+    },
+    created () {
+      this.refresh();
+      console.log('Schedule::Created')
     },
     computed: {
       goal_stat: {
@@ -127,27 +130,18 @@
         }
       }
     },
-    created () {
-      this.refresh()
-      this.updateFormatter()
-    },
-    watch: {
-      locale () {
-        // this.updateFormatter()
-        this.updateTitle()
-      }
-    },
     methods: {
-      onChange ({ start }) {
-        this.start = start
-        this.updateTitle()
-      },
       refresh() {
-        this.getTasks(),
+        this.getTasks();
         this.getStatistics()
       },
+      onChange ({ start }) {
+        this.start = start;
+        this.getTasks();
+        this.updateTitle()
+      },
       getTasks() {
-        this.$backend.tasks.indexCreated({ scopes: 'created' })
+        this.$backend.tasks.index({ scopes: 'created', start_date: this.start })
           .then((response) => this.resources = response.data)
           .catch(()        => this.error = true)
           .finally(()      => this.loading = false)
@@ -195,18 +189,9 @@
       calendarPrev () {
         this.$refs.calendar.prev()
       },
-      handleSwipe ({ evt, ...info }) {
-        if (info.duration >= 30) {
-          if (info.direction === 'right') {
-            this.calendarPrev()
-          } else if (info.direction === 'left') {
-            this.calendarNext()
-          }
-        }
-        evt.cancelable !== false && evt.preventDefault()
-        evt.stopPropagation()
-      },
       updateTitle () {
+        this.updateFormatter();
+
         const myDate = QCalendar.makeDate(this.start)
 
         if (this.dateFormatter !== undefined) {
@@ -215,10 +200,8 @@
       },
       updateFormatter () {
         try {
-          this.dateFormatter = new Intl.DateTimeFormat(this.locale || undefined, {
-            month: 'long',
-            year: 'numeric',
-            timeZone: 'UTC'
+          this.dateFormatter = new Intl.DateTimeFormat(this.locale, {
+            month: 'long', year: 'numeric', timeZone: 'UTC'
           })
         }
         catch (e) {
@@ -232,16 +215,8 @@
       generalStat
     },
     subscriptions: {
-      StarsChannel: {
-        received(data) {
-          this.refresh()
-        }
-      },
-      TasksChannel: {
-        received(data) {
-          this.refresh()
-        }
-      }
+      StarsChannel: { received(data) { this.refresh() } },
+      TasksChannel: { received(data) { this.refresh() } }
     }
   }
 </script>

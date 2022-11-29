@@ -1,5 +1,7 @@
-unless Star.any?
-  100.times do
+if Star.any?
+  puts "  ---> Warning! Didn't load, already exists."
+else
+  500.times do
     @date ||= Time.now
 
     Task.all.each do |task|
@@ -14,6 +16,4 @@ unless Star.any?
 
     @date -= 86_400
   end
-else
-  puts "  ---> Warning! Didn't load, already exists."
 end

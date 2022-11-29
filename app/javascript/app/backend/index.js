@@ -15,7 +15,6 @@ const adapter = axios.create({
 const backend = {
   tasks: {
     index:        (params) => adapter.get('tasks', { params: params }),
-    indexCreated: (params) => adapter.get('tasks', { params: params }),
     create:       (params) => adapter.post('tasks', params),
     show:         (id)     => adapter.get(`tasks/${id}`),
     update:       (task)   => adapter.patch(`tasks/${task.id}`, task),

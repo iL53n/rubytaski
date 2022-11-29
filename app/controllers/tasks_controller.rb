@@ -6,6 +6,8 @@ class TasksController < ApplicationController
   layout false
 
   def index
+    @start_of_week = Date.parse(params[:start_date])
+
     scope = Task.where(user: current_user).preload(:stars)
     @tasks = ::QueryBuilder.new(params, scope)
     render status: :ok
@@ -17,7 +19,7 @@ class TasksController < ApplicationController
 
     if @task.save
       render status: :created,
-        json: {notice: "Task was successfully created."}
+        json: {notice: 'Task was successfully created.'}
     else
       error_response(@task, :unprocessable_entity)
     end
@@ -30,7 +32,7 @@ class TasksController < ApplicationController
   def update
     if @task.update(task_params)
       render status: :ok,
-        json: {notice: "Successfully updated task."}
+        json: {notice: 'Successfully updated task.'}
     else
       error_response(@task, :unprocessable_entity)
     end
@@ -39,9 +41,9 @@ class TasksController < ApplicationController
   def update_order
     if Task.change_order(order_params)
       render status: :ok,
-        json: {notice: "Successfully updated order."}
+        json: {notice: 'Successfully updated order.'}
     else
-      error_response("Order has not been updated", :unprocessable_entity)
+      error_response('Order has not been updated', :unprocessable_entity)
     end
   end
 
@@ -49,7 +51,7 @@ class TasksController < ApplicationController
     state = task_params[:state]
     if @task.send(state)
       render status: :ok,
-        json: {notice: "Successfully changed tasks state."}
+        json: {notice: 'Successfully changed tasks state.'}
     else
       error_response(@task, :unprocessable_entity)
     end
@@ -58,7 +60,7 @@ class TasksController < ApplicationController
   def destroy
     if @task.destroy
       render status: :ok,
-        json: {notice: "Successfully deleted task."}
+        json: {notice: 'Successfully deleted task.'}
     else
       error_response(@task, :unprocessable_entity)
     end
@@ -89,6 +91,6 @@ class TasksController < ApplicationController
   def broadcast
     return if @task.errors.any?
 
-    ActionCable.server.broadcast("tasks", {task: @task})
+    ActionCable.server.broadcast('tasks', {task: @task})
   end
 end
