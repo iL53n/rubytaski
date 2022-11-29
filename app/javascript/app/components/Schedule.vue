@@ -64,7 +64,7 @@
                         push
                         glossy
                         round
-                        padding="xs"
+                        padding="sm"
                         class="fit emergence zoom-box"
                         align="around"
                         name="star"
