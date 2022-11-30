@@ -1,0 +1,20 @@
+<div class="d-flex">
+  <%= button_to user_google_oauth2_omniauth_authorize_path, class: "btn btn-provider", method: :post do %>
+    <i class="fa fa-google"></i>
+  <% end %>
+
+  <%= button_to user_google_oauth2_omniauth_authorize_path, class: "btn btn-provider", disabled: true, method: :post do %>
+    <i class="fa fa-facebook"></i>
+  <% end %>
+
+  <%= button_to user_google_oauth2_omniauth_authorize_path, class: "btn btn-provider", disabled: true, method: :post do %>
+    <i class="fa fa-twitter"></i>
+  <% end %>
+</div>
+
+<style>
+.btn-provider {
+  background-color: rgb(230, 230, 255) !important;
+  color: rgb(101, 68, 211);
+}
+</style>

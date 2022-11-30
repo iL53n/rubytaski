@@ -10,8 +10,6 @@ html
     
     = favicon_link_tag asset_path('favicon.ico')
   body
-    / p.notice= notice
-    / p.alert= alert
     = yield
     - if current_user
       = javascript_pack_tag 'application'

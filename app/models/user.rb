@@ -10,7 +10,8 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable,
+         :omniauthable, omniauth_providers: [:google_oauth2]
   validates :email, presence: true
   validates :locale, inclusion: {in: %w[ru en], message: "%{value} is not valid value"}
 
@@ -18,6 +19,27 @@ class User < ApplicationRecord
   has_many :stars
 
   has_one_attached :avatar
+
+  def self.from_google(google_params)
+    # TODO: find better solution
+    if (user_by_uuid = where(provider: google_params[:provider], uid: google_params[:uid]).first)
+      user_by_uuid
+    elsif (user_by_email = where(email: google_params[:email]).first)
+      user_by_email
+    else
+      create(
+        provider: google_params[:provider],
+        uid: google_params[:uid],
+        email: google_params[:email],
+        password: Devise.friendly_token[0, 20]
+      )
+    end
+
+    # where(provider: google_params[:provider], uid: google_params[:uid]).first_or_create do |user|
+    #   user.email = google_params[:email]
+    #   user.password = Devise.friendly_token[0, 20]
+    # end
+  end
 
   def avatar_url
     # avatar.attached? ? url_for(avatar) : nil
