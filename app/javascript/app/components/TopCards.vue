@@ -31,7 +31,7 @@
               )
               .text-h4.text-blue-grey-14 {{stat.stars.current_day}}/{{stat.tasks.all_active}}
             div(v-else)
-              q-btn.shine.text-yellow-2.bg-amber-5(push glossy round padding="xs" size="60px" icon="verified")
+              q-btn.shine.text-yellow-2.bg-amber-5(push glossy round padding="md" size="45px" icon="library_add_check")
                 q-tooltip(class="bg-primary" :offset="[10, 10]" :delay="200")
                   .text-h5 {{stat.stars.current_day}}/{{stat.tasks.all_active}}
         //- WEEK progress Card
@@ -50,7 +50,7 @@
                     | {{  weekProgress }}%
               .text-h4.text-blue-grey-14 {{stat.stars.current_week}}/{{stat.tasks.all_active * 7}}
             div(v-else)
-              q-btn.text-yellow-2.bg-amber-5(push glossy round padding="xs" size="60px" icon="emoji_events")
+              q-btn.shine.text-yellow-2.bg-amber-5(push glossy round padding="md" size="45px" icon="event_available")
                 q-tooltip(class="bg-primary" :offset="[10, 10]" :delay="200")
                   .text-h5 {{stat.stars.current_week}}/{{stat.tasks.all_active * 7}}
         //- GOAL Card
@@ -77,7 +77,7 @@
                 .text-h4 {{ goalProgress }}
                 .text-h6.text-grey %
               .col(v-else)
-                q-btn.shine.text-yellow-2.bg-amber-5(push glossy round padding="xs" size="60px" icon="emoji_events")
+                q-btn.shine.text-yellow-2.bg-amber-5(push glossy round padding="md" size="45px" icon="emoji_events")
               //q-separator(vertical)
               q-list.col.text-blue-grey-6(align="left" dense padding)
                 q-item
