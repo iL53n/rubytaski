@@ -51,7 +51,8 @@
             filled
             label="Email"
             v-model="user.email"
-            @input="bannerShow=true")
+            @input="bannerShow=true"
+            disable)
             template(v-slot:append)
               q-icon(name="email")
           //- TODO: add change password request
