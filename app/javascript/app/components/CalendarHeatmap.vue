@@ -1,11 +1,12 @@
 <template lang="pug">
   div(class="q-pa-md row justify-around")
+    // or better use :end-date="last_months_day" ?
     calendar-heatmap(
       :values="data"
       :vertical="true"
       :tooltip-unit="$t('heatmap.unit')"
       :locale="$t('heatmap.locale')"
-      :end-date="last_months_day"
+      :end-date="current_date"
       :range-color="['#eceef0','#9ceaaa','#3ec563','#2ca24d','#1b6e36']"
       )
 </template>
@@ -15,7 +16,7 @@
     // props: ['values'],
     data () {
       return {
-        last_months_day: {},
+        // last_months_day: {},
         current_date: new Date()
       }
     },
@@ -30,9 +31,9 @@
       }
     },
     created() {
-      this.getStatistics(),
+      this.getStatistics()
       // TODO: computer better?
-      this.getLastMonthsDay()
+      // this.getLastMonthsDay()
     },
     methods: {
       getStatistics() {
@@ -43,9 +44,9 @@
           .catch(()   => this.error = true)
           .finally(() => this.loading = false)
       },
-      getLastMonthsDay() {
-        this.last_months_day = new Date(this.current_date.getFullYear(), this.current_date.getMonth() + 1, 0);
-      }  
+      // getLastMonthsDay() {
+      //   this.last_months_day = new Date(this.current_date.getFullYear(), this.current_date.getMonth() + 1, 0);
+      // }
     }
   }
 </script>
