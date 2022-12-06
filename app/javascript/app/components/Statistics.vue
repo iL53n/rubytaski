@@ -1,22 +1,22 @@
 <template lang="pug">
   div
-    .text-h3.text-blue-grey-14 {{ $t('stat.title') }} DEMO
+    //.text-h3.text-blue-grey-14 {{ $t('stat.title') }} DEMO
     top-widgets
     .row
       .col
-        stars-day
-      .col
-        tasks-streak
-    .row
-      .col
-        stars-task
-      .col
-        stars-wday
+        stars-date-count
+      //.col
+      //  tasks-streak
+    //.row
+    //  .col
+    //    stars-task
+    //  .col
+    //    stars-wday
 </template>
 
 <script>
   import TopWidgets   from "components/statistics/TopWidgets";
-  import StarsDay     from "components/statistics/Charts/StarsDay";
+  import StarsDateCount     from "components/statistics/Charts/StarsDateCount";
   import TasksStreak  from "components/statistics/Charts/TasksStreak";
   import StarsWday    from "components/statistics/Charts/StarsWday";
   import StarsTask    from "components/statistics/Charts/StarsTask";
@@ -67,22 +67,22 @@
       },
     },
     created() {
-      this.getStatistics()
+      // this.getStatistics()
     },
     methods: {
-      getStatistics() {
-        this.$backend.statistics.index({ scopes: 'general_stat,tasks_stat,goals_stat,stars_stat,treemap_chart' })
-          .then((response) => {
-            this.stat = response.data.stat
-          })
-          .catch(()   => this.error = true)
-          .finally(() => this.loading = false
-          )
-      },
+      // getStatistics() {
+      //   this.$backend.statistics.index({ scopes: 'general_stat,tasks_stat,goals_stat,stars_stat,treemap_chart' })
+      //     .then((response) => {
+      //       this.stat = response.data.stat
+      //     })
+      //     .catch(()   => this.error = true)
+      //     .finally(() => this.loading = false
+      //     )
+      // },
     },
     components: {
       TopWidgets,
-      StarsDay,
+      StarsDateCount,
       TasksStreak,
       StarsWday,
       StarsTask

@@ -16,8 +16,7 @@
     // props: ['values'],
     data () {
       return {
-        // last_months_day: {},
-        current_date: new Date()
+        current_date: Date.now()
       }
     },
     computed: {
@@ -44,9 +43,6 @@
           .catch(()   => this.error = true)
           .finally(() => this.loading = false)
       },
-      // getLastMonthsDay() {
-      //   this.last_months_day = new Date(this.current_date.getFullYear(), this.current_date.getMonth() + 1, 0);
-      // }
     }
   }
 </script>

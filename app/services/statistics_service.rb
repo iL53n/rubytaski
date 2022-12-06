@@ -18,13 +18,34 @@ class StatisticsService
     @performed_scope
   end
 
+  def stars_date_count
+    # [
+    #   [1660048252000,0],
+    #   [1661048252000,6],
+    #   [1662048252000,13],
+    #   [1664048252000,3],
+    #   [1666048252000,11],
+    #   [1668048252000,1],
+    #   [1670059353000,9], // .to_i * 1000
+    # ]
+    # data = stars_count_by_date.map { |k, v| [k, v] }
+
+    arr = []
+    stars_group_by_date.transform_values(&:count).each do |key, value|
+      arr << [(key.to_i * 1000), value]
+    end
+    arr
+
+    # wrap_for_apexchart(arr)
+  end
+
   def stars_stat
     {
       all: stars_count,
       current_year: stars_for_year_count,
       current_month: stars_for_month_count,
       current_week: stars_for_week_count,
-      current_day: stars_for_day_count
+      current_day: stars_for_day_count,
     }
   end
 

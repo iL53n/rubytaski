@@ -6,4 +6,6 @@ json.stat do
 
   json.heatmap @stat.heatmap_chart
   json.treemap @stat.treemap_chart
+
+  json.stars_date_count @stat.stars_date_count
 end
