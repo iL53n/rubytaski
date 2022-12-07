@@ -18,27 +18,6 @@ class StatisticsService
     @performed_scope
   end
 
-  def stars_date_count
-    # [
-    #   [1660048252000,0],
-    #   [1661048252000,6],
-    #   [1662048252000,13],
-    #   [1664048252000,3],
-    #   [1666048252000,11],
-    #   [1668048252000,1],
-    #   [1670059353000,9], // .to_i * 1000
-    # ]
-    # data = stars_count_by_date.map { |k, v| [k, v] }
-
-    arr = []
-    stars_group_by_date.transform_values(&:count).each do |key, value|
-      arr << [(key.to_i * 1000), value]
-    end
-    arr
-
-    # wrap_for_apexchart(arr)
-  end
-
   def stars_stat
     {
       all: stars_count,
@@ -202,6 +181,21 @@ class StatisticsService
 
   # Charts
 
+  def stars_date_count
+    hash = {}
+    range_of_dates.each { |date| hash[date] = 0 }
+
+    stars_group_by_date.transform_values(&:count).each do |key, value|
+      hash[key.to_date] = value
+    end
+
+    hash.to_a
+  end
+
+  def range_of_dates
+    stars.first.due_date.to_date..Date.current
+  end
+
   def treemap_chart
     data = stars_group_by_task.transform_values(&:count).map do |key, value|
       { x: key.title, y: value }
@@ -211,7 +205,7 @@ class StatisticsService
     # wday-count
     # stars_by_due_date('%A').transform_values(&:count).map ...
   end
-  
+
   def wrap_for_apexchart(data)
     [{ data: data }]
   end

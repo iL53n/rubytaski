@@ -1,9 +1,8 @@
 <template lang="pug">
-  .row.justify-around
-      q-card.col.q-ma-md
-        div(id="chart")
-          apexchart(type="radar" height="350" :options="chartOptions" :series="series")
-
+  q-card.col.q-ma-md
+    div(id="chart")
+      .q-pa-sm.text-body1.text-blue-grey-8.float-left Stars by week day
+      apexchart(type="radar" height="250" :options="chartOptions" :series="series")
 </template>
 
 <script>
@@ -12,19 +11,20 @@
       return {
         series: [{
           name: 'Series 1',
-          data: [20, 100, 40, 30, 50, 80, 33],
+          data: [20, 112, 40, 101, 50, 80, 33],
         }],
         chartOptions: {
+          colors: ['#4db6ac'],
           chart: {
-            height: 350,
+            height: 250,
             type: 'radar',
           },
           dataLabels: {
-            enabled: true
+            enabled: false
           },
           plotOptions: {
             radar: {
-              size: 140,
+              size: 90,
               polygons: {
                 strokeColors: '#e9e9e9',
                 fill: {
@@ -33,14 +33,10 @@
               }
             }
           },
-          title: {
-            text: 'Stars by wday'
-          },
-          colors: ['#22b600'],
           markers: {
             size: 4,
             colors: ['#fff'],
-            strokeColor: '#009c1a',
+            strokeColor: '#4db6ac',
             strokeWidth: 2,
           },
           tooltip: {

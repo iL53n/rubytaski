@@ -1,17 +1,17 @@
 <template lang="pug">
   div
-    //.text-h3.text-blue-grey-14 {{ $t('stat.title') }} DEMO
+    //div(class="text-h3 text-blue-grey-14" align="right") {{ $t('stat.title') }} DEMO
     top-widgets
     .row
       .col
         stars-date-count
-      //.col
-      //  tasks-streak
-    //.row
-    //  .col
-    //    stars-task
-    //  .col
-    //    stars-wday
+    .row
+      .col
+        tasks-streak
+      .col
+        stars-task
+      .col
+        stars-wday
 </template>
 
 <script>
@@ -68,6 +68,11 @@
     },
     created() {
       // this.getStatistics()
+    },
+    mounted() {
+      setTimeout(function () {
+        window.dispatchEvent(new Event('resize'))
+      }.bind(this), 700)
     },
     methods: {
       // getStatistics() {

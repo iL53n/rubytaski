@@ -1,9 +1,9 @@
 <template lang="pug">
-  .row.justify-around
-      q-card.col.q-ma-md
-        div(id="chart")
-          apexchart(type="bar" height="350" :options="chartOptions" :series="series")
-
+  q-card.col.q-ma-md
+    div(id="chart")
+      div(style="min-height: 265px;")
+        .q-pa-sm.text-body1.text-blue-grey-8.float-left Stars by task
+        apexchart(type="bar" height="225" :options="chartOptions" :series="series")
 </template>
 
 <script>
@@ -15,41 +15,35 @@
           data: [44, 55, 41, 67, 22, 43, 21, 33, 45, 31, 87, 65]
         }],
         chartOptions: {
-          annotations: {
-            // points: [{
-            //   x: 'Bananas',
-            //   seriesIndex: 0,
-            //   label: {
-            //     borderColor: '#775DD0',
-            //     offsetY: 0,
-            //     style: {
-            //       color: '#fff',
-            //       background: '#775DD0',
-            //     },
-            //     text: 'Bananas are good',
-            //   }
-            // }]
-          },
+          colors: ['#e57373'],
           chart: {
-            height: 350,
+            height: 250,
             type: 'bar',
+            toolbar: {
+              show: true,
+              tools: {
+                download: true,
+                selection: false,
+                zoom: false,
+                zoomin: false,
+                zoomout: false,
+                pan: false,
+                reset: false
+              }
+            },
           },
           plotOptions: {
             bar: {
-              borderRadius: 10,
-              columnWidth: '50%',
+              borderRadius: 3,
+              columnWidth: '90%',
             }
           },
-          title: {
-            text: 'Stars by task'
-          },
           dataLabels: {
-            enabled: false
+            enabled: true
           },
           stroke: {
             width: 2
           },
-
           grid: {
             row: {
               colors: ['#fff', '#f2f2f2']
@@ -57,18 +51,14 @@
           },
           xaxis: {
             labels: {
+              show: false,
               rotate: -45
             },
             categories: [
-              'Task1', 'Task2', 'Task3', 'Task4', 'Task5', 'Task6',
-              'Task7', 'Task8', 'Task9', 'Task10', 'Task11', 'Task12',
+              "Застелить кровать", "Сделать зарядку", "Помочь маме", "Убрать рабочий стол", "Позаниматься англ.яз", "Сделать ДЗ", "Почитать перед сном"
             ],
-            tickPlacement: 'on'
           },
           yaxis: {
-            title: {
-              text: 'Stars',
-            },
           },
           fill: {
             type: 'gradient',
