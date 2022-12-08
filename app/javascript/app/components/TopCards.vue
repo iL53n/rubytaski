@@ -91,13 +91,13 @@
                   div.ellipsis {{ goal.prize }}
             //- NO GOAL
             q-card-section(v-else horizontal)
-              .col-9
+              .col-8
                 q-card-section
-                  .text-h6.text-red-5 У вас нет ни одной активной цели!
+                  .text-body2.text-red-5 У вас нет ни одной активной цели!
                   .text-caption.text-blue-grey-8 Создайтие новую цель, кликнув на иконку.
-              .col-3
+              .col-4
                 q-card-section
-                  q-btn.text-red-4.bg-red-1(size="25px" flat round icon="add" @click="newGoal()")
+                  q-btn.text-red-4.bg-red-1(size="xl" flat round icon="add" @click="newGoal()")
       div(v-else)
         //- NO TASKS
         q-card.col.q-ma-md

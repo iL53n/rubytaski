@@ -7,6 +7,8 @@
           .text-caption.text-blue-grey-8 Tasks
         q-card-section.flex.flex-center(align="right")
           q-btn.text-blue-4.bg-blue-1(unelevated round size="lg" icon="format_list_bulleted")
+      q-tooltip(class="bg-primary" :delay="250")
+        .text-subtitle2 All active tasks
     q-card.col.q-ma-md.zoom-box
       q-card-section(horizontal)
         q-card-section.col(align="left")
@@ -14,6 +16,9 @@
           .text-caption.text-blue-grey-8 Completed
         q-card-section.flex.flex-center(align="right")
           q-btn.text-green-4.bg-green-1(unelevated round size="lg" icon="done_all")
+      q-tooltip(class="bg-primary" :delay="250")
+        .text-subtitle2 How many tasks have been completed
+        .text-caption *is equal all stars
     q-card.col.q-ma-md.zoom-box
       q-card-section(horizontal)
         q-card-section.col(align="left")
@@ -23,6 +28,9 @@
           .text-caption.text-blue-grey-8 Efficiency
         q-card-section.flex.flex-center(align="right")
           q-btn.text-red-4.bg-red-1(unelevated round size="lg" icon="speed")
+      q-tooltip(class="bg-primary" :delay="250")
+        .text-subtitle2 What percentage of all possible stars have been obtained
+        .text-caption [ All Stars / (All active tasks * All active days) * 100 ]
     q-card.col.q-ma-md.zoom-box
       q-card-section(horizontal)
         q-card-section.col(align="left")
@@ -30,6 +38,8 @@
           .text-caption.text-blue-grey-8 Days
         q-card-section.flex.flex-center(align="right")
           q-btn.text-teal-4.bg-teal-1(unelevated round size="lg" icon="date_range")
+      q-tooltip(class="bg-primary" :delay="250")
+        .text-subtitle2 All active days
 </template>
 
 <script>
