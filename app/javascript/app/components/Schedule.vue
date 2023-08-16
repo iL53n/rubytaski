@@ -49,10 +49,10 @@
                       q-list
                         q-item(clickable to="/tasks_list" class="text-primary")
                           q-item-section Настроить список задач
-              template(#scheduler-resource="{ resource /*, index */ }") 
+              template(#scheduler-resource="{ resource /*, index */ }")
                 q-btn(@click="showTask(resource.id)" flat size="lg" class="full-width" align="left")
                   div(class="ellipsis") {{ resource.title }}
-                q-tooltip(class="bg-primary" :delay="700") 
+                q-tooltip(class="bg-primary" :delay="700")
                  .text-subtitle1 {{ resource.title }}
                  .text-subtitle2 {{ resource.description }}
               template(#scheduler-resource-day="{ timestamp, /* index, */ resource }")
@@ -141,7 +141,7 @@
         this.updateTitle()
       },
       getTasks() {
-        this.$backend.tasks.index({ scopes: 'created', start_date: this.start })
+        this.$backend.tasks.index({ scopes: 'created', start_date: this.start.date })
           .then((response) => this.resources = response.data)
           .catch(()        => this.error = true)
           .finally(()      => this.loading = false)
@@ -176,8 +176,8 @@
             this.heatmap = response.data.stat.heatmap
           })
           .catch(()   => this.error = true)
-          .finally(() => { 
-            // this.loading = false 
+          .finally(() => {
+            // this.loading = false
           })
       },
       calendarNext () {
@@ -226,7 +226,7 @@
   background: linear-gradient(90deg, #847bf3 0%, #b47bf3 100%);
 }
 
-.emergence { 
+.emergence {
   animation: emergence-with-rotate 0.8s;
   animation-iteration-count: 1;
 }
@@ -236,7 +236,7 @@
     transform: rotate(0deg) scale(0.5);
   }
   50% {
-    transform: 
+    transform:
     rotate(360deg) scale(1);
   }
   65% {
