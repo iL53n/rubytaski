@@ -9,5 +9,6 @@ json.task do
                 :order,
                 :stars_count,
                 :current_streak,
-                :longest_streak
+                :longest_streak,
+                :has_reminder
 end

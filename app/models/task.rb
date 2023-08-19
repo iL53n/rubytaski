@@ -4,8 +4,9 @@ class Task < ApplicationRecord
 
   belongs_to :user
   has_many :stars, dependent: :destroy
+  has_one :reminder, dependent: :destroy
 
-  enum state: {created: 0, archived: 5} do
+  enum state: { created: 0, archived: 5 } do
     event :archive do
       transition created: :archived
     end
@@ -33,6 +34,10 @@ class Task < ApplicationRecord
 
   def longest_streak
     stars.exists? ? streaks.max : 0
+  end
+
+  def has_reminder
+    reminder.present?
   end
 
   private

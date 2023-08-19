@@ -49,12 +49,24 @@
                       q-list
                         q-item(clickable to="/tasks_list" class="text-primary")
                           q-item-section Настроить список задач
+                          div(class="q-pa-md")
               template(#scheduler-resource="{ resource /*, index */ }")
                 q-btn(@click="showTask(resource.id)" flat size="lg" class="full-width" align="left")
-                  div(class="ellipsis") {{ resource.title }}
-                q-tooltip(class="bg-primary" :delay="700")
-                 .text-subtitle1 {{ resource.title }}
-                 .text-subtitle2 {{ resource.description }}
+                  .ellipsis {{ resource.title }}
+                    q-badge(
+                      v-if="resource.has_reminder"
+                      align="top"
+                      transparent
+                      rounded
+                      color="white"
+                      text-color="blue-5"
+                      )
+                      q-icon(name='alarm_on')
+                      q-tooltip.bg-blue-5(anchor="top middle" self="bottom middle" :offset="[10, 10]")
+                        .text-subtitle2 {{ toLocal(resource.reminder_info.time_utc) }}{{ resource.reminder_info.text_days }}
+                //- q-tooltip(class="bg-primary" :delay="700")
+                //-  .text-subtitle1 {{ resource.title }}
+                //-  .text-subtitle2 {{ resource.description }}
               template(#scheduler-resource-day="{ timestamp, /* index, */ resource }")
                 q-btn(flat class="fit" @click.stop="addStar(resource.id, timestamp.date)")
                   div(v-for="star in resource.stars_dates" :key="star.id")
@@ -134,6 +146,13 @@
       refresh() {
         this.getTasks();
         this.getStatistics()
+      },
+      toLocal(utcTime) {
+        const utcDate = new Date(`1963-01-01T${utcTime}`);
+        const localTime = new Date(utcDate.getTime() - utcDate.getTimezoneOffset() * 60000);
+        const options = { hour: "2-digit", minute: "2-digit" };
+        const localTimeString = localTime.toLocaleTimeString(undefined, options);
+        return localTimeString;
       },
       onChange ({ start }) {
         this.start = start;

@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
+  require 'sidekiq/web'
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
+  mount Sidekiq::Web => "/sidekiq"
+
   root to: 'application#index'
 
   devise_for :users, controllers: {
@@ -14,6 +18,8 @@ Rails.application.routes.draw do
     resources :tasks, only: %i[index create show update destroy] do
       patch :update_order, to: 'tasks#update_order', on: :collection
       patch :set_state, to: 'tasks#set_state', on: :member
+
+      resources :reminders, only: :create
     end
 
     resources :goals, only: %i[index create show update destroy] do

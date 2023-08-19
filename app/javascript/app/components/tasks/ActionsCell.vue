@@ -33,6 +33,9 @@
       apply(action) {
         if (typeof this[action] === 'function') this[action]()
       },
+      reminder() {
+        this.$router.push({ name: 'indexTaskReminders', params: { id: this.id } })
+      },
       edit() {
         this.$router.push({ name: 'editTask', params: { id: this.id } })
       },

@@ -24,7 +24,7 @@
             wrap-cells)
             thead(style="background-color: rgb(248, 247, 253)")
               tr(class="text-primary")
-                th(class="text-center") 
+                th(class="text-center")
                 //- th(class="text-left") ID
                 //- th(class="text-left") #
                 th(class="text-left") Title
@@ -44,20 +44,20 @@
                   q-icon(name="dehaze" class="handle text-grey" size="xs")
                 //- td {{ el.id }}
                 //- td {{ el.order + 1 }}
-                td {{ el.title }} 
+                td {{ el.title }}
                 td {{ el.description }}
-                td 
+                td
                   q-badge(
                     :color="statuses[el.state][1]",
                     :label="statuses[el.state][0]")
-                td(key="actions" style="width: 185px")
+                td(key="actions" style="width: 240px")
                   actions-cell(
                     :actions="el.actions",
                     :title="el.title",
                     :state="el.state"
                     :id="el.id"
                     @changed="getTasks()")
-      router-view(@rchanged="getTasks()")
+      router-view(@changed="getTasks()")
 </template>
 
 <script>
@@ -125,7 +125,7 @@
       },
     },
     components: {
-      NewTask,  
+      NewTask,
       actionsCell,
       draggable
     },

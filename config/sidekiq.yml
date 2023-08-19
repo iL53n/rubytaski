@@ -1,0 +1,6 @@
+:scheduler:
+  :schedule:
+    reminder_scheduler:
+      cron: '* * * * *'  # Run every minute
+      class: ReminderScheduler
+      queue: default
