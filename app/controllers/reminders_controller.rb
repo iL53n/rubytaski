@@ -10,6 +10,20 @@ class RemindersController < ApplicationController
     end
   end
 
+  def destroy
+    task = Task.find_by(id: params[:task_id])
+    reminder = task.reminder
+
+    if reminder.destroy
+      render status: :ok,
+        json: {notice: "Successfully deleted reminder."}
+    else
+      error_response(reminder, :unprocessable_entity)
+    end
+  end
+
+  private
+
   def reminder_params
     params.require(:reminder).permit(
       :task_id,

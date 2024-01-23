@@ -19,7 +19,7 @@ Rails.application.routes.draw do
       patch :update_order, to: 'tasks#update_order', on: :collection
       patch :set_state, to: 'tasks#set_state', on: :member
 
-      resources :reminders, only: :create
+      resources :reminders, only: %i[create destroy]
     end
 
     resources :goals, only: %i[index create show update destroy] do

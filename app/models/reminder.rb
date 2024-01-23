@@ -1,7 +1,7 @@
 class Reminder < ApplicationRecord
   belongs_to :task
 
-  validates :remind_at, presence: true
+  validates :remind_at, :recurrence, :days, presence: true
   validates :recurrence, inclusion: { in: %w[daily weekly monthly], message: 'must be daily, weekly, or monthly' }
 
   before_save :destroy_previous_reminder, if: :will_save_change_to_task_id?

@@ -21,7 +21,8 @@ const backend = {
     update_order: (order)  => adapter.patch(`tasks/update_order`, { order: order }),
     set_state:    (params) => adapter.patch(`tasks/${params.id}/set_state`, params),
     destroy:      (id)     => adapter.delete(`tasks/${id}`),
-    create_reminders: (params) => adapter.post(`tasks/${params.task_id}/reminders`, params)
+    create_reminder: (params) => adapter.post(`tasks/${params.task_id}/reminders`, params),
+    delete_reminder: (id) => adapter.delete(`tasks/${id}/reminders`)
   },
   goals: {
     index:   (params)   => adapter.get('goals', { params: params }),

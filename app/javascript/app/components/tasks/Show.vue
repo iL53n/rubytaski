@@ -23,9 +23,25 @@ q-dialog(
                   q-item-section
                     q-item-label {{ task.updated_at }}
                     q-item-label(caption) Updated
+        br
         q-separator
         br
-        q-btn(@click="showReminders" color="blue-5" outline no-caps icon="alarm" label="Reminders")
+        q-btn(
+          @click="showReminders"
+          color="blue-5"
+          outline
+          no-caps
+          icon="alarm"
+         :label="reminder_btn_label"
+        )
+        q-btn(
+          @click="deleteReminder"
+          flat
+          round
+          size="sm"
+          color="blue-5"
+          icon="close"
+        )
       q-separator(vertical)
       q-card-actions(vertical align="left" dense class="justify-around q-px-md")
         q-item
@@ -63,14 +79,36 @@ q-dialog(
     computed: {
       id () {
         return this.$route.params.id
+      },
+      reminder_btn_label () {
+        if (this.task.has_reminder) {
+          return `${this.toLocal(this.task.reminder_info.time_utc)}${this.task.reminder_info.text_days}`
+        } else {
+          return "No reminders"
+        }
       }
     },
     created() {
       this.getTask()
     },
     methods: {
+      toLocal(utcTime) {
+        const utcDate = new Date(`1963-01-01T${utcTime}`);
+        const localTime = new Date(utcDate.getTime() - utcDate.getTimezoneOffset() * 60000);
+        const options = { hour: "2-digit", minute: "2-digit" };
+        const localTimeString = localTime.toLocaleTimeString(undefined, options);
+        return localTimeString;
+      },
       showReminders() {
         this.$router.push({ name: 'dashboardTaskReminders', params: { id: this.id } })
+      },
+      deleteReminder() {
+        this.$backend.tasks.delete_reminder(this.id)
+          .then((response) => {
+            this.task = response.data.task
+          })
+          .catch(()   => this.error = true)
+          .finally(() => this.loading = false)
       },
       getTask() {
         this.$backend.tasks.show(this.id)

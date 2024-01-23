@@ -49,6 +49,7 @@
               @click="addReminders"
               no-caps
               v-close-popup
+              :disable="disable_save_button"
             )
 </template>
 
@@ -67,7 +68,7 @@
           {label: 'Fri', value: 5},
           {label: 'Sat', value: 6},
           {label: 'Sun', value: 0},
-      ],
+        ],
         selection: [],
         time: '09:00',
         error: false,
@@ -76,6 +77,9 @@
     computed: {
       id () {
         return this.$route.params.id
+      },
+      disable_save_button () {
+        return this.selection.length === 0 || this.time.length < 5
       }
     },
     created () {
@@ -90,7 +94,7 @@
       addReminders() {
         const utcTime = this.toUTC(this.time)
 
-        this.$backend.tasks.create_reminders(
+        this.$backend.tasks.create_reminder(
           {
             task_id: this.id,
             recurrence: this.recurrence,
