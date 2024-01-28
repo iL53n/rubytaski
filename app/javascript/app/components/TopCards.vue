@@ -27,7 +27,7 @@
                 label
                 :label-value="leftToCompleteDay + $t('stat.left_to_complete')"
                 label-always
-                color="orange-4"
+                color="blue-4"
               )
               .text-h4.text-blue-grey-14 {{stat.stars.current_day}}/{{stat.tasks.all_active}}
             div(v-else)
@@ -258,7 +258,7 @@
   opacity: 1;
   background: rgba(255, 255, 255, 0.13);
   background: linear-gradient(
-    to right, 
+    to right,
     /*rgba(255, 255, 255, 0.13) 0%,*/
     rgba(255, 255, 255, 0.0) 0%,
     rgba(255, 255, 255, 0.13) 77%,

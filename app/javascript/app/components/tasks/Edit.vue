@@ -35,7 +35,7 @@
           q-card-section(class="q-gutter-y-md column")
             q-card-actions(align="right" class="q-gutter-sm")
               q-btn(
-                unelevated 
+                unelevated
                 color="deep-purple-1"
                 text-color="primary"
                 label="Cancel"
@@ -54,7 +54,7 @@
 
 <script>
   import LoadingMixin from 'mixins'
-  
+
   export default {
     data: function () {
       return {
@@ -75,7 +75,7 @@
             this.error = true
           })
           .finally(() => {
-            this.loading = false  
+            this.loading = false
           })
       },
       updateTask() {

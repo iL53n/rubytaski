@@ -17,29 +17,29 @@
               q-btn(size="sm" icon="keyboard_arrow_left" @click="calendarPrev")
               q-btn(size="sm" icon="horizontal_rule" @click="calendarToday")
               q-btn(size="sm" icon="keyboard_arrow_right" @click="calendarNext")
-            q-toolbar-title {{ titleDate }}
-          q-card-section
-            // TODO: fix resource-width
+            q-toolbar-title.text-subtitle1 {{ titleDate }}
+          div(v-if="$q.platform.is.mobile")
             q-calendar(
-              ref="calendar"
-              v-model="selectedDate"
-              no-active-date
-              short-weekday-label
-              view="week-scheduler"
-              :resources="resources.schedule.data"
-              resource-key="id"
-              :resource-width="this.$q.screen.width * 0.28"
-              :resource-height="0"
-              sticky
-              cell-width="auto"
-              :locale="locale"
-              animated
-              transition-prev="slide-right"
-              transition-next="slide-left"
-              style="height: 100%"
-              :weekdays=[1, 2, 3, 4, 5, 6, 0]
-              @change="onChange"
-            )
+                ref="calendar"
+                v-model="selectedDate"
+                no-active-date
+                short-weekday-label
+                view="custom-scheduler"
+                :resources="resources.schedule.data"
+                resource-key="id"
+                :resource-width="this.$q.screen.width * 0.4"
+                :resource-height="0"
+                sticky
+                cell-width="auto"
+                :locale="locale"
+                animated
+                transition-prev="slide-right"
+                transition-next="slide-left"
+                style="height: 100%"
+                :max-days="3"
+                :weekdays=[1, 2, 3, 4, 5, 6, 0]
+                @change="onChange"
+              )
               template(#scheduler-resources-header)
                 //- div(class="full-height row justify-center items-center")
                 //-   div(class="text-h6") {{ titleDate }}
@@ -49,12 +49,24 @@
                       q-list
                         q-item(clickable to="/tasks_list" class="text-primary")
                           q-item-section Настроить список задач
+                          div(class="q-pa-md")
               template(#scheduler-resource="{ resource /*, index */ }")
-                q-btn(@click="showTask(resource.id)" flat size="lg" class="full-width" align="left")
-                  div(class="ellipsis") {{ resource.title }}
-                q-tooltip(class="bg-primary" :delay="700")
-                 .text-subtitle1 {{ resource.title }}
-                 .text-subtitle2 {{ resource.description }}
+                q-btn(@click="showTask(resource.id)" flat size="xs" padding="md" class="full-width" align="left")
+                  .ellipsis.text-weight-bold {{ resource.title }}
+                    q-badge(
+                      v-if="resource.has_reminder"
+                        align="top"
+                        transparent
+                        rounded
+                        color="white"
+                        text-color="blue-5"
+                      )
+                      q-icon(name='alarm_on')
+                      q-tooltip.bg-blue-5(anchor="top middle" self="bottom middle" :offset="[10, 10]")
+                        .text-subtitle2 {{ toLocal(resource.reminder_info.time_utc) }}{{ resource.reminder_info.text_days }}
+                //- q-tooltip(class="bg-primary" :delay="700")
+                //-  .text-subtitle1 {{ resource.title }}
+                //-  .text-subtitle2 {{ resource.description }}
               template(#scheduler-resource-day="{ timestamp, /* index, */ resource }")
                 q-btn(flat class="fit" @click.stop="addStar(resource.id, timestamp.date)")
                   div(v-for="star in resource.stars_dates" :key="star.id")
@@ -64,7 +76,7 @@
                         push
                         glossy
                         round
-                        padding="sm"
+                        padding="xs"
                         class="fit emergence zoom-box"
                         align="around"
                         name="star"
@@ -74,6 +86,75 @@
                         icon="star"
                         @click.stop="removeStar(star.id)"
                       )
+          div(v-else-if="$q.platform.is.desktop")
+            q-card-section
+              // TODO: fix resource-width
+              q-calendar(
+                ref="calendar"
+                v-model="selectedDate"
+                no-active-date
+                short-weekday-label
+                view="week-scheduler"
+                :resources="resources.schedule.data"
+                resource-key="id"
+                :resource-width="this.$q.screen.width * 0.28"
+                :resource-height="0"
+                sticky
+                cell-width="auto"
+                :locale="locale"
+                animated
+                transition-prev="slide-right"
+                transition-next="slide-left"
+                style="height: 100%"
+                :weekdays=[1, 2, 3, 4, 5, 6, 0]
+                @change="onChange"
+              )
+                template(#scheduler-resources-header)
+                  //- div(class="full-height row justify-center items-center")
+                  //-   div(class="text-h6") {{ titleDate }}
+                  div(class="col-auto")
+                    q-btn(color="grey-4" round flat icon="tune")
+                      q-menu(cover auto-close)
+                        q-list
+                          q-item(clickable to="/tasks_list" class="text-primary")
+                            q-item-section Настроить список задач
+                            div(class="q-pa-md")
+                template(#scheduler-resource="{ resource /*, index */ }")
+                  q-btn(@click="showTask(resource.id)" flat size="lg" class="full-width" align="left")
+                    .ellipsis {{ resource.title }}
+                      q-badge(
+                        v-if="resource.has_reminder"
+                          align="top"
+                          transparent
+                          rounded
+                          color="white"
+                          text-color="blue-5"
+                        )
+                        q-icon(name='alarm_on')
+                        q-tooltip.bg-blue-5(anchor="top middle" self="bottom middle" :offset="[10, 10]")
+                          .text-subtitle2 {{ toLocal(resource.reminder_info.time_utc) }}{{ resource.reminder_info.text_days }}
+                  //- q-tooltip(class="bg-primary" :delay="700")
+                  //-  .text-subtitle1 {{ resource.title }}
+                  //-  .text-subtitle2 {{ resource.description }}
+                template(#scheduler-resource-day="{ timestamp, /* index, */ resource }")
+                  q-btn(flat class="fit" @click.stop="addStar(resource.id, timestamp.date)")
+                    div(v-for="star in resource.stars_dates" :key="star.id")
+                      div(v-show="star.due_date == timestamp.date")
+                        //star options: stars, verified, check_circle, task_alt
+                        q-btn(
+                          push
+                          glossy
+                          round
+                          padding="xs"
+                          class="fit emergence zoom-box"
+                          align="around"
+                          name="star"
+                          color="amber-5"
+                          text-color="yellow-2"
+                          size="lg"
+                          icon="star"
+                          @click.stop="removeStar(star.id)"
+                        )
     router-view
 </template>
 
@@ -82,7 +163,6 @@
   import loadingMixin from 'mixins'
 
   // TODO: remove it (DRY)
-  import { date } from 'quasar'
   import QCalendar from '@quasar/quasar-ui-qcalendar'
 
   export default {
@@ -134,6 +214,13 @@
       refresh() {
         this.getTasks();
         this.getStatistics()
+      },
+      toLocal(utcTime) {
+        const utcDate = new Date(`1963-01-01T${utcTime}`);
+        const localTime = new Date(utcDate.getTime() - utcDate.getTimezoneOffset() * 60000);
+        const options = { hour: "2-digit", minute: "2-digit" };
+        const localTimeString = localTime.toLocaleTimeString(undefined, options);
+        return localTimeString;
       },
       onChange ({ start }) {
         this.start = start;

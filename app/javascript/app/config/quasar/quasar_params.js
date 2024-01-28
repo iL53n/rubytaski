@@ -1,10 +1,10 @@
 // import iconSet from 'quasar/icon-set/fontawesome-v5.js'
 // import '@quasar/extras/fontawesome-v5/fontawesome-v5.css'
-import iconSet from 'quasar/icon-set/material-icons'
-import '@quasar/extras/material-icons/material-icons.css'
+import iconSet from "quasar/icon-set/material-icons";
+import "@quasar/extras/material-icons/material-icons.css";
 // import '@quasar/extras/roboto-font/roboto-font.css'
-import '../../assets/styles/quasar.styl'
-import 'quasar/dist/quasar.ie.polyfills'
+import "../../assets/styles/quasar.styl";
+import "quasar/dist/quasar.ie.polyfills";
 import {
   ClosePopup,
   date,
@@ -21,6 +21,7 @@ import {
   QCard,
   QCardActions,
   QCardSection,
+  QCheckbox,
   QChip,
   QDate,
   QDialog,
@@ -51,12 +52,14 @@ import {
   QSlider,
   QSpace,
   QSpinnerDots,
+  QTab,
   QTable,
   QTd,
+  QTime,
   QToolbar,
   QToolbarTitle,
-  QTooltip
-} from 'quasar'
+  QTooltip,
+} from "quasar";
 
 export default {
   config: {},
@@ -71,6 +74,7 @@ export default {
     QCard,
     QCardActions,
     QCardSection,
+    QCheckbox,
     QChip,
     QDate,
     QDialog,
@@ -101,22 +105,24 @@ export default {
     QSlider,
     QSpace,
     QSpinnerDots,
+    QTab,
     QTable,
     QTd,
+    QTime,
     QToolbar,
     QToolbarTitle,
-    QTooltip
+    QTooltip,
   },
   directives: {
     ClosePopup,
-    TouchSwipe
+    TouchSwipe,
   },
   iconSet: iconSet,
   utils: {
-    date
+    date,
   },
   plugins: {
     Dialog,
-    Notify
+    Notify,
   },
-}
+};

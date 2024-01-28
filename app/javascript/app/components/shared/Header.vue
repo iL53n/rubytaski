@@ -3,7 +3,8 @@
       q-toolbar
         q-toolbar-title
           q-btn(flat to="/" class="text-primary" size="lg" label="rubytaski" no-caps)
-          //q-badge(align="top" color="orange") v1.0.0b
+          // q-badge(align="top" color="orange") v1.0.0b
+          // q-btn(flat @click="miniState = !miniState" round dense color="primary" icon="menu")
         q-chip(size="20px" square color="primary" text-color="white")
           //q-item-section(avatar) add some gap between avatar and nik
           q-avatar(rounded)
@@ -63,7 +64,7 @@
         }
       },
       age() {
-        var today = new Date(); 
+        var today = new Date();
         var birth_date = new Date(this.user.date_of_birth)
         return Math.floor((today - birth_date) / (365*24*60*60*1000))
       }
@@ -81,6 +82,13 @@
 </script>
 
 <style scoped>
+  #square {
+    width: 25px;
+    height: 25px;
+    border-color: #fff200;
+    border-style: solid;
+    border-width: 4px
+  }
 .profile-icon {
   border-radius: 5px;
   padding: 10px

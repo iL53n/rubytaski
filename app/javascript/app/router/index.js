@@ -3,20 +3,21 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
-const Tasks      = () => import(/* webpackChunkName: "tasks" */ 'components/tasks/Index')
-const Task       = () => import(/* webpackChunkName: "dashboard" */ 'components/tasks/Show')
-const NewTask    = () => import(/* webpackChunkName: "tasks" */ 'components/tasks/New')
-const EditTask   = () => import(/* webpackChunkName: "tasks" */ 'components/tasks/Edit')
-const Goals      = () => import(/* webpackChunkName: "goals" */ 'components/goals/Index')
-const Goal       = () => import(/* webpackChunkName: "goals" */ 'components/goals/Show')
-const NewGoal    = () => import(/* webpackChunkName: "goals" */ 'components/goals/New')
-const EditGoal   = () => import(/* webpackChunkName: "goals" */ 'components/goals/Edit')
-const DoneGoal   = () => import(/* webpackChunkName: "goals" */ 'components/goals/Done')
-const Dashboard  = () => import(/* webpackChunkName: "dashboard" */ 'components/Dashboard')
-const Statistics = () => import(/* webpackChunkName: "statistics" */ 'components/Statistics')
-const Profile    = () => import(/* webpackChunkName: "profile" */ 'components/Profile')
-const Feedback   = () => import(/* webpackChunkName: "profile" */ 'components/Feedback')
-const About      = () => import(/* webpackChunkName: "profile" */ 'components/About')
+const Tasks         = () => import(/* webpackChunkName: "tasks" */ 'components/tasks/Index')
+const Task          = () => import(/* webpackChunkName: "dashboard" */ 'components/tasks/Show')
+const NewTask       = () => import(/* webpackChunkName: "tasks" */ 'components/tasks/New')
+const EditTask      = () => import(/* webpackChunkName: "tasks" */ 'components/tasks/Edit')
+const TaskReminders = () => import(/* webpackChunkName: "tasks" */ 'components/reminders/New')
+const Goals         = () => import(/* webpackChunkName: "goals" */ 'components/goals/Index')
+const Goal          = () => import(/* webpackChunkName: "goals" */ 'components/goals/Show')
+const NewGoal       = () => import(/* webpackChunkName: "goals" */ 'components/goals/New')
+const EditGoal      = () => import(/* webpackChunkName: "goals" */ 'components/goals/Edit')
+const DoneGoal      = () => import(/* webpackChunkName: "goals" */ 'components/goals/Done')
+const Dashboard     = () => import(/* webpackChunkName: "dashboard" */ 'components/Dashboard')
+const Statistics    = () => import(/* webpackChunkName: "statistics" */ 'components/Statistics')
+const Profile       = () => import(/* webpackChunkName: "profile" */ 'components/Profile')
+const Feedback      = () => import(/* webpackChunkName: "profile" */ 'components/Feedback')
+const About         = () => import(/* webpackChunkName: "profile" */ 'components/About')
 
 export default new VueRouter ({
   mode: 'history',
@@ -27,7 +28,8 @@ export default new VueRouter ({
       children: [
         { path: 'new/', component: NewTask, name: 'newTask' },
         { path: ':id/edit/', component: EditTask, name: 'editTask' },
-        { path: ':id/', component: Task, name: 'showTask' }
+        { path: ':id/', component: Task, name: 'showTask' },
+        { path: ':id/reminders/', component: TaskReminders, name: 'indexTaskReminders' },
       ]
     },
     { path: '/goals_list', component: Goals,
@@ -39,11 +41,12 @@ export default new VueRouter ({
       ]
     },
     { path: '/dashboard', component: Dashboard,
-    children: [
-      { path: ':id/', component: Task, name: 'dashboardShowTask' },
-      { path: 'new_goal/', component: NewGoal, name: 'dashboardNewGoal' },
-      { path: 'new_task/', component: NewTask, name: 'dashboardNewTask' }
-    ]
+      children: [
+        { path: ':id/', component: Task, name: 'dashboardShowTask' },
+        { path: ':id/reminders/', component: TaskReminders, name: 'dashboardTaskReminders' },
+        { path: 'new_goal/', component: NewGoal, name: 'dashboardNewGoal' },
+        { path: 'new_task/', component: NewTask, name: 'dashboardNewTask' }
+      ]
     },
     { path: '/my_statistics', component: Statistics },
     { path: '/profile', component: Profile },

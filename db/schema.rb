@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_29_173510) do
+ActiveRecord::Schema.define(version: 2023_08_16_114132) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,6 +81,16 @@ ActiveRecord::Schema.define(version: 2022_11_29_173510) do
     t.index ["user_id"], name: "index_goals_on_user_id"
   end
 
+  create_table "reminders", force: :cascade do |t|
+    t.bigint "task_id", null: false
+    t.string "remind_at", null: false
+    t.string "recurrence", null: false
+    t.integer "days", null: false, array: true
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["task_id"], name: "index_reminders_on_task_id"
+  end
+
   create_table "stars", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "task_id", null: false
@@ -124,4 +134,5 @@ ActiveRecord::Schema.define(version: 2022_11_29_173510) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "reminders", "tasks"
 end
