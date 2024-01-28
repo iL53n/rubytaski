@@ -1,25 +1,31 @@
 <template lang="pug">
-q-layout(v-if="!!user" view="lHr lpR fFf")
+q-layout(v-if="!!user" view="lHh lpr lFf" )
   header-component
   left-menu
   right-menu
 
   q-page-container(align="middle")
-    q-btn(push label="TEST NOTIFICATION" @click="remind({task: {title: 'test'}})")
-    audio(id="notificationSound")
-      source(src="/Users/Illia_Hrybko/Desktop/rt/rubytaski/app/javascript/app/assets/sounds/remind.mp3"  type="audio/mpeg")
+    //- q-btn(push label="TEST NOTIFICATION" @click="remind({task: {title: 'test'}})")
+    //- audio(id="notificationSound")
+    //-   source(src="/Users/Illia_Hrybko/Desktop/rt/rubytaski/app/javascript/app/assets/sounds/remind.mp3"  type="audio/mpeg")
     router-view
+  div(v-if="$q.platform.is.mobile")
+    footer-component
+
+
 </template>
 
 <script>
   import Languages       from 'config/quasar/lang/index.json'
   import HeaderComponent from 'components/shared/Header'
+  import FooterComponent from 'components/shared/Footer'
   import LeftMenu        from 'components/shared/LeftMenu'
   import RightMenu       from 'components/shared/RightMenu'
 
   export default {
     data () {
       return {
+        tab: 'images'
       }
     },
     computed: {
@@ -112,6 +118,7 @@ q-layout(v-if="!!user" view="lHr lpR fFf")
     },
     components: {
       HeaderComponent,
+      FooterComponent,
       LeftMenu,
       RightMenu
     },
