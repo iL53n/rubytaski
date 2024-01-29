@@ -40,6 +40,14 @@ class Task < ApplicationRecord
     reminder.present?
   end
 
+  def created_formatted
+    created_at.strftime("%d.%m.%Y %H:%M")
+  end
+
+  def updated_formatted
+    updated_at.strftime("%d.%m.%Y %H:%M")
+  end
+
   private
 
   def streaks

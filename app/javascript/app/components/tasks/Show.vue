@@ -6,7 +6,41 @@ q-dialog(
   transition-show="slide-up"
   transition-hide="slide-down"
 )
-  q-card(class="text-grey-10" flat bordered style="width: 100%; max-width: 600px")
+  q-card(v-if="$q.platform.is.mobile" flat bordered class="text-grey-10")
+    q-card-section
+      .text-h5.q-mt-sm.q-mb-xs {{ task.title }}
+      //- .text-subtitle2 by John Doe
+      .absolute
+          q-btn(color="grey-4" round flat icon="info")
+            q-menu(auto-close self="top end")
+              q-list
+                q-item
+                  q-item-section
+                    q-item-label {{ task.created_formatted }}
+                    q-item-label(caption) Created
+                q-item
+                  q-item-section
+                    q-item-label {{ task.created_formatted }}
+                    q-item-label(caption) Updated
+    q-separator
+    q-card-section {{ task.description }}
+    q-separator
+    q-card-actions
+      q-item(class="justify-between items-end")
+        q-item-section.col(avatar)
+          q-icon(color="amber-4" name="star" size="md")
+          q-item-label(caption) All stars
+          q-item-label.text-h5 {{ task.stars_count }}
+        q-item-section.col(avatar)
+          q-icon(color="teal-4" name="insights" size="md")
+          q-item-label(caption) Current streak
+          q-item-label.text-h5 {{ task.current_streak }}
+        q-item-section.col(avatar)
+          q-icon(color="deep-purple-4" name="linear_scale" size="md")
+          q-item-label(caption) Longest streak
+          q-item-label.text-h5 {{ task.longest_streak }}
+
+  q-card(v-else class="text-grey-10" flat bordered style="width: 100%; max-width: 600px")
     q-card-section(horizontal)
       q-card-section(class="col")
         div(class="text-h5 q-mt-sm q-mb-xs") {{ task.title }}
@@ -17,11 +51,11 @@ q-dialog(
               q-list
                 q-item
                   q-item-section
-                    q-item-label {{ task.created_at }}
+                    q-item-label {{ task.created_formatted }}
                     q-item-label(caption) Created
                 q-item
                   q-item-section
-                    q-item-label {{ task.updated_at }}
+                    q-item-label {{ task.created_formatted }}
                     q-item-label(caption) Updated
         br
         q-separator
