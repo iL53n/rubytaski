@@ -2,45 +2,50 @@
 .row.justify-around(v-if="stat.tasks.all_active")
   q-card.col.q-ma-md.zoom-box
     q-list(dense)
-      q-item
-        q-item-section(avatar)
-          .text-subtitle1.text-grey.ellipsis Today
-        q-item-section
-          q-slider(
-            v-model="stat.stars.current_day"
-            :min="0"
-            :max="stat.tasks.all_active"
-            readonly
-            label
-            :label-value="this.stat.stars.current_day + '/' + this.stat.tasks.all_active "
-            color="blue-4"
-          )
-      q-item
-        q-item-section(avatar)
-          .text-subtitle1.text-grey.ellipsis Week
-        q-item-section
-          q-slider(
-            v-model="stat.stars.current_week"
-            :min="0"
-            :max="stat.tasks.all_active * 7"
-            readonly
-            label
-            :label-value="this.stat.stars.current_week + '/' + this.stat.tasks.all_active * 7"
-            color="green-4"
-          )
-      q-item
-        q-item-section(avatar)
-          .text-subtitle1.text-grey.ellipsis Goal
-        q-item-section
-          q-slider(
-            v-model="goalProgress"
-            :min="0"
-            :max="this.stat.goals.current.number_of_stars"
-            readonly
-            :label-value="this.stat.goals.current.completed_stars + '/' + this.stat.goals.current.number_of_stars"
-            color="red-4"
-          )
-
+      q-expansion-item(v-model="expanded" dense)
+        template(v-slot:header)
+          q-item-section(avatar)
+            q-icon(color="primary" name="format_list_bulleted")
+          q-item-section
+        q-list(dense)
+          q-item
+            q-item-section(avatar)
+              .text-subtitle1.text-grey.ellipsis Today
+            q-item-section
+              q-slider(
+                v-model="stat.stars.current_day"
+                :min="0"
+                :max="stat.tasks.all_active"
+                readonly
+                label
+                :label-value="this.stat.stars.current_day + '/' + this.stat.tasks.all_active "
+                color="blue-4"
+              )
+          q-item
+            q-item-section(avatar)
+              .text-subtitle1.text-grey.ellipsis Week
+            q-item-section
+              q-slider(
+                v-model="stat.stars.current_week"
+                :min="0"
+                :max="stat.tasks.all_active * 7"
+                readonly
+                label
+                :label-value="this.stat.stars.current_week + '/' + this.stat.tasks.all_active * 7"
+                color="green-4"
+              )
+          q-item
+            q-item-section(avatar)
+              .text-subtitle1.text-grey.ellipsis Goal
+            q-item-section
+              q-slider(
+                v-model="goalProgress"
+                :min="0"
+                :max="this.stat.goals.current.number_of_stars"
+                readonly
+                :label-value="this.stat.goals.current.completed_stars + '/' + this.stat.goals.current.number_of_stars"
+                color="red-4"
+              )
 </template>
 
 <script>
@@ -49,7 +54,8 @@
   export default {
     data () {
       return {
-        goal: {}
+        goal: {},
+        expanded: false
       }
     },
     computed: {
