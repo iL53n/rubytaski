@@ -178,7 +178,8 @@ div
           schedule: {
             data: []
           }
-        }
+        },
+        isProcessStar: false,
       }
     },
     created () {
@@ -238,6 +239,9 @@ div
         this.$router.push({ name: 'dashboardShowTask', params: { id: task_id } })
       },
       addStar(task_id, date) {
+        if (this.isProcessStar) return;
+        this.isProcessStar = true;
+
         // NOTE: to increase time of rendering
         this.resources.schedule.data.find(obj => obj.id === task_id).stars_dates.push({"due_date": date})
 
@@ -248,9 +252,16 @@ div
             // this.$emit('add-star')
           })
           .catch(()   => this.error = true)
-          .finally(() => this.loading = false)
+          .finally(() => {
+            this.isProcessStar = false;
+            this.loading = false
+          })
       },
-      removeStar(id, task_id, date) {
+    removeStar(id, task_id, date) {
+        if (this.isProcessStar) return;
+        if (typeof id === 'undefined') return;
+        this.isProcessStar = true;
+
         const taskIndex = this.resources.schedule.data.findIndex(obj => obj.id === task_id);
         if (taskIndex === -1) return;
         const starDateIndex = this.resources.schedule.data[taskIndex].stars_dates.findIndex(obj => obj.due_date === date);
@@ -261,8 +272,17 @@ div
           .then((response) => {
             // this.refresh()
           })
-          .catch(()   => this.error = true)
-          .finally(() => this.loading = false)
+          .catch((error) => {
+            if (error.response && error.response.status === 404) {
+              console.log('The task does not exist or was already deleted.');
+            } else {
+              this.error = true;
+            }
+          })
+          .finally(() => {
+            this.isProcessStar = false;
+            // this.loading = false
+          })
       },
       getStatistics() {
         this.$backend.statistics.index({ scopes: 'stars_stat,goals_stat,heatmap_chart' })
