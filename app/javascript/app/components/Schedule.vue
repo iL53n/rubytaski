@@ -68,7 +68,7 @@ div
               //-  .text-subtitle1 {{ resource.title }}
               //-  .text-subtitle2 {{ resource.description }}
             template(#scheduler-resource-day="{ timestamp, /* index, */ resource }")
-              q-btn(flat class="fit" @click.stop="addStar(resource.id, timestamp.date)")
+              q-btn(flat class="fit" :ripple="false" @click.stop="addStar(resource.id, timestamp.date)")
                 div(v-for="star in resource.stars_dates" :key="star.id")
                   div(v-show="star.due_date == timestamp.date")
                     //star options: stars, verified, check_circle, task_alt
@@ -77,12 +77,12 @@ div
                       glossy
                       round
                       padding="xs"
-                      class="fit emergence zoom-box"
+                      class="fit"
                       align="around"
                       name="star"
                       color="amber-5"
                       text-color="yellow-2"
-                      size="lg"
+                      size="md"
                       icon="star"
                       @click.stop="removeStar(star.id)"
                     )
@@ -237,6 +237,9 @@ div
         this.$router.push({ name: 'dashboardShowTask', params: { id: task_id } })
       },
       addStar(task_id, date) {
+        // NOTE: to increase time of rendering
+        this.resources.schedule.data.find(obj => obj.id === task_id).stars_dates.push({"due_date": date})
+
         let params = { state: 1, task_id: task_id, due_date: date }
 
         this.$backend.stars.create(params)
