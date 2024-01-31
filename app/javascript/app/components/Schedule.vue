@@ -68,7 +68,7 @@ div
               //-  .text-subtitle1 {{ resource.title }}
               //-  .text-subtitle2 {{ resource.description }}
             template(#scheduler-resource-day="{ timestamp, /* index, */ resource }")
-              q-btn(flat class="fit" :ripple="false" @click.stop="addStar(resource.id, timestamp.date)")
+              q-btn(flat class="fit" dense :ripple="false" @click.stop="addStar(resource.id, timestamp.date)")
                 div(v-for="star in resource.stars_dates" :key="star.id")
                   div(v-show="star.due_date == timestamp.date")
                     //star options: stars, verified, check_circle, task_alt
@@ -78,13 +78,14 @@ div
                       round
                       padding="xs"
                       class="fit"
+                      dense
                       align="around"
                       name="star"
                       color="amber-5"
                       text-color="yellow-2"
-                      size="md"
+                      size="lg"
                       icon="star"
-                      @click.stop="removeStar(star.id)"
+                      @click.stop="removeStar(star.id, resource.id, timestamp.date)"
                     )
         div(v-else-if="$q.platform.is.desktop")
           q-card-section
@@ -153,7 +154,7 @@ div
                         text-color="yellow-2"
                         size="lg"
                         icon="star"
-                        @click.stop="removeStar(star.id)"
+                        @click.stop="removeStar(star.id, resource.id, timestamp.date)"
                       )
   router-view
 </template>
@@ -241,7 +242,6 @@ div
         this.resources.schedule.data.find(obj => obj.id === task_id).stars_dates.push({"due_date": date})
 
         let params = { state: 1, task_id: task_id, due_date: date }
-
         this.$backend.stars.create(params)
           .then((response) => {
             // this.refresh()
@@ -250,7 +250,13 @@ div
           .catch(()   => this.error = true)
           .finally(() => this.loading = false)
       },
-      removeStar(id) {
+      removeStar(id, task_id, date) {
+        const taskIndex = this.resources.schedule.data.findIndex(obj => obj.id === task_id);
+        if (taskIndex === -1) return;
+        const starDateIndex = this.resources.schedule.data[taskIndex].stars_dates.findIndex(obj => obj.due_date === date);
+        if (starDateIndex === -1) return;
+        this.resources.schedule.data[taskIndex].stars_dates.splice(starDateIndex, 1);
+
         this.$backend.stars.destroy(id)
           .then((response) => {
             // this.refresh()
