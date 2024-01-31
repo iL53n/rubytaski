@@ -77,7 +77,7 @@ div
                       glossy
                       round
                       padding="xs"
-                      class="fit emergence"
+                      class="fit"
                       dense
                       align="around"
                       name="star"
