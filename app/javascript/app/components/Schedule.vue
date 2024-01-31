@@ -138,7 +138,7 @@ div
                 //-  .text-subtitle1 {{ resource.title }}
                 //-  .text-subtitle2 {{ resource.description }}
               template(#scheduler-resource-day="{ timestamp, /* index, */ resource }")
-                q-btn(flat class="fit" @click.stop="addStar(resource.id, timestamp.date)")
+                q-btn(flat class="fit" dense @click.stop="addStar(resource.id, timestamp.date)")
                   div(v-for="star in resource.stars_dates" :key="star.id")
                     div(v-show="star.due_date == timestamp.date")
                       //star options: stars, verified, check_circle, task_alt
@@ -146,6 +146,7 @@ div
                         push
                         glossy
                         round
+                        dense
                         padding="xs"
                         class="fit emergence zoom-box"
                         align="around"
@@ -179,7 +180,7 @@ div
             data: []
           }
         },
-        isProcessStar: false,
+        // isProcessStar: false,
       }
     },
     created () {
@@ -239,8 +240,8 @@ div
         this.$router.push({ name: 'dashboardShowTask', params: { id: task_id } })
       },
       addStar(task_id, date) {
-        if (this.isProcessStar) return;
-        this.isProcessStar = true;
+        // if (this.isProcessStar) return;
+        // this.isProcessStar = true;
 
         // NOTE: to increase time of rendering
         this.resources.schedule.data.find(obj => obj.id === task_id).stars_dates.push({"due_date": date})
@@ -258,9 +259,9 @@ div
           })
       },
     removeStar(id, task_id, date) {
-        if (this.isProcessStar) return;
         if (typeof id === 'undefined') return;
-        this.isProcessStar = true;
+        // if (this.isProcessStar) return;
+        // this.isProcessStar = true;
 
         const taskIndex = this.resources.schedule.data.findIndex(obj => obj.id === task_id);
         if (taskIndex === -1) return;
@@ -280,7 +281,7 @@ div
             }
           })
           .finally(() => {
-            this.isProcessStar = false;
+            // this.isProcessStar = false;
             // this.loading = false
           })
       },

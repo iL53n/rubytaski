@@ -5,7 +5,7 @@
         q-avatar.bg-primary(v-if="$q.platform.is.mobile" square)
           q-btn(href="/" padding="none" square flat id="square")
         q-toolbar-title
-          q-btn(flat to="/" class="text-primary" size="lg" padding="xs" label="rubytaski" no-caps)
+          q-btn(href="/" flat class="text-primary" size="lg" padding="xs" label="rubytaski" no-caps)
           // q-badge(align="top" color="orange") v1.0.0b
           // q-btn(flat @click="miniState = !miniState" round dense color="primary" icon="menu")
         q-chip(size="20px" square color="primary" text-color="white")
