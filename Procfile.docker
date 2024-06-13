@@ -1,0 +1,4 @@
+web:                bin/rails s -b 0.0.0.0 -p 3000
+webpacker:          ./bin/webpack-dev-server --host 0.0.0.0
+redis:              redis-server
+sidekiq-scheduler:  bundle exec sidekiq -C config/sidekiq.yml

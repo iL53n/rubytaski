@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:14
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: mydatabase
+
+  redis:
+    image: redis:7
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+      - redis
+    environment:
+      DATABASE_URL: postgres://myuser:mypassword@db:5432/mydatabase
+      REDIS_URL: redis://redis:6379/0
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/rubytaski
+
+  sidekiq:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: bundle exec sidekiq -C config/sidekiq.yml
+    depends_on:
+      - db
+      - redis
+    environment:
+      DATABASE_URL: postgres://myuser:mypassword@db:5432/mydatabase
+      REDIS_URL: redis://redis:6379/0
+    volumes:
+      - .:/rubytaski
+
+volumes:
+  pgdata:
