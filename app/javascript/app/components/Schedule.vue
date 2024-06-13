@@ -11,14 +11,14 @@ div
         q-card-section
           general-stat
         q-img.zoom-image(:src="require('images/astroman.png')" style="position:absolute; bottom:3px; left: 30px")
-      q-card(class="col q-ma-md")
+      q-card(class="col q-ma-xs" v-if="$q.platform.is.mobile")
         q-toolbar(class="text-white gradient" align="right")
           q-btn-group(flat)
-            q-btn(size="sm" icon="keyboard_arrow_left" @click="calendarPrev")
-            q-btn(size="sm" icon="horizontal_rule" @click="calendarToday")
-            q-btn(size="sm" icon="keyboard_arrow_right" @click="calendarNext")
+            q-btn(size="mg" icon="keyboard_arrow_left" @click="calendarPrev")
+            q-btn(size="mg" icon="horizontal_rule" @click="calendarToday")
+            q-btn(size="mg" icon="keyboard_arrow_right" @click="calendarNext")
           q-toolbar-title.text-subtitle1 {{ titleDate }}
-        div(v-if="$q.platform.is.mobile")
+        div()
           q-calendar(
               ref="calendar"
               v-model="selectedDate"
@@ -27,7 +27,7 @@ div
               view="custom-scheduler"
               :resources="resources.schedule.data"
               resource-key="id"
-              :resource-width="this.$q.screen.width * 0.4"
+              :resource-width="this.$q.screen.width * 0.44"
               :resource-height="0"
               sticky
               cell-width="auto"
@@ -51,7 +51,7 @@ div
                         q-item-section Настроить список задач
                         div(class="q-pa-md")
             template(#scheduler-resource="{ resource /*, index */ }")
-              q-btn(@click="showTask(resource.id)" flat size="xs" padding="md" class="full-width" align="left")
+              q-btn(@click="showTask(resource.id)" flat size="sm" padding="md" class="full-width" align="left")
                 .ellipsis.text-weight-bold {{ resource.title }}
                   q-badge(
                     v-if="resource.has_reminder"
@@ -87,7 +87,14 @@ div
                       icon="star"
                       @click.stop="removeStar(star.id, resource.id, timestamp.date)"
                     )
-        div(v-else-if="$q.platform.is.desktop")
+      q-card(class="col q-ma-md" v-else-if="$q.platform.is.desktop")
+        q-toolbar(class="text-white gradient" align="right")
+          q-btn-group(flat)
+            q-btn(size="sm" icon="keyboard_arrow_left" @click="calendarPrev")
+            q-btn(size="sm" icon="horizontal_rule" @click="calendarToday")
+            q-btn(size="sm" icon="keyboard_arrow_right" @click="calendarNext")
+          q-toolbar-title.text-subtitle1 {{ titleDate }}
+        div()
           q-card-section
             // TODO: fix resource-width
             q-calendar(

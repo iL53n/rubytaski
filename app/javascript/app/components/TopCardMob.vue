@@ -1,11 +1,11 @@
 <template lang="pug">
 .row.justify-around(v-if="stat.tasks.all_active")
-  q-card.col.q-ma-md.zoom-box
+  q-card.col.q-ma-xs
     q-list(dense)
       q-expansion-item(v-model="expanded" dense)
         template(v-slot:header)
           q-item-section(avatar)
-            q-icon(color="primary" name="format_list_bulleted")
+            q-icon(color="grey" name="query_stats")
           q-item-section
         q-list(dense)
           q-item
