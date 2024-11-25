@@ -6,7 +6,7 @@ class Reminder < ApplicationRecord
 
   before_save :destroy_previous_reminder, if: :will_save_change_to_task_id?
 
-  scope :on_day, ->(day_number) { where('? = ANY(days)', day_number.to_s) }
+  # scope :on_day, ->(day_number) { where('? = ANY(days)', day_number.to_s) }
 
   private
 

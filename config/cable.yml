@@ -1,22 +1,15 @@
-# development:
-#   adapter: async
+default: &default
+  adapter: "redis"
+  url: "<%= ENV.fetch("REDIS_URL") { "redis://redis:6379/1" } %>"
 
-# test:
-#   adapter: test
+development:
+  <<: *default
+  channel_prefix: "hello_development"
 
-# production:
-#   adapter: async
-  # TODO: config redis for production
-  # adapter: redis
-  # url: <%= ENV.fetch("REDIS_URL") { "redis://localhost:6379/1" } %>
-  # channel_prefix: rubytaski_production
-
-redis: &redis
-  adapter: redis
-  url: redis://localhost:6379/1
+test:
+  <<: *default
+  adapter: "test"
 
 production:
-  adapter: redis
-  url: redis://:p0d056aa7eee37203bf7501a27bb0f88df2de64a59f72f33a7a4c904aca496ace@ec2-34-226-88-37.compute-1.amazonaws.com:20079
-development: *redis
-test: *redis
+  <<: *default
+  channel_prefix: "hello_production"
